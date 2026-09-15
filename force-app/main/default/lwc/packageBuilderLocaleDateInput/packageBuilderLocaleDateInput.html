@@ -1,0 +1,42 @@
+<template>
+  <div class={formElementClass}>
+    <template lwc:if={showLabel}>
+      <label class="slds-form-element__label" for={displayInputId}>{label}</label>
+    </template>
+    <div
+      class="slds-form-element__control pb-locale-date-control slds-input-has-icon slds-input-has-icon_right"
+      onclick={handleControlClick}
+    >
+      <input
+        type="date"
+        data-id="native-picker"
+        class="pb-native-date-hidden"
+        value={value}
+        min={min}
+        max={max}
+        required={required}
+        disabled={disabled}
+        tabindex="-1"
+        aria-hidden="true"
+        onchange={handleChange}
+      />
+      <input
+        id={displayInputId}
+        type="text"
+        class={displayInputClass}
+        value={displayText}
+        readonly
+        required={required}
+        disabled={disabled}
+        aria-label={displayAriaLabel}
+        onkeydown={handleDisplayKeydown}
+      />
+      <lightning-icon
+        icon-name="utility:event"
+        size="x-small"
+        alternative-text="Open calendar"
+        class="pb-date-calendar-icon slds-input__icon slds-input__icon_right"
+      ></lightning-icon>
+    </div>
+  </div>
+</template>

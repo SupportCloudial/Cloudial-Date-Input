@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_end_date__c</fullName>
+    <description>Calculated end date of the renewal period from order end date and renewal period months.</description>
+    <formula>DATE(
+  YEAR(EndDate) + FLOOR((MONTH(EndDate) + Renewal_Period_Months__c - 1) / 12),
+  MOD(MONTH(EndDate) + Renewal_Period_Months__c - 1, 12) + 1,
+  DAY(EndDate)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Renewal end date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

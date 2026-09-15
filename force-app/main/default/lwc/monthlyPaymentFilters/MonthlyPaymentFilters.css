@@ -1,0 +1,63 @@
+.filters-body {
+  padding-block-end: 50px;
+}
+
+.filters-grid {
+  padding-inline: 5vw;
+}
+
+.filters-actions {
+  display: flex;
+  justify-content: center;
+  margin-block-start: 2vh;
+}
+
+.display-toggles {
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+  flex-wrap: wrap;
+}
+
+.resetButton {
+  margin-inline-start: 10px;
+}
+
+.filter-button {
+  margin-bottom: 20px;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.reset-button {
+  --sds-c-button-icon-background-color: #0070d2;
+  --sds-c-button-icon-color: #fff;
+}
+
+.filter-combobox {
+  margin-inline-end: 15px;
+  width: 100%;
+}
+
+.apply-button {
+  margin-top: 20px;
+}
+
+.card {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  overflow: hidden;
+  height: 0;
+  transition: height 0.5s ease;
+  position: relative;
+}

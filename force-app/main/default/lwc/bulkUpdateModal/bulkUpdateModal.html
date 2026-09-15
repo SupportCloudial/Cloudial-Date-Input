@@ -1,0 +1,170 @@
+<template>
+  <lightning-modal-header label={modalTitle}></lightning-modal-header>
+
+  <lightning-modal-body>
+    <div class="modal-glass-shell slds-p-around_medium">
+      <template lwc:if={isEditMode}>
+        <p class="slds-text-body_regular section-helper slds-m-bottom_medium">
+          Fill in the fields you want to update. Leave a field empty to keep its
+          current value.
+        </p>
+      </template>
+
+      <!-- Edit mode fields: Access Type, Desk/Unit Price, Start Date, End Date -->
+      <template lwc:if={isEditMode}>
+        <section class="glass-card">
+          <h3 class="section-title">Bulk Edit</h3>
+          <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+              <lightning-combobox
+                name="accessType"
+                label="Access Type"
+                value={accessType}
+                options={accessTypeOptions}
+                onchange={handleAccessTypeChange}
+              ></lightning-combobox>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+              <lightning-input
+                type="number"
+                label="Desk / Unit Price"
+                value={unitPrice}
+                onchange={handleUnitPriceChange}
+                step="0.01"
+              ></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+              <div class="slds-form-element">
+                <label
+                  class="slds-form-element__label"
+                  for="bulk-edit-entry-date"
+                  >Start Date</label
+                >
+                <div class="slds-form-element__control">
+                  <c-package-builder-locale-date-input
+                    id="bulk-edit-entry-date"
+                    class="bulk-modal-locale-date-host"
+                    variant="label-hidden"
+                    label="Start Date"
+                    value={entryDate}
+                    input-class="modal-date-input"
+                    onchange={handleEntryDateChange}
+                  ></c-package-builder-locale-date-input>
+                </div>
+              </div>
+            </div>
+            <template lwc:if={showEditEndDate}>
+              <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                <div class="slds-form-element">
+                  <label
+                    class="slds-form-element__label"
+                    for="bulk-edit-end-date"
+                    >End Date</label
+                  >
+                  <div class="slds-form-element__control">
+                    <c-package-builder-locale-date-input
+                      id="bulk-edit-end-date"
+                      class="bulk-modal-locale-date-host"
+                      variant="label-hidden"
+                      label="End Date"
+                      value={endDate}
+                      input-class="modal-date-input"
+                      onchange={handleEndDateChange}
+                    ></c-package-builder-locale-date-input>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </section>
+      </template>
+
+      <!-- Terminate mode fields: Exit Date, Termination Reason -->
+      <template lwc:if={isTerminateMode}>
+        <section class="glass-card">
+          <h3 class="section-title">Termination Details</h3>
+          <div class="slds-grid slds-gutters slds-wrap balanced-grid">
+            <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+              <p class="field-label">Exit Date</p>
+              <label class="slds-assistive-text" for="terminate-exit-date"
+                >Exit Date</label
+              >
+              <c-package-builder-locale-date-input
+                id="terminate-exit-date"
+                class="bulk-modal-locale-date-host"
+                variant="label-hidden"
+                label="Exit Date"
+                value={exitDate}
+                min={exitDateMinYmd}
+                max={exitDateMaxYmdForPicker}
+                input-class="modal-date-input"
+                onchange={handleExitDateChange}
+              ></c-package-builder-locale-date-input>
+            </div>
+          </div>
+        </section>
+
+        <template lwc:if={showMovedToField}>
+          <section class="glass-card compact-card slds-m-top_small">
+            <div class="slds-grid slds-gutters slds-wrap">
+              <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                <p class="field-label">Moved To</p>
+                <lightning-combobox
+                  name="movedTo"
+                  label="Moved To"
+                  variant="label-hidden"
+                  value={movedTo}
+                  placeholder="Select destination"
+                  options={movedToOptions}
+                  onchange={handleMovedToChange}
+                ></lightning-combobox>
+              </div>
+            </div>
+          </section>
+        </template>
+
+        <template lwc:if={showTerminationReason}>
+          <section class="glass-card compact-card slds-m-top_small">
+            <p class="slds-text-body_small section-helper slds-m-bottom_small">
+              Termination Reason is required.
+            </p>
+            <div class="slds-grid slds-gutters slds-wrap balanced-grid">
+              <div class="slds-col slds-size_1-of-2 slds-m-bottom_small">
+                <p class="field-label">
+                  <span class="required-mark">*</span>Termination Reason
+                </p>
+                <lightning-combobox
+                  name="terminationReason"
+                  label="Termination Reason"
+                  variant="label-hidden"
+                  value={terminationReason}
+                  placeholder="Select a reason"
+                  options={terminationReasonOptions}
+                  onchange={handleTerminationReasonChange}
+                  required
+                ></lightning-combobox>
+              </div>
+            </div>
+          </section>
+        </template>
+      </template>
+    </div>
+  </lightning-modal-body>
+
+  <lightning-modal-footer>
+    <div class="footer-actions">
+      <lightning-button
+        label="Cancel"
+        onclick={handleCancel}
+        class="slds-m-horizontal_small"
+        disabled={isSaving}
+      ></lightning-button>
+      <lightning-button
+        label={applyLabel}
+        variant="brand"
+        onclick={handleApply}
+        disabled={applyDisabled}
+      ></lightning-button>
+    </div>
+  </lightning-modal-footer>
+</template>

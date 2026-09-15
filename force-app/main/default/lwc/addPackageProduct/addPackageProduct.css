@@ -1,0 +1,129 @@
+
+/* RTL: inherit document direction; prefer logical spacing in this bundle */
+:host {
+  display: block;
+}
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* pushes button to the right */
+  margin-top: 10px; /* adjust as needed */
+}
+
+.table-height {
+  height: 40vh; /* 40% of viewport height */
+  overflow-y: auto; /* scroll if content overflows */
+}
+
+.datatable-border {
+  border: 1px solid #ddd;
+  border-radius: 0.3rem;
+  background-color: #ffffff; /* Optional, for contrast */
+}
+
+.add-products-section__title {
+  margin-bottom: var(--lwc-spacingSmall, 0.75rem);
+  color: var(--slds-g-color-neutral-base-strong, #3e3e3c);
+  letter-spacing: 0.025rem;
+}
+
+/* Add Product modal: Filters — row 1 Site / Type / Sub Type / Number of Desks */
+.add-products-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--lwc-spacingMedium, 1rem);
+  row-gap: var(--lwc-spacingMedium, 1rem);
+  align-items: end;
+}
+
+.add-products-locale-date-host {
+  display: block;
+  width: 100%;
+}
+
+/* Defaults: Available From / To / Access Type / CPI Date (Order only for CPI) */
+.add-products-defaults-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--lwc-spacingMedium, 1rem);
+  row-gap: var(--lwc-spacingMedium, 1rem);
+  align-items: end;
+}
+
+.add-products-filter-cell {
+  min-width: 0;
+}
+
+.add-products-temporary-control {
+  display: flex;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.add-products-temporary-label {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.25rem;
+}
+
+.add-products-temporary-helptext {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* Match package-builder-locale-date-input chrome (border, height, full cell width). */
+.add-products-transfer-price-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2rem;
+  line-height: 1.875rem;
+  padding: 0 0.75rem;
+  column-gap: 0.5rem;
+  border: 1px solid #c9c9c9;
+  border-radius: 0.25rem;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.add-products-transfer-price-text {
+  color: #181818;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.add-products-transfer-price-checkbox {
+  flex: 0 0 auto;
+}
+
+.add-products-transfer-price-checkbox lightning-input,
+.add-products-transfer-price-box lightning-input {
+  display: inline-flex;
+  align-items: center;
+}
+
+.add-products-filter-cell--spacer {
+  min-height: 0;
+}
+
+.add-products-filter-cell--slider {
+  align-self: end;
+}
+
+.add-products-desk-slider {
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 48rem) {
+  .add-products-filter-grid,
+  .add-products-defaults-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .add-products-filter-cell--spacer {
+    display: none;
+  }
+}

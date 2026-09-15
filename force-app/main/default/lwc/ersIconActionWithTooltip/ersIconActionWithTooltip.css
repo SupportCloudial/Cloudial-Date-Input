@@ -1,0 +1,50 @@
+:host {
+  /* Fill the datatable slot height so the button stays vertically centered in tall rows. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+:host .ers-action-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: visible;
+}
+
+:host .ers-action-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+:host .ers-action-btn--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+:host .ers-action-btn lightning-icon {
+  --slds-c-icon-color-foreground-default: #54698d;
+  --slds-c-icon-sizing-width: 1.5rem;
+  --slds-c-icon-sizing-height: 1.5rem;
+}
+
+:host .ers-action-btn__img {
+  width: 1.5rem;
+  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  flex-shrink: 0;
+}

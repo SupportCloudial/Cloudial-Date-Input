@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Replacement_Start_Date__c</fullName>
+    <description>The date when this replacement order becomes active and the previous order&apos;s billing should stop. Defaults to today&apos;s date but can be manually overridden for future-dated replacements.</description>
+    <inlineHelpText>This date determines when the old order&apos;s items will be curtailed. Leave blank to use today&apos;s date, or specify a future date for delayed switchovers.</inlineHelpText>
+    <label>Replacement Start Date</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

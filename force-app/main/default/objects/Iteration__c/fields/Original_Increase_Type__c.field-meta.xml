@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Original_Increase_Type__c</fullName>
+    <label>Original Increase Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Increase_by_Percentage</fullName>
+                <default>false</default>
+                <label>Increase by Percentage</label>
+            </value>
+            <value>
+                <fullName>Increase_by_Value</fullName>
+                <default>false</default>
+                <label>Increase by Value</label>
+            </value>
+            <value>
+                <fullName>Final_Price</fullName>
+                <default>false</default>
+                <label>Final Price</label>
+            </value>
+            <value>
+                <fullName>Percent</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Percent (legacy)</label>
+            </value>
+            <value>
+                <fullName>Fixed Amount</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Fixed Amount (legacy)</label>
+            </value>
+            <value>
+                <fullName>Final Price</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Final Price (legacy)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

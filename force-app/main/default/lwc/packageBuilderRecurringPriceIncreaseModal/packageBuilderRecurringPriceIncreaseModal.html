@@ -1,0 +1,205 @@
+<template>
+  <lightning-modal-header
+    label="Recurring Price Increase"
+  ></lightning-modal-header>
+
+  <lightning-modal-body>
+    <template lwc:if={isLoading}>
+      <div class="rpi-loading" role="status">
+        <lightning-spinner
+          alternative-text="Loading"
+          size="medium"
+        ></lightning-spinner>
+      </div>
+    </template>
+
+    <template lwc:elseif={hasEligibleLines}>
+      <template lwc:if={excludedMessage}>
+        <div
+          class="slds-notify slds-notify_alert slds-alert_warning slds-m-bottom_medium"
+          role="alert"
+        >
+          <span class="slds-assistive-text">Warning</span>
+          <h2>{excludedMessage}</h2>
+        </div>
+      </template>
+
+      <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">
+        One rule applies to all selected eligible Monthly and Periodic products.
+        Start date minimum is max(today, contract/opportunity start).
+      </p>
+
+      <div class="rpi-form">
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="rpi-frequency">
+            <abbr class="slds-required" title="required">*</abbr> Frequency
+            (months)
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              id="rpi-frequency"
+              class="slds-input"
+              type="number"
+              inputmode="numeric"
+              data-field="frequencyMonths"
+              min="1"
+              step="1"
+              required
+              disabled={isBusy}
+              oninput={handleFieldChange}
+              onchange={handleFieldChange}
+            />
+          </div>
+        </div>
+
+        <c-package-builder-locale-date-input
+          data-field="startDate"
+          label="Start date"
+          value={startDateYmd}
+          min={minStartDateYmd}
+          disabled={isBusy}
+          onchange={handleFieldChange}
+        ></c-package-builder-locale-date-input>
+
+        <lightning-combobox
+          label="Increase type"
+          data-field="increaseType"
+          value={increaseType}
+          options={increaseTypeOptions}
+          required
+          disabled={isBusy}
+          onchange={handleFieldChange}
+        ></lightning-combobox>
+
+        <div class="slds-form-element">
+          <label class="slds-form-element__label" for="rpi-increase-value">
+            <abbr class="slds-required" title="required">*</abbr>
+            {increaseValueLabel}
+          </label>
+          <div class="slds-form-element__control">
+            <input
+              id="rpi-increase-value"
+              class="slds-input"
+              type="number"
+              inputmode="decimal"
+              data-field="increaseValue"
+              step={increaseValueStep}
+              required
+              disabled={isBusy}
+              oninput={handleFieldChange}
+              onchange={handleFieldChange}
+            />
+          </div>
+        </div>
+      </div>
+
+      <template lwc:if={showPreview}>
+        <section class="rpi-preview slds-m-top_medium">
+          <h3 class="slds-text-heading_small slds-m-bottom_x-small">
+            Iteration overlap preview
+          </h3>
+          <template lwc:if={previewMessage}>
+            <p class="slds-text-body_small slds-m-bottom_small">
+              {previewMessage}
+            </p>
+          </template>
+          <template lwc:if={hasPreviewRows}>
+            <div class="rpi-preview-table-wrap">
+              <table
+                class="slds-table slds-table_cell-buffer slds-table_bordered"
+              >
+                <thead>
+                  <tr class="slds-line-height_reset">
+                    <th scope="col">
+                      <div class="slds-truncate">Product</div>
+                    </th>
+                    <th scope="col"><div class="slds-truncate">Month</div></th>
+                    <th scope="col"><div class="slds-truncate">List</div></th>
+                    <th scope="col">
+                      <div class="slds-truncate">After iteration</div>
+                    </th>
+                    <th scope="col">
+                      <div class="slds-truncate">After recurring</div>
+                    </th>
+                    <th scope="col"><div class="slds-truncate">Final</div></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template for:each={previewTableRows} for:item="row">
+                    <tr key={row.key}>
+                      <td>
+                        <div class="slds-truncate" title={row.productName}>
+                          {row.productName}
+                        </div>
+                      </td>
+                      <td>{row.overlapMonthLabel}</td>
+                      <td>{row.listPriceLabel}</td>
+                      <td>{row.afterIterationLabel}</td>
+                      <td>{row.afterRecurringLabel}</td>
+                      <td>{row.finalPriceLabel}</td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+          </template>
+        </section>
+      </template>
+    </template>
+  </lightning-modal-body>
+
+  <lightning-modal-footer>
+    <div class="rpi-footer">
+      <div class="rpi-footer__left">
+        <c-ers-tooltip message={toggleTitle} hover-only>
+          <span>
+            <lightning-button
+              label={toggleButtonLabel}
+              disabled={isToggleDisabled}
+              onclick={handleToggleActivation}
+              class="slds-m-horizontal_x-small"
+            ></lightning-button>
+          </span>
+        </c-ers-tooltip>
+        <lightning-button
+          label="Remove"
+          variant="destructive-text"
+          disabled={isRemoveDisabled}
+          onclick={handleRemove}
+        ></lightning-button>
+      </div>
+      <div class="rpi-footer__right">
+        <c-ers-tooltip message={revertTitle} hover-only>
+          <span>
+            <lightning-button
+              label="Revert"
+              disabled={isRevertDisabled}
+              onclick={handleRevert}
+              class="slds-m-horizontal_x-small"
+            ></lightning-button>
+          </span>
+        </c-ers-tooltip>
+        <c-ers-tooltip message={saveTitle} hover-only>
+          <span>
+            <lightning-button
+              label="Save"
+              disabled={isSaveDisabled}
+              onclick={handleSave}
+              class="slds-m-horizontal_x-small"
+            ></lightning-button>
+          </span>
+        </c-ers-tooltip>
+        <c-ers-tooltip message={activateRunTitle} hover-only>
+          <span>
+            <lightning-button
+              label="Activate and Run"
+              variant="brand"
+              disabled={isApplyDisabled}
+              onclick={handleActivateAndRun}
+            ></lightning-button>
+          </span>
+        </c-ers-tooltip>
+      </div>
+    </div>
+  </lightning-modal-footer>
+</template>

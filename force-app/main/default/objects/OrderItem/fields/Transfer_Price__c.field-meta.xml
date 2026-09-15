@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Transfer_Price__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>True when Package Builder replace applied Transfer Price (monthly Discount / ListPrice / Final Adjusted Price copied onto the replacement). Used on undo to decide full term map-back vs Discount-only.</description>
+    <externalId>false</externalId>
+    <label>Transfer Price</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

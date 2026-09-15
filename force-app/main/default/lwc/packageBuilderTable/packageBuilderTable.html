@@ -1,0 +1,1891 @@
+<template>
+  <!-- WI-000168: Package Builder - Save/Cancel footer, oncellchange support -->
+  <!-- ===========================================================
+         CONTRACT CONTEXT
+         =========================================================== -->
+  <template lwc:if={isContract}>
+    <!-- === Top bar: Tabs (optional) + header actions + expand/collapse === -->
+    <div class={contractTopBarClass}>
+      <template lwc:if={showTabs}>
+        <div class="tabbar-with-delete">
+          <div class="custom-tab-bar" role="tablist">
+            <button
+              type="button"
+              class="custom-tab"
+              role="tab"
+              aria-selected={isActiveTab}
+              aria-label="View concluded terms"
+              data-tab="active"
+              onclick={handleTabClick}
+            >
+              <lightning-icon
+                icon-name="utility:lock"
+                alternative-text=""
+                size="x-small"
+                class="slds-m-horizontal_xx-small"
+              ></lightning-icon>
+              Concluded Terms
+            </button>
+            <template lwc:if={hasDraftContent}>
+              <button
+                type="button"
+                class="custom-tab"
+                role="tab"
+                aria-selected={isDraftTab}
+                aria-label="View draft order"
+                data-tab="draft"
+                onclick={handleTabClick}
+              >
+                <lightning-icon
+                  icon-name="utility:edit"
+                  alternative-text=""
+                  size="x-small"
+                  class="slds-m-horizontal_xx-small"
+                ></lightning-icon>
+                DRAFT
+              </button>
+            </template>
+          </div>
+          <template lwc:if={showCancelDraftButton}>
+            <lightning-button-icon
+              icon-name="utility:delete"
+              variant="border-filled"
+              alternative-text={labels.RemoveDraftIconHelp}
+              title={labels.RemoveDraftIconHelp}
+              onclick={handleCancelDraftOrder}
+              disabled={cancellingDraft}
+              class="tabbar-delete-btn"
+            ></lightning-button-icon>
+          </template>
+        </div>
+      </template>
+
+      <template lwc:if={showContractTopNotice}>
+        <div class="pb-topbar-center">
+          <div
+            class="pb-readonly-banner pb-readonly-banner--inline slds-scoped-notification slds-media slds-media_center"
+            role="status"
+          >
+            <div class="slds-media__figure">
+              <lightning-icon
+                icon-name="utility:info"
+                size="small"
+                alternative-text="Information"
+                class="pb-readonly-banner__icon"
+              ></lightning-icon>
+            </div>
+            <div class="slds-media__body">
+              <p class="pb-readonly-banner__text">{topReadOnlyBannerMessage}</p>
+            </div>
+          </div>
+        </div>
+      </template>
+      <div class="top-bar-actions-group">
+        <!-- Draft status Path (Draft → Negotiation → Signed) -->
+        <template lwc:if={showStatusPath}>
+          <div
+            class="status-path status-path--topbar"
+            role="group"
+            aria-label="Order status"
+          >
+            <button
+              type="button"
+              class={draftPathClass}
+              data-status="Draft"
+              disabled={isActivatingDraft}
+              onclick={handleStatusPathClick}
+            >
+              Draft
+            </button>
+            <button
+              type="button"
+              class={negotiationPathClass}
+              data-status="Negotiation"
+              disabled={isActivatingDraft}
+              onclick={handleStatusPathClick}
+            >
+              Negotiation
+            </button>
+            <button
+              type="button"
+              class={activatedPathClass}
+              data-status="Activated"
+              onclick={handleStatusPathClick}
+              disabled={isActivatingDraft}
+              aria-busy={isActivatingDraft}
+              aria-disabled={activatePathDisabled}
+              title={activatedPathTitle}
+            >
+              <span class="status-path__step-inner">
+                <template lwc:if={isActivatingDraft}>
+                  <lightning-spinner
+                    alternative-text="Signing…"
+                    size="small"
+                    class="status-path__activating-spinner"
+                  ></lightning-spinner>
+                </template>
+                Signed
+              </span>
+            </button>
+          </div>
+        </template>
+        <div class="header-actions-slot">
+          <slot name="header-actions"></slot>
+        </div>
+      </div>
+    </div>
+
+    <!-- === KPI: header only (collapsed) or 8 tiles (expanded). Toggle lives on the section. === -->
+    <template lwc:if={showContractKpis}>
+      <c-package-builder-kpi-panel
+        expanded={kpiViewExpanded}
+        summary={contractKpiSummary}
+        total-products={currentProductsCount}
+        onkpitoggle={handleKpiViewToggle}
+      ></c-package-builder-kpi-panel>
+    </template>
+
+    <div class="contract-body-stack">
+      <!-- === Order section: toolbar-style (shadow, no line under heading) === -->
+      <template lwc:if={showOrderSection}>
+        <div
+          class={orderSectionClass}
+          role="region"
+          aria-label="Order information"
+        >
+          <div class="order-toolbar">
+            <c-package-builder-order-section
+              order-section-title={orderSectionTitle}
+            ></c-package-builder-order-section>
+            <div class="order-toolbar__body">
+              <template lwc:if={orderSectionExpanded}>
+                <template lwc:if={showInMemoryOrderSection}>
+                  <lightning-record-view-form
+                    record-id={activeOrderId}
+                    object-api-name="Order"
+                    class="order-record-form"
+                  >
+                    <div class="order-detail-sections">
+                      <div class="order-subsection">
+                        <div class="order-detail-grid">
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Contract Start Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-formatted-date-time
+                                    value={contractStartDate}
+                                    year="numeric"
+                                    month="2-digit"
+                                    day="2-digit"
+                                  ></lightning-formatted-date-time>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">Location</div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="Location__c"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="description"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Description
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={inMemoryEditDescription}>
+                                      <lightning-input
+                                        type="text"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.description}
+                                        data-field="description"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.description}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilInMemoryDescription}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Description"
+                                  title="Edit Description"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="description"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="numberOfMembers"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Number of members
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditNumberOfMembers}
+                                    >
+                                      <lightning-input
+                                        type="number"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.numberOfMembers}
+                                        data-field="numberOfMembers"
+                                        onchange={handleOrderFieldChange}
+                                        step="1"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.numberOfMembers}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryNumberOfMembers}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Number of members"
+                                  title="Edit Number of members"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="numberOfMembers"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="quarterlyPayment"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Quarterly Payment
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditQuarterlyPayment}
+                                    >
+                                      <lightning-input
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked={inMemoryDraftOrder.quarterlyPayment}
+                                        data-field="quarterlyPayment"
+                                        onchange={handleOrderFieldChange}
+                                        class="order-inline-checkbox"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-input
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked={inMemoryDraftOrder.quarterlyPayment}
+                                        disabled
+                                        class="order-inline-checkbox"
+                                      ></lightning-input>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryQuarterlyPayment}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Quarterly Payment"
+                                  title="Edit Quarterly Payment"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="quarterlyPayment"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="paymentMethod"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Payment Method
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditPaymentMethod}
+                                    >
+                                      <lightning-combobox
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.paymentMethod}
+                                        options={paymentMethodOptions}
+                                        data-field="paymentMethod"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-combobox>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.paymentMethod}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryPaymentMethod}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Payment Method"
+                                  title="Edit Payment Method"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="paymentMethod"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="googleDriveLink"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Google Drive Link
+                                    <template lwc:if={hasGoogleDriveLinkHelp}>
+                                      <lightning-helptext
+                                        content={googleDriveLinkHelp}
+                                      ></lightning-helptext>
+                                    </template>
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditGoogleDriveLink}
+                                    >
+                                      <lightning-input
+                                        type="text"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.googleDriveLink}
+                                        data-field="googleDriveLink"
+                                        onchange={handleOrderFieldChange}
+                                        maxlength="250"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.googleDriveLink}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryGoogleDriveLink}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Google Drive Link"
+                                  title="Edit Google Drive Link"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="googleDriveLink"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Created Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="CreatedDate"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">Created By</div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="CreatedById"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Last Modified Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="LastModifiedDate"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Last Modified By
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="LastModifiedById"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Header renewal fields removed; Iterations object is the engine. -->
+                      <div
+                        class="order-subsection"
+                        lwc:if={showLegacyHeaderRenewal}
+                      >
+                        <h4 class="order-subsection-title">Renewal</h4>
+                        <div class="order-detail-grid">
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="autoRenewal"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Auto-Renewal
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={inMemoryEditAutoRenewal}>
+                                      <lightning-input
+                                        type="toggle"
+                                        variant="label-hidden"
+                                        checked={inMemoryDraftOrder.autoRenewal}
+                                        data-field="autoRenewal"
+                                        onchange={handleOrderFieldChange}
+                                        message-toggle-active="Yes"
+                                        message-toggle-inactive="No"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.autoRenewal}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilInMemoryAutoRenewal}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Auto-Renewal"
+                                  title="Edit Auto-Renewal"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="autoRenewal"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="noticePeriodMonths"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Notice Period (Months)
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditNoticePeriodMonths}
+                                    >
+                                      <lightning-input
+                                        type="number"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.noticePeriodMonths}
+                                        data-field="noticePeriodMonths"
+                                        onchange={handleOrderFieldChange}
+                                        step="1"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.noticePeriodMonths}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryNoticePeriodMonths}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Notice Period"
+                                  title="Edit Notice Period"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="noticePeriodMonths"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="renewalPeriodMonths"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Renewal Period (Months)
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditRenewalPeriodMonths}
+                                    >
+                                      <lightning-input
+                                        type="number"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.renewalPeriodMonths}
+                                        data-field="renewalPeriodMonths"
+                                        onchange={handleOrderFieldChange}
+                                        step="1"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.renewalPeriodMonths}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryRenewalPeriodMonths}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Renewal Period (Months)"
+                                  title="Edit Renewal Period (Months)"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="renewalPeriodMonths"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="renewalPriceIncreasePercent"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Renewal Price Increase Percent
+                                    <template
+                                      lwc:if={hasRenewalPriceIncreaseHelp}
+                                    >
+                                      <lightning-helptext
+                                        content={renewalPriceIncreaseHelp}
+                                      ></lightning-helptext>
+                                    </template>
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditRenewalPriceIncreasePercent}
+                                    >
+                                      <lightning-input
+                                        type="number"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.renewalPriceIncreasePercent}
+                                        data-field="renewalPriceIncreasePercent"
+                                        onchange={handleOrderFieldChange}
+                                        step="1"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.renewalPriceIncreasePercent}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryRenewalPriceIncreasePercent}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Renewal Price Increase Percent"
+                                  title="Edit Renewal Price Increase Percent"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="renewalPriceIncreasePercent"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Renewal End Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-formatted-date-time
+                                    value={inMemoryRenewalEndDateDisplay}
+                                    year="numeric"
+                                    month="2-digit"
+                                    day="2-digit"
+                                  ></lightning-formatted-date-time>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="renewalTotalIterations"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Renewal Iterations
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={inMemoryEditRenewalTotalIterations}
+                                    >
+                                      <lightning-input
+                                        type="text"
+                                        variant="label-hidden"
+                                        value={inMemoryDraftOrder.renewalTotalIterations}
+                                        data-field="renewalTotalIterations"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{inMemoryDraftOrder.renewalTotalIterations}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilInMemoryRenewalTotalIterations}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Renewal Iterations"
+                                  title="Edit Renewal Iterations"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="renewalTotalIterations"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </lightning-record-view-form>
+                </template>
+                <template lwc:else>
+                  <lightning-record-edit-form
+                    record-id={orderSectionOrderId}
+                    object-api-name="Order"
+                    onsubmit={handleOrderSubmit}
+                    onsuccess={handleOrderSaveSuccess}
+                    onerror={handleOrderSaveError}
+                    class="order-record-form"
+                  >
+                    <div class="order-detail-sections">
+                      <div class="order-subsection">
+                        <div class="order-detail-grid">
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Contract Start Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-formatted-date-time
+                                    value={contractStartDate}
+                                    year="numeric"
+                                    month="2-digit"
+                                    day="2-digit"
+                                  ></lightning-formatted-date-time>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">Location</div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="Location__c"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Description"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Description
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={isEditingDescription}>
+                                      <lightning-input-field
+                                        field-name="Description"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Description"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilDescription}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Description"
+                                  title="Edit Description"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Description"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Number_of_members__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Number of members
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={isEditingNumberOfMembers}>
+                                      <lightning-input-field
+                                        field-name="Number_of_members__c"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Number_of_members__c"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilNumberOfMembers}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Number of members"
+                                  title="Edit Number of members"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Number_of_members__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Quarterly_Payment__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Quarterly Payment
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={isEditingQuarterlyPayment}
+                                    >
+                                      <lightning-input
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked={contractQuarterlyPayment}
+                                        data-field="Quarterly_Payment__c"
+                                        onchange={handleOrderFieldChange}
+                                        class="order-inline-checkbox"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-input
+                                        type="checkbox"
+                                        variant="label-hidden"
+                                        checked={contractQuarterlyPayment}
+                                        disabled
+                                        class="order-inline-checkbox"
+                                      ></lightning-input>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilQuarterlyPayment}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Quarterly Payment"
+                                  title="Edit Quarterly Payment"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Quarterly_Payment__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Payment_Method__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Payment Method
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={isEditingPaymentMethod}>
+                                      <lightning-input-field
+                                        field-name="Payment_Method__c"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Payment_Method__c"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilPaymentMethod}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Payment Method"
+                                  title="Edit Payment Method"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Payment_Method__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Google_Drive_Link__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Google Drive Link
+                                    <template lwc:if={hasGoogleDriveLinkHelp}>
+                                      <lightning-helptext
+                                        content={googleDriveLinkHelp}
+                                      ></lightning-helptext>
+                                    </template>
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={isEditingGoogleDriveLink}>
+                                      <lightning-input
+                                        type="text"
+                                        variant="label-hidden"
+                                        value={orderSectionGoogleDriveLinkValue}
+                                        data-field="Google_Drive_Link__c"
+                                        onchange={handleOrderFieldChange}
+                                        maxlength="250"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <span
+                                        >{orderSectionGoogleDriveLinkValue}</span
+                                      >
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilGoogleDriveLink}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Google Drive Link"
+                                  title="Edit Google Drive Link"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Google_Drive_Link__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Created Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="CreatedDate"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">Created By</div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="CreatedById"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Last Modified Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="LastModifiedDate"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Last Modified By
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="LastModifiedById"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Header renewal fields removed; Iterations object is the engine. -->
+                      <div
+                        class="order-subsection"
+                        lwc:if={showLegacyHeaderRenewal}
+                      >
+                        <h4 class="order-subsection-title">Renewal</h4>
+                        <div class="order-detail-grid">
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Auto_Renewal__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Auto-Renewal
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template lwc:if={isEditingAutoRenewal}>
+                                      <lightning-input-field
+                                        field-name="Auto_Renewal__c"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Auto_Renewal__c"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilAutoRenewal}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Auto-Renewal"
+                                  title="Edit Auto-Renewal"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Auto_Renewal__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-value-wrap">
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Notice Period (Months)
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={isEditingNoticePeriodMonths}
+                                    >
+                                      <lightning-input-field
+                                        field-name="Lease_Termination_Notice_Months__c"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Lease_Termination_Notice_Months__c"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilNoticePeriodMonths}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Notice Period (Months)"
+                                  title="Edit Notice Period (Months)"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Lease_Termination_Notice_Months__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Renewal_Period_Months__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Renewal Period (Months)
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={isEditingRenewalPeriodMonths}
+                                    >
+                                      <lightning-input-field
+                                        field-name="Renewal_Period_Months__c"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Renewal_Period_Months__c"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template lwc:if={showPencilRenewalPeriodMonths}>
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Renewal Period (Months)"
+                                  title="Edit Renewal Period (Months)"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Renewal_Period_Months__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Renewal_Price_Increase_Percent__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Renewal Price Increase Percent
+                                    <template
+                                      lwc:if={hasRenewalPriceIncreaseHelp}
+                                    >
+                                      <lightning-helptext
+                                        content={renewalPriceIncreaseHelp}
+                                      ></lightning-helptext>
+                                    </template>
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={isEditingRenewalPriceIncreasePercent}
+                                    >
+                                      <lightning-input
+                                        type="number"
+                                        variant="label-hidden"
+                                        value={orderSectionRenewalPriceIncreaseValue}
+                                        data-field="Renewal_Price_Increase_Percent__c"
+                                        onchange={handleOrderFieldChange}
+                                        step="1"
+                                      ></lightning-input>
+                                    </template>
+                                    <template lwc:else>
+                                      <template
+                                        lwc:if={hasOrderSectionRenewalPriceIncreaseValue}
+                                      >
+                                        <lightning-formatted-number
+                                          value={orderSectionRenewalPriceIncreaseValue}
+                                          format-style="percent-fixed"
+                                          maximum-fraction-digits="0"
+                                        ></lightning-formatted-number>
+                                      </template>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilRenewalPriceIncreasePercent}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Renewal Price Increase Percent"
+                                  title="Edit Renewal Price Increase Percent"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Renewal_Price_Increase_Percent__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div class="order-detail-content">
+                              <div class="order-inline-row">
+                                <div class="order-inline-label">
+                                  Renewal End Date
+                                </div>
+                                <div class="order-inline-value">
+                                  <lightning-output-field
+                                    field-name="Renewal_end_date__c"
+                                    variant="label-hidden"
+                                  ></lightning-output-field>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="order-detail-field">
+                            <div
+                              class="order-detail-value-wrap order-detail-value-wrap--editable"
+                              data-field="Renewal_Total_Iterations__c"
+                              ondblclick={handleOrderFieldDblclick}
+                              title="Double-click to edit"
+                            >
+                              <div class="order-detail-content">
+                                <div class="order-inline-row">
+                                  <div class="order-inline-label">
+                                    Renewal Iterations
+                                  </div>
+                                  <div class="order-inline-value">
+                                    <template
+                                      lwc:if={isEditingRenewalTotalIterations}
+                                    >
+                                      <lightning-input-field
+                                        field-name="Renewal_Total_Iterations__c"
+                                        variant="label-hidden"
+                                        onchange={handleOrderFieldChange}
+                                      ></lightning-input-field>
+                                    </template>
+                                    <template lwc:else>
+                                      <lightning-output-field
+                                        field-name="Renewal_Total_Iterations__c"
+                                        variant="label-hidden"
+                                      ></lightning-output-field>
+                                    </template>
+                                  </div>
+                                </div>
+                              </div>
+                              <template
+                                lwc:if={showPencilRenewalTotalIterations}
+                              >
+                                <lightning-button-icon
+                                  icon-name="utility:edit"
+                                  alternative-text="Edit Renewal Iterations"
+                                  title="Edit Renewal Iterations"
+                                  onclick={handleOrderFieldEditIcon}
+                                  data-field="Renewal_Total_Iterations__c"
+                                  variant="bare"
+                                  size="x-small"
+                                  class="order-inline-pencil"
+                                ></lightning-button-icon>
+                              </template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <template lwc:if={showOrderSectionSaveCancel}>
+                      <div class="order-actions-row">
+                        <div class="order-save-cancel-buttons">
+                          <lightning-button
+                            type="button"
+                            label="Cancel"
+                            variant="neutral"
+                            onclick={handleOrderCancel}
+                            class="slds-m-horizontal_x-small"
+                          ></lightning-button>
+                          <lightning-button
+                            type="button"
+                            label="Save"
+                            variant="brand"
+                            onclick={handleOrderSaveClick}
+                          ></lightning-button>
+                        </div>
+                      </div>
+                    </template>
+                    <template lwc:elseif={showOrderSectionCancelOnly}>
+                      <div class="order-actions-row">
+                        <lightning-button
+                          type="button"
+                          label="Cancel"
+                          variant="neutral"
+                          onclick={handleOrderCancel}
+                        ></lightning-button>
+                      </div>
+                    </template>
+                  </lightning-record-edit-form>
+                </template>
+              </template>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <div class="pb-product-sections">
+        <!-- === Content: Draft view vs Active view (mutually exclusive) === -->
+        <template lwc:if={isDraftTab}>
+          <!-- Draft Tab: Tables (Rooms + Parking + Extra) - products-panel = one shell with toolbar -->
+          <template lwc:if={hasDraftProducts}>
+            <c-package-builder-products-panel
+              class="pb-products-panel-target"
+              enable-toolbar-tooltips
+              show-toolbar={showToolbar}
+              enable-draft-edits
+              show-contract-terms-select-all-disclaimer
+              hide-bulk-edit-button={hideBulkEditOnContract}
+              show-iterations-button
+              is-on-demand-products={isOnDemandProducts}
+              products-header-count={productsHeaderCount}
+              show-products-toolbar-summary={showProductsToolbarSummary}
+              products-toolbar-total-monthly-value={productsToolbarTotalMonthlyValue}
+              is-add-product-disabled={isAddProductDisabled}
+              show-replace-button={showReplaceButton}
+              replace-button-title={replaceButtonTitle}
+              is-replace-disabled={isReplaceDisabled}
+              is-monthly-payments-disabled={isMonthlyPaymentsDisabled}
+              monthly-payments-button-title={monthlyPaymentsButtonTitle}
+              bulk-edit-disabled={toolbarBulkDisabled}
+              terminate-disabled={toolbarTerminateDisabled}
+              bulk-edit-button-title={bulkEditButtonTitle}
+              terminate-button-title={terminateButtonTitle}
+              standard-products={standardProducts}
+              parking-products={parkingProducts}
+              has-parking-products={hasParkingProducts}
+              parking-products-count={parkingProductsCount}
+              contract-terms-products={contractTermsProducts}
+              display-columns-standard={displayColumnsStandard}
+              display-columns-parking={displayColumnsParking}
+              display-columns-extra={displayColumnsExtra}
+              table-container-class={datatableContainerClass}
+              table-container-class-extra={datatableContainerClassExtra}
+              draft-values={draftValues}
+              selected-rows={selectedRows}
+              hide-checkbox-column={hideCheckboxColumn}
+              has-standard-or-extra-products={hasStandardOrExtraProducts}
+              has-contract-terms-products={hasContractTermsProducts}
+              contract-terms-count={contractTermsCount}
+              show-section-empty-message
+              section-empty-message="No products in this draft."
+              onaddproduct={handleAddProduct}
+              onreplace={handleReplace}
+              onopenmonthlypayments={handleOpenMonthlyPayments}
+              onbulkedit={handleBulkEdit}
+              onterminateproducts={handleTerminateProducts}
+              onopeniterations={handleOpenIterations}
+              onsave={handleDraftValueChange}
+              oncellchange={handleDraftValueChange}
+              oncombovaluechange={handleDraftValueChange}
+              onfieldpencilclick={handleFieldPencilClick}
+              onrowselection={handleRowSelection}
+              onselectallroomsandextra={handleSelectAllRoomsAndExtra}
+              onrowaction={handleRowAction}
+            >
+              <div
+                lwc:if={showVersionStartDateInToolbar}
+                slot="toolbar-version-start"
+                class="toolbar-version-start-wrap"
+              >
+                <template lwc:if={showInMemoryOrderSection}>
+                  <div class="order-detail-field toolbar-version-start-field">
+                    <div class="order-detail-value-wrap">
+                      <div class="order-detail-content">
+                        <div class="order-inline-row">
+                          <div class="order-inline-label">
+                            Contract Start Date
+                          </div>
+                          <div class="order-inline-value">
+                            <c-package-builder-locale-date-input
+                              variant="label-hidden"
+                              label="Contract Start Date"
+                              value={inMemoryOrderEffectiveDate}
+                              min={toolbarOrderStartMinYmd}
+                              data-field="effectiveDate"
+                              onchange={handleOrderFieldChange}
+                            ></c-package-builder-locale-date-input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <template lwc:else>
+                  <div class="order-detail-field toolbar-version-start-field">
+                    <div class="order-detail-value-wrap">
+                      <div class="order-detail-content">
+                        <div class="order-inline-row">
+                          <div class="order-inline-label">
+                            Contract Start Date
+                          </div>
+                          <div class="order-inline-value">
+                            <c-package-builder-locale-date-input
+                              variant="label-hidden"
+                              label="Contract Start Date"
+                              value={savedDraftToolbarEffectiveDateInputValue}
+                              min={toolbarOrderStartMinYmd}
+                              data-field="Order_Start_Date__c"
+                              onchange={handleOrderFieldChange}
+                            ></c-package-builder-locale-date-input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </c-package-builder-products-panel>
+            <template lwc:if={showStickyDraftFooter}>
+              <div class="pb-draft-footer-spacer" aria-hidden="true"></div>
+              <div
+                class="footer-actions footer-actions--viewport slds-docked-form-footer"
+                data-pb-draft-footer
+              >
+                <lightning-button
+                  label={labels.Cancel}
+                  onclick={handleCancel}
+                  variant="neutral"
+                  class="slds-m-horizontal_small"
+                  disabled={savingDraft}
+                ></lightning-button>
+                <span class="footer-save-wrap">
+                  <template lwc:if={savingDraft}>
+                    <lightning-spinner
+                      alternative-text="Saving…"
+                      size="small"
+                      class="footer-save-spinner"
+                    ></lightning-spinner>
+                  </template>
+                  <lightning-button
+                    label="Save"
+                    onclick={handleSaveChanges}
+                    variant="brand"
+                    disabled={savingDraft}
+                    title={saveButtonTitle}
+                  ></lightning-button>
+                </span>
+              </div>
+            </template>
+          </template>
+          <template lwc:if={showContractDraftToolbarWithoutTable}>
+            <c-package-builder-products-panel
+              class="pb-products-panel-target"
+              enable-toolbar-tooltips
+              toolbar-only
+              show-toolbar
+              show-contract-terms-select-all-disclaimer
+              hide-bulk-edit-button={hideBulkEditOnContract}
+              show-iterations-button
+              is-on-demand-products={isOnDemandProducts}
+              products-header-count={productsHeaderCount}
+              show-products-toolbar-summary={showProductsToolbarSummary}
+              products-toolbar-total-monthly-value={productsToolbarTotalMonthlyValue}
+              is-add-product-disabled={isAddProductDisabled}
+              show-replace-button={showReplaceButton}
+              replace-button-title={replaceButtonTitle}
+              is-replace-disabled={isReplaceDisabled}
+              is-monthly-payments-disabled={isMonthlyPaymentsDisabled}
+              monthly-payments-button-title={monthlyPaymentsButtonTitle}
+              bulk-edit-disabled={toolbarBulkDisabled}
+              terminate-disabled={toolbarTerminateDisabled}
+              bulk-edit-button-title={bulkEditButtonTitle}
+              terminate-button-title={terminateButtonTitle}
+              onaddproduct={handleAddProduct}
+              onreplace={handleReplace}
+              onopenmonthlypayments={handleOpenMonthlyPayments}
+              onbulkedit={handleBulkEdit}
+              onterminateproducts={handleTerminateProducts}
+              onopeniterations={handleOpenIterations}
+            >
+              <div
+                lwc:if={showVersionStartDateInToolbar}
+                slot="toolbar-version-start"
+                class="toolbar-version-start-wrap"
+              >
+                <template lwc:if={showInMemoryOrderSection}>
+                  <div class="order-detail-field toolbar-version-start-field">
+                    <div class="order-detail-value-wrap">
+                      <div class="order-detail-content">
+                        <div class="order-inline-row">
+                          <div class="order-inline-label">
+                            Contract Start Date
+                          </div>
+                          <div class="order-inline-value">
+                            <c-package-builder-locale-date-input
+                              variant="label-hidden"
+                              label="Contract Start Date"
+                              value={inMemoryOrderEffectiveDate}
+                              min={toolbarOrderStartMinYmd}
+                              data-field="effectiveDate"
+                              onchange={handleOrderFieldChange}
+                            ></c-package-builder-locale-date-input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <template lwc:else>
+                  <div class="order-detail-field toolbar-version-start-field">
+                    <div class="order-detail-value-wrap">
+                      <div class="order-detail-content">
+                        <div class="order-inline-row">
+                          <div class="order-inline-label">
+                            Contract Start Date
+                          </div>
+                          <div class="order-inline-value">
+                            <c-package-builder-locale-date-input
+                              variant="label-hidden"
+                              label="Contract Start Date"
+                              value={savedDraftToolbarEffectiveDateInputValue}
+                              min={toolbarOrderStartMinYmd}
+                              data-field="Order_Start_Date__c"
+                              onchange={handleOrderFieldChange}
+                            ></c-package-builder-locale-date-input>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </c-package-builder-products-panel>
+            <template lwc:if={showDraftHydrationLoader}>
+              <div class="draft-hydration-loader">
+                <lightning-spinner
+                  alternative-text="Loading draft products…"
+                  size="small"
+                ></lightning-spinner>
+                <span>Preparing draft products...</span>
+              </div>
+            </template>
+            <template lwc:if={showStickyDraftFooter}>
+              <div class="pb-draft-footer-spacer" aria-hidden="true"></div>
+              <div
+                class="footer-actions footer-actions--viewport slds-docked-form-footer"
+                data-pb-draft-footer
+              >
+                <lightning-button
+                  label={labels.Cancel}
+                  onclick={handleCancel}
+                  variant="neutral"
+                  class="slds-m-horizontal_small"
+                  disabled={savingDraft}
+                ></lightning-button>
+                <span class="footer-save-wrap">
+                  <template lwc:if={savingDraft}>
+                    <lightning-spinner
+                      alternative-text="Saving…"
+                      size="small"
+                      class="footer-save-spinner"
+                    ></lightning-spinner>
+                  </template>
+                  <lightning-button
+                    label="Save"
+                    onclick={handleSaveChanges}
+                    variant="brand"
+                    disabled={savingDraft}
+                    title={saveButtonTitle}
+                  ></lightning-button>
+                </span>
+              </div>
+            </template>
+          </template>
+          <!-- Draft Tab: Empty State -->
+          <template lwc:if={showDraftEmptyState}>
+            <div class="empty-state">
+              <lightning-icon
+                icon-name="utility:edit"
+                alternative-text="Draft"
+                size="small"
+                class="empty-state-icon"
+              ></lightning-icon>
+              <p class="empty-state-text">No draft order exists.</p>
+              <template lwc:if={hasActiveOrder}>
+                <p class="empty-state-hint">
+                  Create a draft to modify your current package.
+                </p>
+                <lightning-button
+                  label="Create Draft"
+                  icon-name="utility:add"
+                  variant="brand"
+                  onclick={handleCreateDraft}
+                  class="slds-m-top_medium"
+                ></lightning-button>
+              </template>
+            </div>
+          </template>
+        </template>
+        <template lwc:else>
+          <!-- Active View: Tables (Rooms + Parking + Extra) - products-panel = one shell with toolbar -->
+          <template lwc:if={hasActiveOrder}>
+            <c-package-builder-products-panel
+              class="pb-products-panel-target"
+              enable-toolbar-tooltips
+              show-toolbar={showToolbar}
+              enable-draft-edits
+              show-contract-terms-select-all-disclaimer
+              hide-bulk-edit-button={hideBulkEditOnContract}
+              show-iterations-button
+              is-on-demand-products={isOnDemandProducts}
+              products-header-count={productsHeaderCount}
+              show-products-toolbar-summary={showProductsToolbarSummary}
+              products-toolbar-total-monthly-value={productsToolbarTotalMonthlyValue}
+              is-add-product-disabled={isAddProductDisabled}
+              show-replace-button={showReplaceButton}
+              replace-button-title={replaceButtonTitle}
+              is-replace-disabled={isReplaceDisabled}
+              is-monthly-payments-disabled={isMonthlyPaymentsDisabled}
+              monthly-payments-button-title={monthlyPaymentsButtonTitle}
+              bulk-edit-disabled={toolbarBulkDisabled}
+              terminate-disabled={toolbarTerminateDisabled}
+              bulk-edit-button-title={bulkEditButtonTitle}
+              terminate-button-title={terminateButtonTitle}
+              standard-products={standardProducts}
+              parking-products={parkingProducts}
+              has-parking-products={hasParkingProducts}
+              parking-products-count={parkingProductsCount}
+              contract-terms-products={contractTermsProducts}
+              display-columns-standard={displayColumnsStandard}
+              display-columns-parking={displayColumnsParking}
+              display-columns-extra={displayColumnsExtra}
+              table-container-class={datatableContainerClass}
+              table-container-class-extra={datatableContainerClassExtra}
+              has-standard-or-extra-products={hasStandardOrExtraProducts}
+              has-contract-terms-products={hasContractTermsProducts}
+              contract-terms-count={contractTermsCount}
+              selected-rows={selectedRows}
+              hide-checkbox-column={hideCheckboxColumn}
+              show-section-empty-message
+              section-empty-message="No products."
+              onaddproduct={handleAddProduct}
+              onreplace={handleReplace}
+              onopenmonthlypayments={handleOpenMonthlyPayments}
+              onbulkedit={handleBulkEdit}
+              onopeniterations={handleOpenIterations}
+              onterminateproducts={handleTerminateProducts}
+              oncellchange={handleDraftValueChange}
+              onrowselection={handleRowSelection}
+              onselectallroomsandextra={handleSelectAllRoomsAndExtra}
+              onrowaction={handleRowAction}
+            ></c-package-builder-products-panel>
+          </template>
+          <!-- Active View: Empty State -->
+          <template lwc:if={showActiveEmptyState}>
+            <div class="empty-state">
+              <lightning-icon
+                icon-name="utility:info"
+                alternative-text="Info"
+                size="small"
+                class="empty-state-icon"
+              ></lightning-icon>
+              <p class="empty-state-text">No active order on this contract.</p>
+            </div>
+          </template>
+        </template>
+      </div>
+    </div>
+  </template>
+
+  <!-- ===========================================================
+         NON-CONTRACT CONTEXT (Opportunity / Order)
+         =========================================================== -->
+  <template lwc:else>
+    <!-- === KPI: header only (collapsed) or 8 tiles (expanded). Icon fixed at top. === -->
+    <template lwc:if={showOpportunityKpis}>
+      <c-package-builder-kpi-panel
+        expanded={kpiViewExpanded}
+        summary={opportunityKpiSummary}
+        total-products={oppProductsCount}
+        onkpitoggle={handleKpiViewToggle}
+        show-header-read-only-notice={showOpportunityClosedWonBanner}
+        header-read-only-notice-message={topReadOnlyBannerMessage}
+      ></c-package-builder-kpi-panel>
+    </template>
+
+    <!-- === Products: toolbar + table in one shell (Opportunity/Order) === -->
+    <template lwc:if={showToolbar}>
+      <c-package-builder-products-panel
+        class="pb-products-panel-target"
+        enable-toolbar-tooltips
+        show-toolbar
+        enable-draft-edits
+        show-empty-product-hint={showEmptyProductHint}
+        hide-terminate-button
+        show-iterations-button
+        is-on-demand-products={isOnDemandProducts}
+        products-header-count={productsHeaderCount}
+        show-products-toolbar-summary={showProductsToolbarSummary}
+        products-toolbar-total-monthly-value={productsToolbarTotalMonthlyValue}
+        is-add-product-disabled={isAddProductDisabled}
+        is-monthly-payments-disabled={isMonthlyPaymentsDisabled}
+        monthly-payments-button-title={monthlyPaymentsButtonTitle}
+        bulk-edit-disabled={toolbarBulkDisabled}
+        terminate-disabled={toolbarTerminateDisabled}
+        bulk-edit-button-title={bulkEditButtonTitle}
+        terminate-button-title={terminateButtonTitle}
+        standard-products={standardProducts}
+        parking-products={parkingProducts}
+        has-parking-products={hasParkingProducts}
+        parking-products-count={parkingProductsCount}
+        contract-terms-products={contractTermsProducts}
+        display-columns-standard={displayColumnsStandard}
+        display-columns-parking={displayColumnsParking}
+        display-columns-extra={displayColumnsExtra}
+        table-container-class={datatableContainerClass}
+        table-container-class-extra={datatableContainerClassExtra}
+        draft-values={draftValues}
+        selected-rows={selectedRows}
+        hide-checkbox-column={hideCheckboxColumn}
+        has-standard-or-extra-products={hasStandardOrExtraProducts}
+        has-contract-terms-products={hasContractTermsProducts}
+        contract-terms-count={contractTermsCount}
+        onaddproduct={handleAddProduct}
+        onopenmonthlypayments={handleOpenMonthlyPayments}
+        onbulkedit={handleBulkEdit}
+        onopeniterations={handleOpenIterations}
+        onterminateproducts={handleTerminateProducts}
+        onrowaction={handleRowAction}
+        onsave={handleSave}
+        oncellchange={handleDraftValueChange}
+        oncombovaluechange={handleDraftValueChange}
+        onrowselection={handleRowSelection}
+        onselectallroomsandextra={handleSelectAllRoomsAndExtra}
+      ></c-package-builder-products-panel>
+
+      <template lwc:if={showStickyDraftFooter}>
+        <div class="pb-draft-footer-spacer" aria-hidden="true"></div>
+        <div
+          class="footer-actions footer-actions--viewport slds-docked-form-footer"
+          data-pb-draft-footer
+        >
+          <lightning-button
+            label={labels.Cancel}
+            onclick={handleCancel}
+            variant="neutral"
+            class="slds-m-horizontal_small"
+            disabled={savingDraft}
+          ></lightning-button>
+          <span class="footer-save-wrap">
+            <template lwc:if={savingDraft}>
+              <lightning-spinner
+                alternative-text="Saving…"
+                size="small"
+                class="footer-save-spinner"
+              ></lightning-spinner>
+            </template>
+            <lightning-button
+              label="Save"
+              onclick={handleSaveChanges}
+              variant="brand"
+              disabled={savingDraft}
+              title={saveButtonTitle}
+            ></lightning-button>
+          </span>
+        </div>
+      </template>
+    </template>
+  </template>
+
+  <template lwc:if={showIterationsModal}>
+    <c-package-builder-iterations-modal
+      context={iterationsModalContext}
+      is-archived={iterationsModalArchived}
+      line-ids={iterationLineIds}
+      onclose={handleCloseIterations}
+      onsaved={handleIterationsSaved}
+    ></c-package-builder-iterations-modal>
+  </template>
+</template>

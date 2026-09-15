@@ -1,0 +1,19 @@
+<template>
+    <div class="boolean-cell">
+        <span class="slds-checkbox slds-checkbox_standalone">
+            <input
+                type="checkbox"
+                id={inputId}
+                class="boolean-cell__input"
+                checked={checked}
+                disabled={isDisabled}
+                onchange={handleChange}
+                aria-label="Temporary"
+            />
+            <label class="slds-checkbox__label" for={inputId}>
+                <span class="slds-checkbox_faux"></span>
+                <span class="slds-assistive-text">Temporary</span>
+            </label>
+        </span>
+    </div>
+</template>

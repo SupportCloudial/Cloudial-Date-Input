@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Renewal_Status__c</fullName>
+    <description>Informs about Renewal Status</description>
+    <label>Renewal Status</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Not Due</fullName>
+                <default>false</default>
+                <label>Not Due</label>
+            </value>
+            <value>
+                <fullName>Renewed - pending</fullName>
+                <default>false</default>
+                <label>Renewed - pending</label>
+            </value>
+            <value>
+                <fullName>Leaving</fullName>
+                <default>false</default>
+                <label>Leaving</label>
+            </value>
+            <value>
+                <fullName>Negotiation</fullName>
+                <default>false</default>
+                <label>Negotiation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

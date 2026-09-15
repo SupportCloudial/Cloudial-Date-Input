@@ -1,0 +1,54 @@
+<!-- Combobox Column Type -->
+<template>
+  <template if:true={editMode}>
+    <!-- Native select avoids datatable overlay clipping for dropdown options. -->
+    <label class="slds-assistive-text" for="accessTypeSelect"
+      >Access Type</label
+    >
+    <select
+      id="accessTypeSelect"
+      name="combobox"
+      class="combobox-editor"
+      aria-label="Access Type"
+      title="Access Type"
+      onchange={handleChange}
+    >
+      <template for:each={optionsForRender} for:item="opt">
+        <option key={opt.value} value={opt.value} selected={opt.selected}>
+          {opt.label}
+        </option>
+      </template>
+    </select>
+  </template>
+
+  <template if:false={editMode}>
+    <div class={cellClass}>
+      <template if:true={readOnly}>
+        <div class={valueClass}>{displayLabel}</div>
+      </template>
+      <template if:false={readOnly}>
+        <div
+          class={valueClass}
+          onclick={editCombobox}
+          onkeydown={handleKeyDown}
+          role="button"
+          tabindex="0"
+          aria-label="Edit access type"
+        >
+          {displayLabel}
+        </div>
+        <div class="slds-align-middle slds-m-horizontal_x-small">
+          <lightning-button-icon
+            icon-name="utility:edit"
+            size="medium"
+            variant="bare"
+            class="cell-icon__edit"
+            onclick={editCombobox}
+            alternative-text="Edit access type"
+            title="Edit access type"
+          ></lightning-button-icon>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

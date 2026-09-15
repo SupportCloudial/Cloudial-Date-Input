@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Period_In_Months__c</fullName>
+    <externalId>false</externalId>
+    <formula>(YEAR(EndDate) - YEAR(ServiceDate)) * 12 +
+(MONTH(EndDate) - MONTH(ServiceDate)) +
+(
+  (DAY(EndDate) / 
+    CASE(MONTH(EndDate),
+      1,31, 2, IF(MOD(YEAR(EndDate),4)=0,29,28),
+      3,31, 4,30, 5,31, 6,30,
+      7,31, 8,31, 9,30, 10,31,
+      11,30, 12,31, 0)
+  )
+  -
+  ((DAY(ServiceDate) - 1) /
+    CASE(MONTH(ServiceDate),
+      1,31, 2, IF(MOD(YEAR(ServiceDate),4)=0,29,28),
+      3,31, 4,30, 5,31, 6,30,
+      7,31, 8,31, 9,30, 10,31,
+      11,30, 12,31, 0)
+  )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Period In Months</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

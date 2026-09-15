@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Changed_Access_Type__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description
+  >Set true on new OrderItem rows created by past-start access type split (Package Builder, ClickUp 869dk2u53).</description>
+    <externalId>false</externalId>
+    <label>Changed Access Type</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

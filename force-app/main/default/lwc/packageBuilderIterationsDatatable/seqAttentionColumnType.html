@@ -1,0 +1,29 @@
+<template>
+  <div
+    class="iter-seq-cell iter-icon-cell slds-grid slds-grid_vertical-align-center"
+  >
+    <div class="iter-seq-cell__main slds-grow">
+      <c-ers_pencil-editable-column-type
+        editable={typeAttributes.editable}
+        value={value}
+        field-name={typeAttributes.fieldName}
+        key-field={typeAttributes.keyField}
+        key-field-value={typeAttributes.keyFieldValue}
+        input-type="number"
+        step="1"
+        alignment={typeAttributes.alignment}
+      ></c-ers_pencil-editable-column-type>
+    </div>
+    <template if:true={typeAttributes.attentionHint}>
+      <div
+        class="slds-m-horizontal_xx-small slds-shrink-none iter-seq-attention-icon"
+      >
+        <c-iteration-info-hint
+          message={typeAttributes.attentionHint}
+          icon-name="utility:clock"
+          icon-class="iter-attention-icon"
+        ></c-iteration-info-hint>
+      </div>
+    </template>
+  </div>
+</template>

@@ -1,0 +1,166 @@
+/* Shared glyph box — matches row trash/replace action icons (ersIconActionWithTooltip). */
+:host {
+  --pb-icon-glyph-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  min-height: 1.75rem;
+  overflow: visible;
+}
+
+/* Anchor for c-ers-tooltip without stretching the icon row layout. */
+.status-icon-tt-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--pb-icon-glyph-size);
+  height: var(--pb-icon-glyph-size);
+  min-height: var(--pb-icon-glyph-size);
+  line-height: 1;
+  overflow: visible;
+}
+
+.status-icon-row--grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  width: fit-content;
+  max-width: none;
+  min-height: 1.75rem;
+  min-width: max-content;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.status-icon-slot {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 1.75rem;
+  height: auto;
+  min-height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.status-icon-slot--future {
+  justify-content: flex-start;
+  gap: 0.25rem;
+  min-width: max-content;
+}
+
+.status-icon-slot--primary-cluster {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  min-width: 0;
+  min-height: 1.75rem;
+  width: auto;
+  max-width: none;
+  padding-inline: 0;
+}
+
+.status-icon-primary-subslot {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.status-icon-primary-subslot.status-icon-primary-subslot--aux {
+  min-width: max-content;
+  width: auto;
+  max-width: none;
+  justify-content: flex-start;
+  gap: 0.35rem;
+}
+
+.status-icon-slot--primary-cluster lightning-icon {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.status-icon-monthly-coin,
+.status-icon-custom-svg,
+.status-icon-future-plus,
+.status-icon-future-x,
+.status-icon-new-plus,
+.status-icon-cross-img {
+  width: var(--pb-icon-glyph-size);
+  height: var(--pb-icon-glyph-size);
+  min-width: var(--pb-icon-glyph-size);
+  min-height: var(--pb-icon-glyph-size);
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+  align-self: center;
+  box-sizing: border-box;
+}
+
+.status-icon-row--compact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  width: fit-content;
+  min-height: 1.75rem;
+  min-width: max-content;
+  overflow: visible;
+}
+
+.status-icon-cross {
+  flex: 0 0 auto;
+}
+
+.replacement-icon-in-cell {
+  width: var(--pb-icon-glyph-size);
+  height: var(--pb-icon-glyph-size);
+  min-width: var(--pb-icon-glyph-size);
+  min-height: var(--pb-icon-glyph-size);
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  align-self: center;
+  flex: 0 0 auto;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.status-icon-emoji {
+  display: inline-block;
+  font-size: 1.25rem;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.status-icon-plus,
+.status-icon-edit,
+.status-icon-clock {
+  vertical-align: middle;
+}
+
+.status-icon-row lightning-icon {
+  display: block;
+  line-height: 0;
+  --slds-c-icon-sizing-width: var(--pb-icon-glyph-size);
+  --slds-c-icon-sizing-height: var(--pb-icon-glyph-size);
+}

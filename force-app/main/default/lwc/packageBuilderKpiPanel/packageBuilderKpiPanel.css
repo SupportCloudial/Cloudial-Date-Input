@@ -1,0 +1,172 @@
+/* WI-000168: KPI panel styling (extracted from packageBuilderTable.css) */
+:host {
+  --brand-color: #0176d3;
+  --brand-gradient: linear-gradient(135deg, #0176d3 0%, #00a1e0 100%);
+  --surface-color: #ffffff;
+  --bg-color: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-focus: 0 0 0 2px var(--brand-color);
+
+  display: block;
+  width: 100%;
+}
+
+/* ═══ KPI Dashboard ═══ */
+.kpi-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.kpi-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--brand-color);
+}
+
+.kpi-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+/* Currency symbol on the left (₪) */
+.kpi-currency-left-wrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.kpi-currency-left {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* Section titles: uppercase (Summary etc.) */
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* KPI section: card with header */
+.kpi-section {
+  width: 100%;
+  margin-bottom: 0.5rem !important;
+}
+
+.kpi-section-card.slds-card,
+.kpi-section-card.slds-card_boundary {
+  border: none !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.kpi-section-card.slds-card:hover,
+.kpi-section-card.slds-card_boundary:hover {
+  box-shadow: var(--shadow-lg) !important;
+  transform: translateY(-2px);
+}
+
+.kpi-section-card {
+  position: relative;
+  background: var(--surface-color);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.kpi-section-card::before {
+  display: none;
+}
+
+/* Less vertical padding in Summary card body */
+.kpi-section-card .slds-card__body_inner {
+  padding-top: 0.75rem;
+  padding-bottom: 0.25rem;
+}
+
+.kpi-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
+  min-height: 2.25rem;
+}
+
+.kpi-header-title {
+  flex: 0 0 auto;
+}
+
+.kpi-header-flex-fill {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.kpi-header-readonly-notice {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    rgba(1, 118, 211, 0.08),
+    rgba(1, 118, 211, 0.02)
+  );
+  box-shadow: var(--shadow-sm);
+}
+
+.kpi-header-readonly-notice__text {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.kpi-header-readonly-notice__icon {
+  --sds-c-icon-color-foreground-default: var(--brand-color);
+}
+
+.kpi-card-header .kpi-toggle-cell {
+  flex-shrink: 0;
+}
+
+.kpi-toggle-cell {
+  flex-shrink: 0;
+}

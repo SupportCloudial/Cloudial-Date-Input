@@ -1,0 +1,270 @@
+<template>
+  <template lwc:if={isGridLayout}>
+    <div class="status-icon-row status-icon-row--grid">
+      <!-- Replacement (moving in/out) before end-date cross — aligns with delete/replace action column flow -->
+      <template lwc:if={showGridReplacementSlot}>
+        <div class="status-icon-slot">
+          <c-ers-tooltip message={tooltipReplacement}>
+            <span class="status-icon-tt-wrap">
+              <img src={value} alt="" class="replacement-icon-in-cell" role="presentation" />
+            </span>
+          </c-ers-tooltip>
+        </div>
+      </template>
+      <template lwc:if={showGridCrossSlot}>
+        <div class="status-icon-slot">
+        <template lwc:if={showCrossAsImage}>
+          <c-ers-tooltip message={tooltipCross}>
+            <span class="status-icon-tt-wrap">
+              <img
+                src={statusCrossIconUrl}
+                alt={crossAlternativeText}
+                class="status-icon-custom-svg status-icon-cross-img"
+              />
+            </span>
+          </c-ers-tooltip>
+        </template>
+        <template lwc:elseif={showCrossAsLightning}>
+          <c-ers-tooltip message={tooltipCross}>
+            <span class="status-icon-tt-wrap">
+              <lightning-icon
+                icon-name="utility:close"
+                alternative-text={crossAlternativeText}
+                size="x-small"
+                variant="error"
+                class="status-icon-cross"
+              ></lightning-icon>
+            </span>
+          </c-ers-tooltip>
+        </template>
+        </div>
+      </template>
+      <template lwc:if={showGridPrimaryClusterSlot}>
+      <div class="status-icon-slot status-icon-slot--primary-cluster">
+        <template lwc:if={showPrimaryChangeMarkers}>
+        <span class="status-icon-primary-subslot">
+            <template lwc:if={isNewItemMarker}>
+              <c-ers-tooltip message={tooltipNewProduct}>
+                <span class="status-icon-tt-wrap">
+                  <lightning-icon
+                    icon-name="utility:add"
+                    alternative-text="New item"
+                    size="x-small"
+                    variant="success"
+                    class="status-icon-plus"
+                  ></lightning-icon>
+                </span>
+              </c-ers-tooltip>
+            </template>
+            <template lwc:elseif={isModifiedMarker}>
+              <c-ers-tooltip message={tooltipModified}>
+                <span class="status-icon-tt-wrap">
+                  <lightning-icon
+                    icon-name="utility:edit"
+                    alternative-text="Modified"
+                    size="x-small"
+                    variant="warning"
+                    class="status-icon-edit"
+                  ></lightning-icon>
+                </span>
+              </c-ers-tooltip>
+            </template>
+            <template lwc:else>
+              <span class="status-icon-emoji">{value}</span>
+            </template>
+        </span>
+        </template>
+        <template lwc:if={showGridPrimaryAuxSubslot}>
+        <span class="status-icon-primary-subslot status-icon-primary-subslot--aux">
+          <template lwc:if={showMoneyImage}>
+            <c-ers-tooltip message={tooltipMoneyFinancial}>
+              <span class="status-icon-tt-wrap">
+                <img
+                  src={statusMonthlyMoneyIconUrl}
+                  alt=""
+                  class="status-icon-monthly-coin"
+                  role="presentation"
+                />
+              </span>
+            </c-ers-tooltip>
+          </template>
+          <template lwc:if={showPrimaryNewImage}>
+            <c-ers-tooltip message={tooltipNewProduct}>
+              <span class="status-icon-tt-wrap">
+                <img
+                  src={statusNewProductIconUrl}
+                  alt="New product"
+                  class="status-icon-custom-svg status-icon-new-plus"
+                />
+              </span>
+            </c-ers-tooltip>
+          </template>
+        </span>
+        </template>
+      </div>
+      </template>
+      <template lwc:if={showGridFutureSlot}>
+      <div class="status-icon-slot status-icon-slot--future">
+        <template lwc:if={showEntryAfterStartImage}>
+          <c-ers-tooltip message={tooltipFuturePlusEntry}>
+            <span class="status-icon-tt-wrap">
+              <img
+                src={statusEntryAfterStartUrl}
+                alt=""
+                class="status-icon-custom-svg status-icon-future-plus"
+                role="presentation"
+              />
+            </span>
+          </c-ers-tooltip>
+        </template>
+        <template lwc:if={showFutureEndBeforeMaxImage}>
+          <c-ers-tooltip message={tooltipFutureXOtherProducts}>
+            <span class="status-icon-tt-wrap">
+              <img
+                src={statusFutureEndBeforeMaxUrl}
+                alt=""
+                class="status-icon-custom-svg status-icon-future-x"
+                role="presentation"
+              />
+            </span>
+          </c-ers-tooltip>
+        </template>
+        <template lwc:if={hasEntryClock}>
+          <c-ers-tooltip message={tooltipFuturePlusEntry}>
+            <span class="status-icon-tt-wrap">
+              <lightning-icon
+                icon-name={entryClockIcon}
+                alternative-text="Start date after order start"
+                size="x-small"
+                variant="base"
+                class="status-icon-clock"
+              ></lightning-icon>
+            </span>
+          </c-ers-tooltip>
+        </template>
+      </div>
+      </template>
+    </div>
+  </template>
+  <template lwc:else>
+    <div class="status-icon-row status-icon-row--compact">
+      <template lwc:if={showPrimaryReplacementImage}>
+        <c-ers-tooltip message={tooltipReplacement}>
+          <span class="status-icon-tt-wrap">
+            <img src={value} alt="" class="replacement-icon-in-cell" role="presentation" />
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:if={showCrossAsImage}>
+        <c-ers-tooltip message={tooltipCross}>
+          <span class="status-icon-tt-wrap">
+            <img
+              src={statusCrossIconUrl}
+              alt={crossAlternativeText}
+              class="status-icon-custom-svg status-icon-cross-img"
+            />
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:elseif={showCrossAsLightning}>
+        <c-ers-tooltip message={tooltipCross}>
+          <span class="status-icon-tt-wrap">
+            <lightning-icon
+              icon-name="utility:close"
+              alternative-text={crossAlternativeText}
+              size="x-small"
+              variant="error"
+              class="status-icon-cross"
+            ></lightning-icon>
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:if={showEntryAfterStartImage}>
+        <c-ers-tooltip message={tooltipFuturePlusEntry}>
+          <span class="status-icon-tt-wrap">
+            <img
+              src={statusEntryAfterStartUrl}
+              alt=""
+              class="status-icon-custom-svg status-icon-future-plus"
+              role="presentation"
+            />
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:elseif={hasEntryClock}>
+        <c-ers-tooltip message={tooltipFuturePlusEntry}>
+          <span class="status-icon-tt-wrap">
+            <lightning-icon
+              icon-name={entryClockIcon}
+              alternative-text="Start date after order start"
+              size="x-small"
+              variant="base"
+              class="status-icon-clock"
+            ></lightning-icon>
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:if={showFutureEndBeforeMaxImage}>
+        <c-ers-tooltip message={tooltipFutureXOtherProducts}>
+          <span class="status-icon-tt-wrap">
+            <img
+              src={statusFutureEndBeforeMaxUrl}
+              alt=""
+              class="status-icon-custom-svg status-icon-future-x"
+              role="presentation"
+            />
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:if={showPrimaryNewImage}>
+        <c-ers-tooltip message={tooltipNewProduct}>
+          <span class="status-icon-tt-wrap">
+            <img
+              src={statusNewProductIconUrl}
+              alt="New product"
+              class="status-icon-custom-svg status-icon-new-plus"
+            />
+          </span>
+        </c-ers-tooltip>
+      </template>
+      <template lwc:if={showPrimaryChangeMarkers}>
+        <template lwc:if={isNewItemMarker}>
+          <c-ers-tooltip message={tooltipNewProduct}>
+            <span class="status-icon-tt-wrap">
+              <lightning-icon
+                icon-name="utility:add"
+                alternative-text="New item"
+                size="x-small"
+                variant="success"
+                class="status-icon-plus"
+              ></lightning-icon>
+            </span>
+          </c-ers-tooltip>
+        </template>
+        <template lwc:elseif={isModifiedMarker}>
+          <c-ers-tooltip message={tooltipModified}>
+            <span class="status-icon-tt-wrap">
+              <lightning-icon
+                icon-name="utility:edit"
+                alternative-text="Modified"
+                size="x-small"
+                variant="warning"
+                class="status-icon-edit"
+              ></lightning-icon>
+            </span>
+          </c-ers-tooltip>
+        </template>
+        <template lwc:else>
+          <span class="status-icon-emoji">{value}</span>
+        </template>
+      </template>
+      <template lwc:if={showMoneyImage}>
+        <c-ers-tooltip message={tooltipMoneyFinancial}>
+          <span class="status-icon-tt-wrap">
+            <img src={statusMonthlyMoneyIconUrl} alt="" class="status-icon-monthly-coin" role="presentation" />
+          </span>
+        </c-ers-tooltip>
+      </template>
+    </div>
+  </template>
+</template>

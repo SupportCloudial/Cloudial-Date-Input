@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>State__c</fullName>
+    <label>State</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Busy</fullName>
+                <default>false</default>
+                <label>Busy 🔴</label>
+            </value>
+            <value>
+                <fullName>Available</fullName>
+                <default>false</default>
+                <label>Available 🟢</label>
+            </value>
+            <value>
+                <fullName>Available soon</fullName>
+                <default>false</default>
+                <label>Available soon 🟡</label>
+            </value>
+            <value>
+                <fullName>Busy soon</fullName>
+                <default>false</default>
+                <label>Busy soon 🟠</label>
+            </value>
+            <value>
+                <fullName>Attention required</fullName>
+                <default>false</default>
+                <label>Attention required 🛎️</label>
+            </value>
+            <value>
+                <fullName>Busy soon - Available soon</fullName>
+                <default>false</default>
+                <label>Busy soon - Available soon ⌛</label>
+            </value>
+            <value>
+                <fullName>Available soon - Busy soon</fullName>
+                <default>false</default>
+                <label>Available soon - Busy soon ⌛</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

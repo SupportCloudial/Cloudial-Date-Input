@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sub_Type__c</fullName>
+    <label>Sub-Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Hot Desk</fullName>
+                <default>false</default>
+                <label>Hot Desk</label>
+            </value>
+            <value>
+                <fullName>Open Space</fullName>
+                <default>false</default>
+                <label>Open Space</label>
+            </value>
+            <value>
+                <fullName>Office</fullName>
+                <default>false</default>
+                <label>Office</label>
+            </value>
+            <value>
+                <fullName>Suite</fullName>
+                <default>false</default>
+                <label>Suite</label>
+            </value>
+            <value>
+                <fullName>Rent</fullName>
+                <default>false</default>
+                <label>Rent</label>
+            </value>
+            <value>
+                <fullName>Daily HD</fullName>
+                <default>false</default>
+                <label>Daily HD</label>
+            </value>
+            <value>
+                <fullName>Daily Office</fullName>
+                <default>false</default>
+                <label>Daily Office</label>
+            </value>
+            <value>
+                <fullName>Meeting Rooms</fullName>
+                <default>false</default>
+                <label>Meeting Rooms</label>
+            </value>
+            <value>
+                <fullName>Event Space-Balcony, roof, Lounge</fullName>
+                <default>false</default>
+                <label>Event Space-Balcony, roof, Lounge</label>
+            </value>
+            <value>
+                <fullName>Mini Cinema</fullName>
+                <default>false</default>
+                <label>Mini Cinema</label>
+            </value>
+            <value>
+                <fullName>Classroom</fullName>
+                <default>false</default>
+                <label>Classroom</label>
+            </value>
+            <value>
+                <fullName>Parking spot</fullName>
+                <default>false</default>
+                <label>Parking spot</label>
+            </value>
+            <value>
+                <fullName>Capsules</fullName>
+                <default>false</default>
+                <label>Capsules</label>
+            </value>
+            <value>
+                <fullName>Food / Refreshements</fullName>
+                <default>false</default>
+                <label>Food / Refreshements</label>
+            </value>
+            <value>
+                <fullName>IP/VLAN</fullName>
+                <default>false</default>
+                <label>IP/VLAN</label>
+            </value>
+            <value>
+                <fullName>Credits(Meeting rooms windows)</fullName>
+                <default>false</default>
+                <label>Credits(Meeting rooms windows)</label>
+            </value>
+            <value>
+                <fullName>Credits for MR</fullName>
+                <default>false</default>
+                <label>Credits for MR</label>
+            </value>
+            <value>
+                <fullName>Print Units</fullName>
+                <default>false</default>
+                <label>Print Units</label>
+            </value>
+            <value>
+                <fullName>Prints Color</fullName>
+                <default>false</default>
+                <label>Prints Color</label>
+            </value>
+            <value>
+                <fullName>Prints B&amp;W</fullName>
+                <default>false</default>
+                <label>Prints B&amp;W</label>
+            </value>
+            <value>
+                <fullName>Storage Space</fullName>
+                <default>false</default>
+                <label>Storage Space</label>
+            </value>
+            <value>
+                <fullName>Set Up Fee</fullName>
+                <default>false</default>
+                <label>Set Up Fee</label>
+            </value>
+            <value>
+                <fullName>Restoration Fee</fullName>
+                <default>false</default>
+                <label>Restoration Fee</label>
+            </value>
+            <value>
+                <fullName>Deposit Amount - Manual</fullName>
+                <default>false</default>
+                <label>Deposit</label>
+            </value>
+            <value>
+                <fullName>Podcast Room</fullName>
+                <default>false</default>
+                <label>Podcast Room</label>
+            </value>
+            <value>
+                <fullName>Maintenance</fullName>
+                <default>false</default>
+                <label>Maintenance</label>
+            </value>
+            <value>
+                <fullName>Arnona</fullName>
+                <default>false</default>
+                <label>Arnona</label>
+            </value>
+            <value>
+                <fullName>Cleaning</fullName>
+                <default>false</default>
+                <label>Cleaning</label>
+            </value>
+            <value>
+                <fullName>Electricity</fullName>
+                <default>false</default>
+                <label>Electricity</label>
+            </value>
+            <value>
+                <fullName>Management Fee</fullName>
+                <default>false</default>
+                <label>Management Fee</label>
+            </value>
+            <value>
+                <fullName>One Time</fullName>
+                <default>false</default>
+                <label>One Time</label>
+            </value>
+            <value>
+                <fullName>Water</fullName>
+                <default>false</default>
+                <label>Water</label>
+            </value>
+            <value>
+                <fullName>Extra for meter Products</fullName>
+                <default>false</default>
+                <label>Extra for meter Products</label>
+            </value>
+            <value>
+                <fullName>Other- (all other fee)</fullName>
+                <default>false</default>
+                <label>Other- (all other fee)</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+            <value>
+                <fullName>Early Termination Fee</fullName>
+                <default>false</default>
+                <label>Early Termination Fee</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Standard Products</controllingFieldValue>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Hot Desk</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard Products</controllingFieldValue>
+            <valueName>Open Space</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard Products</controllingFieldValue>
+            <valueName>Office</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard Products</controllingFieldValue>
+            <valueName>Suite</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Standard Products</controllingFieldValue>
+            <valueName>Rent</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Daily HD</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Daily Office</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Meeting Rooms</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Event Space-Balcony, roof, Lounge</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Mini Cinema</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Classroom</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>On demand Products</controllingFieldValue>
+            <valueName>Podcast Room</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Parking spot</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Capsules</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Food / Refreshements</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>IP/VLAN</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Credits(Meeting rooms windows)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Print Units</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Storage Space</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Maintenance</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>One Time</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Other- (all other fee)</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for all products</controllingFieldValue>
+            <valueName>Early Termination Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>Arnona</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>Cleaning</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>Electricity</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>Management Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Extra for meter Products</controllingFieldValue>
+            <valueName>Water</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contract Terms</controllingFieldValue>
+            <valueName>Credits for MR</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contract Terms</controllingFieldValue>
+            <valueName>Prints Color</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contract Terms</controllingFieldValue>
+            <valueName>Prints B&amp;W</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contract Terms</controllingFieldValue>
+            <valueName>Set Up Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contract Terms</controllingFieldValue>
+            <valueName>Restoration Fee</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Contract Terms</controllingFieldValue>
+            <valueName>Deposit Amount - Manual</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

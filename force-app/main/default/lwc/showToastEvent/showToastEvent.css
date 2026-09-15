@@ -1,0 +1,12 @@
+.slds-notify_toast{
+    min-width: 35%!important;
+}
+.slds-icon_container{
+    margin: auto 18px auto 3px!important;
+}
+/* .slds-notify__close{
+    margin: auto 0 auto;
+    position: relative!important;
+    top: 0!important;
+    right: -24px!important;
+} */

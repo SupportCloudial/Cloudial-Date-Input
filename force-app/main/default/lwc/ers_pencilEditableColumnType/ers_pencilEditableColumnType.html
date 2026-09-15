@@ -1,0 +1,55 @@
+<template>
+  <template lwc:if={editMode}>
+    <input
+      class="pencil-editor slds-input"
+      type={nativeInputType}
+      step={step}
+      value={editorValue}
+      aria-label="Edit value"
+      oninput={handleEditorInput}
+      onkeydown={handleEditorKeyDown}
+      onblur={handleEditorBlur}
+    />
+  </template>
+  <template lwc:else>
+    <div class={cellClass}>
+      <div
+        class={valueClass}
+        onclick={handlePencilClick}
+        onkeydown={handleKeyDown}
+        role={readOnlyRole}
+        tabindex={readOnlyTabIndex}
+        aria-label={readOnlyAriaLabel}
+      >
+        {displayValue}
+      </div>
+      <template lwc:if={showPriceProjectionInfoIcon}>
+        <div class="slds-align-middle slds-m-horizontal_xx-small">
+          <c-ers-tooltip message={priceProjectionTooltip}>
+            <span class="pb-price-projection-info">
+              <lightning-icon
+                icon-name="utility:info"
+                alternative-text={priceProjectionTooltip}
+                size="xx-small"
+                variant="base"
+              ></lightning-icon>
+            </span>
+          </c-ers-tooltip>
+        </div>
+      </template>
+      <template lwc:if={isCellEditable}>
+        <div class="slds-align-middle slds-m-horizontal_x-small">
+          <lightning-button-icon
+            icon-name="utility:edit"
+            size="medium"
+            variant="bare"
+            class="cell-icon__edit"
+            onclick={handlePencilClick}
+            alternative-text="Edit"
+            title="Edit"
+          ></lightning-button-icon>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

@@ -1,0 +1,322 @@
+/* Minimal ProductsPanel styling extracted from packageBuilderTable.css */
+:host {
+  --brand-color: #0176d3;
+  --surface-color: #ffffff;
+  --bg-color: #f8fafc;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  display: block;
+  width: 100%;
+}
+
+.section-title {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.products-panel {
+  position: relative;
+  background: var(--surface-color);
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s ease;
+  overflow: visible;
+}
+
+.products-panel:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.products-toolbar {
+  position: relative;
+  background: var(--surface-color);
+  /* Premium: round top corners only; tables/sections sit flush below */
+  border-radius: 12px 12px 0 0;
+  /* Avoid "double border" look vs outer .products-panel */
+  box-shadow: none;
+  overflow: visible;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  margin-top: 0;
+  border: none;
+  z-index: 5;
+}
+
+.products-toolbar__inner {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, auto);
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.25rem;
+  min-height: 3.5rem;
+}
+
+.products-toolbar__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  min-width: 0;
+}
+
+.products-toolbar__title-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  min-width: 0;
+}
+
+slot[name="toolbar-version-start"]::slotted(.toolbar-version-start-wrap) {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.products-toolbar__contract-banner {
+  margin: 0;
+  padding: 0.65rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(90deg, rgba(1, 118, 211, 0.06), rgba(1, 118, 211, 0.02));
+  border-radius: 12px 12px 0 0;
+}
+
+.products-toolbar__contract-banner-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-main);
+}
+
+.products-toolbar__contract-banner-icon {
+  --sds-c-icon-color-foreground-default: var(--brand-color);
+}
+
+.products-toolbar__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.products-toolbar__group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.products-toolbar__heading {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.products-toolbar__count {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-inline-start: 0.35rem;
+}
+
+.products-toolbar__summary {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.products-toolbar__summary-label {
+  overflow-wrap: anywhere;
+}
+
+.empty-product-hint {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.empty-product-hint strong {
+  color: var(--text-main);
+}
+
+.sections-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.product-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-split-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-split-block--tight {
+  gap: 0;
+}
+
+.product-split-title {
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+/* ═══ Product Section Headers (Standard / On Demand / Extra) ═══ */
+.products-section-header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--section-accent);
+  background-color: var(--section-bg);
+  background-clip: padding-box;
+  color: var(--section-text);
+
+  box-sizing: border-box;
+}
+
+.products-section-header__summary {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.25;
+  margin-inline-start: auto;
+}
+
+.products-section-header__summary-label {
+  overflow-wrap: anywhere;
+}
+
+.products-section-header__currency {
+  margin-inline-end: 0.125rem;
+}
+
+.products-section-header__icon {
+  --slds-c-icon-color-foreground-default: var(--section-icon);
+  --slds-c-icon-color-foreground: var(--section-icon);
+  --slds-c-icon-color-foreground-hover: var(--section-icon);
+  flex-shrink: 0;
+}
+
+.products-section-header__title {
+  font-size: 0.875rem;
+  font-weight: 600; /* semibold */
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  white-space: normal;
+}
+
+.products-section-header__count {
+  margin-inline-start: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--section-badge-bg);
+  border: 1px solid var(--section-badge-border);
+  color: var(--section-badge-text);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.2;
+}
+
+.products-section-header__rooms-extra-select {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: 0.35rem;
+}
+
+.products-section-header__select-all-rooms-extra {
+  flex-shrink: 0;
+}
+
+.products-section-header--standard {
+  border-radius: 0;
+  --section-bg: #EAF3FF;
+  --section-accent: #BFDBFE;
+  --section-text: #1E3A5F;
+  --section-icon: #2563EB;
+  --section-badge-bg: rgba(37, 99, 235, 0.12);
+  --section-badge-border: rgba(191, 219, 254, 1);
+  --section-badge-text: #1E3A5F;
+}
+
+.products-section-header--parking {
+  border-radius: 0;
+  --section-bg: #ECFDF5;
+  --section-accent: #A7F3D0;
+  --section-text: #064E3B;
+  --section-icon: #059669;
+  --section-badge-bg: rgba(5, 150, 105, 0.12);
+  --section-badge-border: rgba(167, 243, 208, 1);
+  --section-badge-text: #064E3B;
+}
+
+.products-section-header--ondemand {
+  --section-bg: #F3ECFF;
+  --section-accent: #D8B4FE;
+  --section-text: #4C1D95;
+  --section-icon: #7C3AED;
+  --section-badge-bg: rgba(124, 58, 237, 0.12);
+  --section-badge-border: rgba(216, 180, 254, 1);
+  --section-badge-text: #4C1D95;
+}
+
+.products-section-header--contract-terms {
+  border-radius: 0;
+  --section-bg: #F3F6F9;
+  --section-accent: #D6DEE8;
+  --section-text: #334155;
+  --section-icon: #64748B;
+  --section-badge-bg: rgba(100, 116, 139, 0.12);
+  --section-badge-border: rgba(214, 222, 232, 1);
+  --section-badge-text: #334155;
+}
+
+.table-wrapper {
+  background: var(--surface-color);
+  /* Outer .products-panel already provides the card border */
+  border: none;
+  border-radius: 0;
+  /* visible: fixed-position ERS tooltips must not be clipped (overflow:hidden clips fixed descendants). */
+  overflow: visible;
+  box-shadow: none;
+}
+
+.section-empty-msg {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}

@@ -1,0 +1,431 @@
+<template>
+  <section
+    role="dialog"
+    tabindex="-1"
+    class="slds-modal slds-fade-in-open slds-modal_large"
+  >
+    <div class="slds-modal__container iterations-modal-container">
+      <header class="slds-modal__header">
+        <button
+          class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+          title="Close"
+          onclick={handleClose}
+        >
+          <lightning-icon
+            icon-name="utility:close"
+            alternative-text="Close"
+            size="small"
+          ></lightning-icon>
+          <span class="slds-assistive-text">Close</span>
+        </button>
+        <h2 class="slds-modal__title slds-hyphenate">Iterations</h2>
+      </header>
+
+      <div
+        class="slds-modal__content slds-p-around_medium iterations-modal-content"
+      >
+        <template lwc:if={isLoading}>
+          <div class="iterations-loading">
+            <lightning-spinner
+              alternative-text="Loading iterations"
+              size="medium"
+            ></lightning-spinner>
+          </div>
+        </template>
+
+        <template lwc:elseif={hasRows}>
+          <template lwc:if={excludedMessage}>
+            <div
+              class="slds-notify slds-notify_alert slds-alert_warning slds-m-bottom_medium"
+              role="alert"
+            >
+              <span class="slds-assistive-text">Warning</span>
+              <h2>{excludedMessage}</h2>
+            </div>
+          </template>
+
+          <div class="iteration-bulk-toggle slds-m-bottom_small">
+            <c-ers-tooltip message={bulkPanelToggleTitle} hover-only>
+              <span>
+                <lightning-button
+                  label={bulkPanelToggleLabel}
+                  icon-name={bulkPanelToggleIcon}
+                  onclick={handleToggleBulkPanel}
+                ></lightning-button>
+              </span>
+            </c-ers-tooltip>
+          </div>
+
+          <template lwc:if={showBulkPanel}>
+            <section class="iteration-bulk-panel slds-m-bottom_medium">
+              <h3 class="iteration-bulk-title">Bulk update</h3>
+              <p class="iteration-field-hint slds-m-bottom_small">
+                Applies to all products in this modal. Check iteration rows in
+                each tile to update; completed rows in a selection are skipped.
+              </p>
+              <div class="iteration-bulk-fields">
+                <lightning-input
+                  type="number"
+                  label="Duration (mo)"
+                  data-field="duration"
+                  value={bulkDuration}
+                  onchange={handleBulkFieldChange}
+                ></lightning-input>
+                <lightning-input
+                  type="number"
+                  label="Notice (days)"
+                  data-field="notice"
+                  value={bulkNotice}
+                  onchange={handleBulkFieldChange}
+                ></lightning-input>
+                <lightning-combobox
+                  label="Price Increase Type"
+                  data-field="increaseType"
+                  value={bulkIncreaseType}
+                  options={increaseTypeOptions}
+                  onchange={handleBulkFieldChange}
+                ></lightning-combobox>
+                <lightning-input
+                  type="number"
+                  label="Price Increase Value"
+                  data-field="increaseValue"
+                  value={bulkIncreaseValue}
+                  onchange={handleBulkFieldChange}
+                ></lightning-input>
+                <lightning-combobox
+                  label="Proposed Type"
+                  data-field="proposedType"
+                  value={bulkProposedType}
+                  options={increaseTypeOptions}
+                  onchange={handleBulkFieldChange}
+                ></lightning-combobox>
+                <lightning-input
+                  type="number"
+                  label="Proposed Value"
+                  data-field="proposedValue"
+                  value={bulkProposedValue}
+                  onchange={handleBulkFieldChange}
+                ></lightning-input>
+                <div class="iteration-bulk-apply-wrap">
+                  <lightning-button
+                    label="Apply bulk update"
+                    variant="brand"
+                    onclick={handleBulkApply}
+                    disabled={isBulkApplyDisabled}
+                  ></lightning-button>
+                </div>
+              </div>
+              <template lwc:if={bulkFeedbackMessage}>
+                <p class="iteration-bulk-feedback slds-m-top_x-small">
+                  {bulkFeedbackMessage}
+                </p>
+              </template>
+            </section>
+          </template>
+
+          <template for:each={displayTiles} for:item="tile">
+            <article
+              key={tile.tileKey}
+              class="iteration-plan-tile slds-m-bottom_medium"
+            >
+              <div class="iteration-tile-header">
+                <div class="iteration-tile-title-row">
+                  <h3 class="iteration-tile-title">{tile.tileTitle}</h3>
+                  <template lwc:if={tile.showCopyFrom}>
+                    <div class="iteration-copy-from">
+                      <template lwc:if={tile.showCopyFromPicker}>
+                        <lightning-combobox
+                          label="Copy from"
+                          variant="label-hidden"
+                          value={tile.copySourceKey}
+                          options={tile.copySourceOptions}
+                          data-tile-key={tile.tileKey}
+                          onchange={handleCopySourceChange}
+                          class="iteration-copy-from-source"
+                        ></lightning-combobox>
+                      </template>
+                      <lightning-button
+                        label="Copy from..."
+                        icon-name="utility:copy"
+                        data-tile-key={tile.tileKey}
+                        onclick={handleCopyFrom}
+                        disabled={tile.copyFromDisabled}
+                        title="Copy working and schedule plan from another tile onto all products in this tile"
+                        class="iteration-copy-from-btn"
+                      ></lightning-button>
+                    </div>
+                  </template>
+                </div>
+                <template lwc:if={tile.showProductList}>
+                  <div
+                    class="iteration-chip-row"
+                    role="list"
+                    aria-label="Products in this plan"
+                  >
+                    <template for:each={tile.chips} for:item="chip">
+                      <span
+                        key={chip.lineId}
+                        class="iteration-chip iteration-chip-static"
+                        role="listitem"
+                        title={chip.label}
+                      >
+                        <span class="iteration-chip-label">{chip.label}</span>
+                      </span>
+                    </template>
+                  </div>
+                </template>
+              </div>
+
+              <div class="iteration-table-wrap">
+                <c-package-builder-iterations-datatable
+                  key={tile.datatableKey}
+                  key-field="rowKey"
+                  data={tile.iterations}
+                  columns={iterationColumns}
+                  wrap-table-header="none"
+                  max-row-selection="500"
+                  selected-rows={tile.selectedRowKeys}
+                  onrowselection={handleRowSelection}
+                  onsave={handleTableSave}
+                  oncombovaluechange={handleTableSave}
+                  data-tile-key={tile.tileKey}
+                  data-anchor-line-id={tile.anchorLineId}
+                  draft-values={tile.draftValues}
+                  suppress-bottom-bar
+                  class="iteration-datatable"
+                ></c-package-builder-iterations-datatable>
+              </div>
+
+              <div class="iteration-row-actions">
+                <lightning-button
+                  label="Add Iteration"
+                  icon-name="utility:add"
+                  data-tile-key={tile.tileKey}
+                  onclick={handleAddRow}
+                ></lightning-button>
+                <lightning-button
+                  label="Delete"
+                  icon-name="utility:delete"
+                  variant="destructive-text"
+                  data-tile-key={tile.tileKey}
+                  onclick={handleDelete}
+                  disabled={tile.deleteDisabled}
+                  title={tile.deleteTitle}
+                ></lightning-button>
+                <lightning-button
+                  label="Propose"
+                  icon-name="utility:edit"
+                  data-tile-key={tile.tileKey}
+                  onclick={handleToggleProposePanel}
+                  disabled={tile.proposeDisabled}
+                  title="Set proposed increase for selected iteration rows"
+                ></lightning-button>
+                <lightning-button
+                  label="Approve"
+                  icon-name="utility:check"
+                  variant="brand"
+                  data-tile-key={tile.tileKey}
+                  onclick={handleApprove}
+                  disabled={tile.approveDisabled}
+                  title="Approve proposed changes on selected iteration rows"
+                ></lightning-button>
+                <lightning-button
+                  label="Reject"
+                  data-tile-key={tile.tileKey}
+                  onclick={handleRejectProposed}
+                  disabled={tile.rejectDisabled}
+                  title="Reject proposed values without changing Working"
+                ></lightning-button>
+                <lightning-button
+                  label="History"
+                  icon-name="utility:clock"
+                  data-tile-key={tile.tileKey}
+                  onclick={handleHistory}
+                  disabled={tile.historyDisabled}
+                  title="Choose a product, then show history for selected iteration rows"
+                ></lightning-button>
+              </div>
+
+              <template lwc:if={tile.productPickerOpen}>
+                <section
+                  class="iteration-product-picker slds-m-top_small"
+                  aria-label="Select a product"
+                >
+                  <div class="iteration-product-picker-header">
+                    <p class="iteration-product-picker-title">
+                      {tile.productPickerTitle}
+                    </p>
+                    <lightning-button
+                      label="Cancel"
+                      variant="base"
+                      data-tile-key={tile.tileKey}
+                      onclick={handleCloseProductPicker}
+                    ></lightning-button>
+                  </div>
+                  <div class="iteration-chip-row" role="list">
+                    <template for:each={tile.chips} for:item="chip">
+                      <button
+                        key={chip.lineId}
+                        type="button"
+                        class="iteration-chip"
+                        data-tile-key={tile.tileKey}
+                        data-line-id={chip.lineId}
+                        onclick={handleProductPickerSelect}
+                        role="listitem"
+                      >
+                        <span class="iteration-chip-label">{chip.label}</span>
+                      </button>
+                    </template>
+                  </div>
+                </section>
+              </template>
+
+              <template lwc:if={tile.proposeOpen}>
+                <section
+                  class="iteration-propose-panel slds-m-top_small"
+                  aria-label="Propose increase"
+                >
+                  <p class="iteration-propose-subtitle">
+                    {tile.proposeSubtitle}
+                  </p>
+                  <div class="iteration-propose-fields">
+                    <lightning-combobox
+                      label="Proposed Type"
+                      data-tile-key={tile.tileKey}
+                      data-field="type"
+                      value={tile.proposeType}
+                      options={increaseTypeOptions}
+                      onchange={handleProposeFieldChange}
+                    ></lightning-combobox>
+                    <lightning-input
+                      type="number"
+                      label="Proposed Value"
+                      data-tile-key={tile.tileKey}
+                      data-field="value"
+                      value={tile.proposeValue}
+                      onchange={handleProposeFieldChange}
+                    ></lightning-input>
+                    <div class="iteration-propose-save-wrap">
+                      <lightning-button
+                        label="Save Proposed"
+                        variant="brand"
+                        data-tile-key={tile.tileKey}
+                        onclick={handleSaveProposed}
+                        disabled={tile.proposeSaveDisabled}
+                      ></lightning-button>
+                    </div>
+                  </div>
+                </section>
+              </template>
+
+              <template lwc:if={tile.historyOpen}>
+                <section
+                  class="iteration-history-panel slds-m-top_small"
+                  aria-label="Iteration history"
+                >
+                  <div class="iteration-history-header">
+                    <h4 class="iteration-history-title">History</h4>
+                    <lightning-button
+                      label="Close"
+                      variant="base"
+                      onclick={handleCloseHistory}
+                    ></lightning-button>
+                  </div>
+                  <template lwc:if={tile.historyLoading}>
+                    <div class="iteration-history-loading">
+                      <lightning-spinner
+                        alternative-text="Loading history"
+                        size="small"
+                      ></lightning-spinner>
+                    </div>
+                  </template>
+                  <template lwc:elseif={tile.historyError}>
+                    <p class="iteration-history-error">{tile.historyError}</p>
+                  </template>
+                  <template lwc:elseif={tile.hasHistoryRows}>
+                    <template
+                      for:each={tile.historySections}
+                      for:item="section"
+                    >
+                      <section
+                        key={section.sectionKey}
+                        class="iteration-history-section slds-m-bottom_small"
+                      >
+                        <h5 class="iteration-history-section-title">
+                          {section.sectionLabel}
+                        </h5>
+                        <table class="iteration-history-table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Event</th>
+                              <th scope="col">Working</th>
+                              <th scope="col">Proposed</th>
+                              <th scope="col">Prior working</th>
+                              <th scope="col">Prior proposed</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">User</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Summary</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <template for:each={section.rows} for:item="hist">
+                              <tr key={hist.key}>
+                                <td>{hist.eventType}</td>
+                                <td>{hist.workingDisplay}</td>
+                                <td>{hist.proposedDisplay}</td>
+                                <td>{hist.priorWorkingDisplay}</td>
+                                <td>{hist.priorProposedDisplay}</td>
+                                <td>{hist.statusChange}</td>
+                                <td>{hist.actorName}</td>
+                                <td>{hist.eventAt}</td>
+                                <td>{hist.summary}</td>
+                              </tr>
+                            </template>
+                          </tbody>
+                        </table>
+                      </section>
+                    </template>
+                  </template>
+                  <template lwc:elseif={tile.historyEmpty}>
+                    <p class="iteration-field-hint">
+                      No history recorded for the selected iterations yet.
+                    </p>
+                  </template>
+                </section>
+              </template>
+            </article>
+          </template>
+        </template>
+
+        <template lwc:else>
+          <div
+            class="slds-illustration slds-illustration_small slds-text-align_center slds-p-vertical_large"
+          >
+            <p class="slds-text-heading_small">No Periodic products selected</p>
+            <p
+              class="slds-text-body_regular slds-text-color_weak slds-m-top_x-small"
+            >
+              Select one or more Periodic lines, then open Iterations again.
+            </p>
+          </div>
+        </template>
+      </div>
+
+      <footer class="slds-modal__footer iterations-modal-footer">
+        <lightning-button
+          label="Close"
+          onclick={handleClose}
+        ></lightning-button>
+        <lightning-button
+          label="Save"
+          variant="brand"
+          onclick={handleSave}
+          class="slds-m-horizontal_x-small"
+          disabled={isSaveDisabled}
+        ></lightning-button>
+      </footer>
+    </div>
+  </section>
+  <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

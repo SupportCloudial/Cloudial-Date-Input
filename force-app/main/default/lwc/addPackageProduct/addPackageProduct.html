@@ -1,0 +1,219 @@
+<template>
+  <!-- Spinner container -->
+  <template if:true={isLoading}>
+    <lightning-spinner
+      alternative-text={labels.Saving}
+      size="medium"
+    ></lightning-spinner>
+  </template>
+
+  <lightning-card dir={textDirection}>
+    <template if:true={inlineErrorMessage}>
+      <div
+        class="slds-m-bottom_small slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error"
+        role="alert"
+      >
+        <span class="slds-assistive-text">error</span>
+        <lightning-icon
+          icon-name="utility:error"
+          alternative-text=""
+          size="small"
+          class="slds-m-horizontal_x-small"
+        ></lightning-icon>
+        <span>{inlineErrorMessage}</span>
+      </div>
+    </template>
+
+    <section
+      class="add-products-section slds-m-bottom_medium"
+      aria-labelledby="add-products-filters-heading"
+    >
+      <h3
+        id="add-products-filters-heading"
+        class="add-products-section__title slds-text-title_caps"
+      >
+        {labels.SectionFilters}
+      </h3>
+      <div class="add-products-filter-grid">
+        <div class="add-products-filter-cell">
+          <lightning-combobox
+            name="Type__c"
+            label={labels.Type}
+            value={selectedType}
+            placeholder={labels.TypePH}
+            options={typeOptions}
+            onchange={handleTypeChange}
+            disabled={isTypeDisabled}
+          ></lightning-combobox>
+        </div>
+        <div class="add-products-filter-cell">
+          <lightning-combobox
+            name="Sub_Type__c"
+            label={labels.SubType}
+            value={selectedSubType}
+            placeholder={labels.SubTypePH}
+            options={subTypeOptions}
+            onchange={handleSubTypeChange}
+            disabled={disableSubTypeOptions}
+          ></lightning-combobox>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="add-products-section slds-m-bottom_medium"
+      aria-labelledby="add-products-defaults-heading"
+    >
+      <h3
+        id="add-products-defaults-heading"
+        class="add-products-section__title slds-text-title_caps"
+      >
+        {labels.SectionDefaults}
+      </h3>
+      <div class="add-products-defaults-grid">
+        <div class="add-products-filter-cell">
+          <label class="slds-form-element">
+            <span class="slds-form-element__label">{labels.PeriodStart}</span>
+            <div class="slds-form-element__control">
+              <c-package-builder-locale-date-input
+                id="period-start-input"
+                class="add-products-locale-date-host"
+                variant="label-hidden"
+                label={labels.PeriodStart}
+                value={periodStartStr}
+                min={periodStartMinYmd}
+                max={periodStartMaxYmd}
+                input-class="add-products-native-date"
+                onchange={handlePeriodStartChange}
+              ></c-package-builder-locale-date-input>
+            </div>
+          </label>
+        </div>
+        <div class="add-products-filter-cell">
+          <label class="slds-form-element">
+            <span class="slds-form-element__label">{labels.PeriodEnd}</span>
+            <div class="slds-form-element__control">
+              <c-package-builder-locale-date-input
+                id="period-end-input"
+                class="add-products-locale-date-host"
+                variant="label-hidden"
+                label={labels.PeriodEnd}
+                value={periodEndStr}
+                min={periodEndMinYmd}
+                disabled={isPeriodEndDisabled}
+                input-class="add-products-native-date"
+                onchange={handlePeriodEndChange}
+              ></c-package-builder-locale-date-input>
+            </div>
+          </label>
+        </div>
+        <div class="add-products-filter-cell">
+          <lightning-combobox
+            name="Access_Type__c"
+            label={labels.AccessType}
+            value={selectedAccessType}
+            placeholder={labels.AccessTypePH}
+            options={accessTypeOptions}
+            onchange={handleAccessTypeChange}
+            disabled={replaceMode}
+          ></lightning-combobox>
+        </div>
+        <template lwc:if={showTemporaryDefault}>
+          <div class="add-products-filter-cell">
+            <div class="slds-form-element">
+              <span class="slds-form-element__label slds-assistive-text"
+                >{labels.Temporary}</span
+              >
+              <div class="slds-form-element__control">
+                <label class="add-products-transfer-price-box">
+                  <span
+                    class="add-products-transfer-price-text add-products-temporary-label"
+                  >
+                    <span>{labels.Temporary}</span>
+                  </span>
+                  <lightning-input
+                    type="checkbox"
+                    variant="label-hidden"
+                    label={labels.Temporary}
+                    checked={defaultTemporary}
+                    onchange={handleTemporaryDefaultChange}
+                    class="add-products-transfer-price-checkbox"
+                  ></lightning-input>
+                </label>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template lwc:if={showNotesDefault}>
+          <div class="add-products-filter-cell">
+            <lightning-input
+              type="text"
+              name="Notes"
+              label={labels.Notes}
+              value={defaultNotes}
+              maxlength="255"
+              onchange={handleNotesDefaultChange}
+            ></lightning-input>
+          </div>
+        </template>
+        <template lwc:if={showOrderCpiDateField}>
+          <div class="add-products-filter-cell">
+            <label class="slds-form-element">
+              <span class="slds-form-element__label">{labels.CpiDate}</span>
+              <div class="slds-form-element__control">
+                <c-package-builder-locale-date-input
+                  class="add-products-locale-date-host"
+                  variant="label-hidden"
+                  label={labels.CpiDate}
+                  value={defaultCpiDateStr}
+                  input-class="add-products-native-date"
+                  onchange={handleCpiDateChange}
+                ></c-package-builder-locale-date-input>
+              </div>
+            </label>
+          </div>
+        </template>
+        <template lwc:if={showTransferPriceCheckbox}>
+          <div class="add-products-filter-cell">
+            <div class="slds-form-element">
+              <span class="slds-form-element__label slds-assistive-text"
+                >Transfer Price</span
+              >
+              <div class="slds-form-element__control">
+                <label class="add-products-transfer-price-box">
+                  <span class="add-products-transfer-price-text"
+                    >Transfer Price</span
+                  >
+                  <lightning-input
+                    type="checkbox"
+                    variant="label-hidden"
+                    label="Transfer Price"
+                    checked={transferPrice}
+                    onchange={handleTransferPriceChange}
+                    class="add-products-transfer-price-checkbox"
+                  ></lightning-input>
+                </label>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <div class="table-height datatable-border">
+      <lightning-datatable
+        data-id="datatable"
+        key-field="Id"
+        data={filteredProducts}
+        columns={columns}
+        draft-values={draftValues}
+        oncellchange={handleCellChange}
+        onrowselection={handleRowSelection}
+        onsave={handleInlineSave}
+      >
+      </lightning-datatable>
+    </div>
+
+    <!-- Primary actions (Add Products / Replace) are in the modal footer for visibility. -->
+  </lightning-card>
+</template>

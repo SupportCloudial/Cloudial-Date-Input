@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Monthly_Units__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+  OR(Access_Type__c = &quot;Periodic&quot;, Access_Type__c = &quot;Monthly&quot;, Access_Type__c = &quot;Rent&quot;),
+  (DAY(End_date__c) - DAY(Start_date__c) + 1) / 
+  DAY(
+    DATE(
+      YEAR(Start_date__c) + IF(MONTH(Start_date__c) = 12, 1, 0), 
+      IF(MONTH(Start_date__c) = 12, 1, MONTH(Start_date__c) + 1), 
+      1
+    ) - 1
+  ),
+  1
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Monthly Units</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>18</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

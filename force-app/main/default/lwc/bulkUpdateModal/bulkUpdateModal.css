@@ -1,0 +1,109 @@
+.modal-glass-shell {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(241, 248, 255, 0.64));
+  border: 1px solid rgba(129, 161, 204, 0.34);
+  border-radius: 14px;
+  padding: 0.9rem 1rem 0.4rem;
+  box-shadow: 0 10px 24px rgba(30, 60, 105, 0.12);
+}
+
+.compact-card {
+  padding-top: 0.75rem;
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: #000000;
+}
+
+.section-subtitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.45rem;
+  color: #000000;
+}
+
+.section-helper {
+  color: #000000;
+}
+
+.balanced-grid {
+  align-items: end;
+}
+
+.modal-date-input {
+  min-width: 230px;
+}
+
+.bulk-modal-locale-date-host {
+  display: block;
+  width: 100%;
+}
+
+.read-only-metric {
+  height: 100%;
+  min-height: 5.05rem;
+  border: 1px solid rgba(133, 163, 204, 0.45);
+  background: linear-gradient(145deg, rgba(237, 246, 255, 0.82), rgba(255, 255, 255, 0.72));
+  border-radius: 10px;
+  padding: 0.72rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.read-only-metric--inline {
+  min-height: 2.38rem;
+  padding: 0.5rem 0.85rem;
+}
+
+.metric-inline-label {
+  color: #000000;
+  margin-bottom: 0.35rem;
+}
+
+.field-label {
+  font-size: 0.9rem;
+  color: #000000;
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+
+.field-label--with-helptext {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.field-helptext {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.required-mark {
+  color: #c23934;
+  margin-inline-end: 0.2rem;
+}
+
+.read-only-metric__value {
+  font-size: 1.08rem;
+  color: #1d3a61;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}

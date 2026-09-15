@@ -1,0 +1,20 @@
+.boolean-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 1.75rem;
+    overflow: visible;
+}
+
+.boolean-cell .slds-checkbox_standalone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.boolean-cell__input {
+    margin: 0;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Iteration__c</fullName>
+    <label>Iteration</label>
+    <referenceTo>Iteration__c</referenceTo>
+    <relationshipLabel>Iteration History Events</relationshipLabel>
+    <relationshipName>Iteration_History_Events</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

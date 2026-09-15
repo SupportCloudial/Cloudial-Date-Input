@@ -1,0 +1,140 @@
+
+/* RTL: inherit document direction; prefer logical spacing in this bundle */
+:host {
+  display: block;
+}
+.container {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.activate-wrapper {
+    display: inline-flex;
+    align-items: center;
+}
+
+.activate-wrapper .activate-spinner {
+    margin-inline-end: 0.25rem;
+}
+
+.modify-contract-wrap {
+    display: inline-flex;
+    align-items: center;
+    min-width: 11.5rem;
+}
+
+.modify-draft-spinner-inline {
+    margin-inline-end: 0.35rem;
+}
+
+/* Monthly payments drawer (Option A) */
+.monthly-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 9000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms ease;
+}
+
+.monthly-drawer-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.monthly-drawer {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    height: calc(100vh - 24px);
+    width: min(620px, 92vw);
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+    z-index: 9001;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateX(calc(100% + 24px));
+    transition: transform 260ms cubic-bezier(0.2, 0, 0, 1);
+    pointer-events: none;
+}
+
+.monthly-drawer.is-open {
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.monthly-drawer__header {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0.75rem 1rem;
+    z-index: 1;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.monthly-drawer__title-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.monthly-drawer__close-btn {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.monthly-drawer__close-btn:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.monthly-drawer__close-btn:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px rgba(0, 112, 210, 0.55);
+}
+
+.monthly-drawer__close-btn lightning-icon {
+    --slds-c-icon-color-foreground-default: rgba(0, 0, 0, 0.78);
+}
+
+.monthly-drawer__title {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
+
+.monthly-drawer__subtitle {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.62);
+    margin-top: 0.125rem;
+}
+
+.monthly-drawer__helper {
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.62);
+    margin-top: 0.5rem;
+}
+
+.monthly-drawer__body {
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    overflow: auto;
+    padding: 0.25rem 1rem 1rem;
+}

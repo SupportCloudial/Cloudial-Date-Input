@@ -1,0 +1,12 @@
+---
+description: rooms-devops is read-only reference when both folders are in the workspace
+alwaysApply: true
+---
+
+# rooms-devops is read-only
+
+This workspace may include `rooms-devops` beside `Cloudial-Packages`.
+
+1. **Never** edit, commit, deploy from, or reformat files under `rooms-devops`.
+2. Use `rooms-devops` only to read Apex/LWC/docs for parity while implementing in `Cloudial-Packages`.
+3. All new metadata, skills, manifests, and README updates go under `Cloudial-Packages` only.

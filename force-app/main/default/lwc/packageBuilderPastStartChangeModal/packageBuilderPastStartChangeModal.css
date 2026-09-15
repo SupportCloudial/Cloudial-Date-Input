@@ -1,0 +1,110 @@
+/* Centered dialog — same layout as Contract Terms replace sheet. */
+.pb-ctr-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 9100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.pb-ctr-sheet-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pb-ctr-sheet {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: min(40rem, calc(100vw - 24px));
+  max-height: min(85vh, 640px);
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0;
+  transition:
+    opacity 220ms ease,
+    transform 260ms cubic-bezier(0.2, 0, 0, 1);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+  z-index: 9101;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.pb-ctr-sheet.is-open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pb-ctr-sheet__header {
+  flex: 0 0 auto;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 1rem;
+}
+
+.pb-ctr-sheet__title-row {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr 2.5rem;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.pb-ctr-sheet__header-edge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+}
+
+.pb-ctr-sheet__header-edge--end {
+  justify-content: flex-end;
+}
+
+.pb-ctr-sheet__title {
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  color: rgba(0, 0, 0, 0.92);
+  text-align: center;
+  justify-self: stretch;
+}
+
+.pb-ctr-sheet__close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pb-ctr-sheet__body {
+  flex: 1 1 auto;
+  overflow: visible;
+  padding: 0.75rem 1rem 1rem;
+}
+
+.pb-ctr-sheet__footer {
+  flex: 0 0 auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 1rem;
+}
+
+.pb-ctr-sheet__footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}

@@ -1,0 +1,64 @@
+<template>
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="combobox-id">{label}</label>
+        <div class="slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div
+                    class={comboboxClass}
+                    aria-expanded={dropdownExpanded}
+                    aria-haspopup="listbox"
+                    role="combobox"
+                >
+                    <div
+                        class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                        role="none"
+                    >
+                        <input
+                            type="text"
+                            class="slds-input slds-combobox__input"
+                            id="combobox-id"
+                            placeholder={placeholder}
+                            readonly
+                            onclick={toggleDropdown}
+                            aria-controls="listbox-id"
+                            value={displayValue}
+                            disabled={disabled}
+                        />
+                        <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
+                            <lightning-icon icon-name="utility:down" size="x-small"></lightning-icon>
+                        </span>
+                    </div>
+                    <div id="listbox-id" role="listbox" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" if:true={dropdownExpanded}>
+                        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                            <template for:each={options} for:item="option">
+                                <li
+                                    key={option.value}
+                                    role="presentation"
+                                    class="slds-listbox__item"
+                                    onclick={handleOptionClick}
+                                    data-value={option.value}
+                                >
+                                    <div
+                                        id="listbox-option-{option.value}"
+                                        class="slds-listbox__option slds-listbox__option_plain slds-media slds-media_small slds-media_center"
+                                        role="option"
+                                    >
+                                        <span class="slds-media__body">
+                                            <span class="slds-truncate" title={option.label}>{option.label}</span>
+                                        </span>
+                                        <lightning-icon
+                                            icon-name="utility:check"
+                                            size="x-small"
+                                            class="slds-m-horizontal_x-small"
+                                            if:true={option.selected}
+                                        ></lightning-icon>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

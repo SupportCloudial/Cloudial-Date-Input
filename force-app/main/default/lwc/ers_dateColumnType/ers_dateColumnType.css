@@ -1,0 +1,45 @@
+.date-editor {
+  position: relative;
+  z-index: 10000;
+  max-width: 9.5rem;
+}
+
+.date-cell {
+  display: flex;
+  align-items: center;
+  min-height: 1.75rem;
+  overflow: visible;
+}
+
+/* End date before order start — td cell class often missing for custom types; see dateCellRootClass */
+.date-cell--warn-before-order-start {
+  background-color: #fecaca;
+  border-radius: 4px;
+}
+
+.date-editor-wrap {
+  display: block;
+}
+
+.date-cell__value {
+  flex: 1;
+}
+
+.date-cell--editable .date-cell__value {
+  cursor: pointer;
+}
+
+.date-cell__icon {
+  margin-inline-start: 0.25rem;
+}
+
+.cell-icon__edit {
+  opacity: 0.45;
+  pointer-events: auto;
+  transition: opacity 120ms ease-in-out;
+}
+
+.date-cell:hover .cell-icon__edit,
+.date-cell:focus-within .cell-icon__edit {
+  opacity: 1;
+}

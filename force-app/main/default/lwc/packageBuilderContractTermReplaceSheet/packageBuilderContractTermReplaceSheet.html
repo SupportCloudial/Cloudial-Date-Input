@@ -1,0 +1,81 @@
+<template>
+  <div class={backdropClass} onclick={handleBackdropClick}></div>
+  <aside
+    class={sheetClass}
+    role="dialog"
+    aria-label="Replace Contract Term"
+    aria-hidden={ariaHidden}
+    onkeydown={handleKeydown}
+  >
+    <header class="pb-ctr-sheet__header">
+      <div class="pb-ctr-sheet__title-row">
+        <div class="pb-ctr-sheet__header-edge" aria-hidden="true"></div>
+        <div class="pb-ctr-sheet__title">Replace Contract Term</div>
+        <div class="pb-ctr-sheet__header-edge pb-ctr-sheet__header-edge--end">
+          <button
+            type="button"
+            data-pb-ctr-sheet-close
+            class="pb-ctr-sheet__close-btn"
+            aria-label="Close"
+            title="Close"
+            onclick={handleClose}
+            disabled={isSaving}
+          >
+            <lightning-icon
+              icon-name="utility:close"
+              size="x-small"
+              alternative-text=""
+            ></lightning-icon>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="pb-ctr-sheet__body">
+      <div class="slds-form slds-form_stacked">
+        <c-package-builder-locale-date-input
+          class="pb-ctr-sheet-locale-date-host"
+          label="Start date"
+          value={entryDateStr}
+          min={entryDateMinYmd}
+          required
+          disabled={isSaving}
+          input-class="pb-ctr-sheet-entry-date-input"
+          onchange={handleEntryChange}
+        ></c-package-builder-locale-date-input>
+        <lightning-input
+          type="number"
+          label={valueLabel}
+          value={quantityInput}
+          step="any"
+          min="0"
+          onchange={handleQtyChange}
+          required
+          class="slds-m-top_small"
+        ></lightning-input>
+        <lightning-textarea
+          label="Description"
+          value={notesVal}
+          onchange={handleNotesChange}
+          class="slds-m-top_small"
+        ></lightning-textarea>
+      </div>
+    </div>
+
+    <footer class="pb-ctr-sheet__footer">
+      <div class="pb-ctr-sheet__footer-inner">
+        <lightning-button
+          label="Cancel"
+          onclick={handleClose}
+          disabled={isSaving}
+        ></lightning-button>
+        <lightning-button
+          variant="brand"
+          label="Save"
+          onclick={handleSave}
+          disabled={isSaving}
+        ></lightning-button>
+      </div>
+    </footer>
+  </aside>
+</template>

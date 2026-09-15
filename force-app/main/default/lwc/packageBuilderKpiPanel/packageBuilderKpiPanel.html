@@ -1,0 +1,148 @@
+<template>
+  <div class="kpi-section">
+    <div class="kpi-section-card slds-card slds-card_boundary">
+      <div class="slds-card__header slds-grid kpi-card-header">
+        <div class="kpi-header-title">
+          <h3 class="slds-card__header-title slds-truncate section-title">
+            Summary
+          </h3>
+        </div>
+
+        <template lwc:if={showHeaderReadOnlyNotice}>
+          <div
+            class="kpi-header-readonly-notice slds-scoped-notification slds-media slds-media_center"
+            role="status"
+          >
+            <div class="slds-media__figure">
+              <lightning-icon
+                icon-name="utility:info"
+                size="x-small"
+                alternative-text="Information"
+                class="kpi-header-readonly-notice__icon"
+              ></lightning-icon>
+            </div>
+            <div class="slds-media__body slds-has-flexi-truncate">
+              <p
+                class="kpi-header-readonly-notice__text slds-truncate"
+                title={headerReadOnlyNoticeMessage}
+              >
+                {headerReadOnlyNoticeMessage}
+              </p>
+            </div>
+          </div>
+        </template>
+        <template lwc:else>
+          <div class="kpi-header-flex-fill" aria-hidden="true"></div>
+        </template>
+
+        <div class="kpi-toggle-cell">
+          <template lwc:if={expanded}>
+            <lightning-button-icon
+              icon-name="utility:chevrondown"
+              alternative-text="Collapse Summary"
+              title="Collapse Summary"
+              onclick={handleToggle}
+              variant="border-filled"
+              size="small"
+            ></lightning-button-icon>
+          </template>
+          <template lwc:else>
+            <lightning-button-icon
+              icon-name="utility:chevronright"
+              alternative-text="Expand Summary"
+              title="Expand Summary"
+              onclick={handleToggle}
+              variant="border-filled"
+              size="small"
+            ></lightning-button-icon>
+          </template>
+        </div>
+      </div>
+
+      <template lwc:if={expanded}>
+        <div class="slds-card__body slds-card__body_inner">
+          <div class="kpi-container">
+            <div class="kpi-card">
+              <p class="kpi-label">Total Monthly Rooms Revenue</p>
+              <div class="kpi-value kpi-currency-left-wrap">
+                <span class="kpi-currency-left">₪</span>
+                <lightning-formatted-number
+                  value={summary.totalMonthlyRoomsRevenue}
+                  format-style="decimal"
+                  minimum-fraction-digits="2"
+                  maximum-fraction-digits="2"
+                ></lightning-formatted-number>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <p class="kpi-label">Total Calculated Monthly Rooms Revenue</p>
+              <div class="kpi-value kpi-currency-left-wrap">
+                <span class="kpi-currency-left">₪</span>
+                <lightning-formatted-number
+                  value={summary.totalCalculatedMonthlyRoomsRevenue}
+                  format-style="decimal"
+                  minimum-fraction-digits="2"
+                  maximum-fraction-digits="2"
+                ></lightning-formatted-number>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <p class="kpi-label">
+                Total Calculated Revenue of periodic Rooms
+              </p>
+              <div class="kpi-value kpi-currency-left-wrap">
+                <span class="kpi-currency-left">₪</span>
+                <lightning-formatted-number
+                  value={summary.totalCalculatedRevenueAllRooms}
+                  format-style="decimal"
+                  minimum-fraction-digits="2"
+                  maximum-fraction-digits="2"
+                ></lightning-formatted-number>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <p class="kpi-label">Total Monthly Parking Revenue</p>
+              <div class="kpi-value kpi-currency-left-wrap">
+                <span class="kpi-currency-left">₪</span>
+                <lightning-formatted-number
+                  value={summary.totalMonthlyParkingRevenue}
+                  format-style="decimal"
+                  minimum-fraction-digits="2"
+                  maximum-fraction-digits="2"
+                ></lightning-formatted-number>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <p class="kpi-label">Parking Spots</p>
+              <div class="kpi-value">
+                <lightning-formatted-number
+                  value={summary.parkingSpots}
+                  format-style="decimal"
+                  minimum-fraction-digits="0"
+                  maximum-fraction-digits="0"
+                ></lightning-formatted-number>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <p class="kpi-label">Average Monthly Parking Revenue</p>
+              <div class="kpi-value kpi-currency-left-wrap">
+                <span class="kpi-currency-left">₪</span>
+                <lightning-formatted-number
+                  value={summary.averageMonthlyParkingRevenue}
+                  format-style="decimal"
+                  minimum-fraction-digits="2"
+                  maximum-fraction-digits="2"
+                ></lightning-formatted-number>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

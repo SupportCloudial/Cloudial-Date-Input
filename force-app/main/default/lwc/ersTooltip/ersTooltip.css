@@ -1,0 +1,61 @@
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+/* Anchor: trigger stays in normal flow; bubble is position:fixed from JS so it is not clipped by table overflow. */
+.ers-tooltip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ers-tooltip__bubble {
+  position: fixed;
+  /* Off-viewport until JS positions (was 0,0 = top-left “ghost” tooltips). */
+  left: -10000px;
+  top: -10000px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100000;
+
+  max-width: min(300px, calc(100vw - 16px));
+  min-width: 140px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #1f2937;
+  border: 1px solid #dbe2ea;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22);
+
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 500;
+  text-align: center;
+  white-space: normal;
+
+  transition: opacity 140ms ease;
+}
+
+.ers-tooltip__bubble.is-visible {
+  opacity: 1;
+}
+
+/* Pointer below bubble (default: bubble is above anchor) */
+.ers-tooltip__bubble::after {
+  content: "";
+  position: absolute;
+  left: var(--ers-tooltip-arrow-left, 50%);
+  top: 100%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #f8fafc;
+}
+
+/* Bubble placed below anchor: arrow on top of bubble */
+.ers-tooltip__bubble--below::after {
+  top: auto;
+  bottom: 100%;
+  border-top-color: transparent;
+  border-bottom-color: #f8fafc;
+}

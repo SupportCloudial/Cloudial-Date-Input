@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Notifies package builder to reload products after opportunity changes.</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>Record Id to refresh (Opportunity)</description>
+        <fieldName>recordId</fieldName>
+    </lightningMessageFields>
+    <masterLabel>Package Builder Refresh</masterLabel>
+</LightningMessageChannel>

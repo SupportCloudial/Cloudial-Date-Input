@@ -1,0 +1,27 @@
+:host {
+  display: inline-flex;
+  width: fit-content;
+  max-width: fit-content;
+}
+
+.iter-info-icon,
+.iter-attention-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  cursor: help;
+  opacity: 0.72;
+  vertical-align: middle;
+  margin-inline-end: 0.125rem;
+  padding-inline-end: 0.125rem;
+}
+
+.iter-info-icon:hover,
+.iter-attention-icon-wrap:hover {
+  opacity: 1;
+}
+
+.iter-attention-icon {
+  --slds-c-icon-color-foreground-default: #fe9339;
+}

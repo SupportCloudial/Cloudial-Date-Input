@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Show_Financial_Adjustment_Icon__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Package Builder: set when the user saves manual monthly discount/final price (drawer) or saves a desk UnitPrice change on the products grid. Not set by end-date-only monthly rollup recalculations.</description>
+    <label>Show Financial Adjustment Icon</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

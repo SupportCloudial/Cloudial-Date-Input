@@ -1,0 +1,36 @@
+<template>
+  <div class="pb-dual-action-outer">
+    <div class="pb-dual-action-grid">
+      <div class="pb-dual-action-slot" hidden={typeAttributes.leftHidden}>
+        <c-ers-icon-action-with-tooltip
+          icon-name={typeAttributes.leftIconName}
+          icon-src={typeAttributes.leftIconSrc}
+          action-name={typeAttributes.leftName}
+          key-field={typeAttributes.keyField}
+          key-field-value={typeAttributes.keyFieldValue}
+          disabled={typeAttributes.leftDisabled}
+          hidden={typeAttributes.leftHidden}
+          tooltip={typeAttributes.leftTooltip}
+          alternative-text={typeAttributes.leftAlternativeText}
+          variant={typeAttributes.variant}
+          size={typeAttributes.size}
+        ></c-ers-icon-action-with-tooltip>
+      </div>
+      <div class="pb-dual-action-slot" hidden={typeAttributes.rightHidden}>
+        <c-ers-icon-action-with-tooltip
+          icon-name={typeAttributes.rightIconName}
+          icon-src={typeAttributes.rightIconSrc}
+          action-name={typeAttributes.rightName}
+          key-field={typeAttributes.keyField}
+          key-field-value={typeAttributes.keyFieldValue}
+          disabled={typeAttributes.rightDisabled}
+          hidden={typeAttributes.rightHidden}
+          tooltip={typeAttributes.rightTooltip}
+          alternative-text={typeAttributes.rightAlternativeText}
+          variant={typeAttributes.variant}
+          size={typeAttributes.size}
+        ></c-ers-icon-action-with-tooltip>
+      </div>
+    </div>
+  </div>
+</template>

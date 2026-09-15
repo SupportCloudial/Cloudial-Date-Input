@@ -1,0 +1,2004 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AddProductsFltr_DesksNum</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_DesksNum</shortDescription>
+        <value>Number of Units</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsFltr_NameSearch</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_NameSearch</shortDescription>
+        <value>Search by Name</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsFltr_NameSearchPH</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_NameSearchPH</shortDescription>
+        <value>Enter Product Name</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsFltr_SubType</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_SubType</shortDescription>
+        <value>Sub Type</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsFltr_SubTypePH</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_SubTypePH</shortDescription>
+        <value>Select Sub Type</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsFltr_Type</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsFltr_TypePH</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsFltr_TypePH</shortDescription>
+        <value>Select Type</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_DeskCount</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_DeskCount</shortDescription>
+        <value>Unit Count</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_DeskUnitPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_DeskUnitPrice</shortDescription>
+        <value>Desk / Unit Price</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_Floor</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_Floor</shortDescription>
+        <value>Floor</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_ListPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_ListPrice</shortDescription>
+        <value>Product&apos;s List Price</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_Name</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_State</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_State</shortDescription>
+        <value>State</value>
+    </labels>
+    <labels>
+        <fullName>AddProductsTbl_Window</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProductsTbl_Window</shortDescription>
+        <value>Window</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_DesksTooltip</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts_DesksTooltip</shortDescription>
+        <value
+    >Show products from 0 and up to {0} units. Includes products without a unit count. Slide to 30+ to show all products</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_Error</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts_Error</shortDescription>
+        <value>Something went wrong</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_Saving</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts_Saving</shortDescription>
+        <value>Saving...</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_Success</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts_Success</shortDescription>
+        <value>The products were added successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Birthdate</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Birthdate</shortDescription>
+        <value>Birthdate</value>
+    </labels>
+    <labels>
+        <fullName>ButtonSave</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Button Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Description_0</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Description 0</shortDescription>
+        <value>Welcome to Rooms! We are glad you&apos;ve joined us. :)</value>
+    </labels>
+    <labels>
+        <fullName>Description_1</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Description 1</shortDescription>
+        <value
+    >In order to prepare in advance for your arrival, fill out the below table with the information of the members that will enter the office.</value>
+    </labels>
+    <labels>
+        <fullName>Description_2</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Description 2</shortDescription>
+        <value
+    >Also, we recommend that you add your birth date so that we know when to congratulate you and your team on those days.</value>
+    </labels>
+    <labels>
+        <fullName>Description_3</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Description 3</shortDescription>
+        <value>Looking forward to seing you !</value>
+    </labels>
+    <labels>
+        <fullName>Descritpion_4</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Descritpion 4</shortDescription>
+        <value
+    >⚠️ To fill in below table, fill in all the required fields before saving. First name and last name fields must be in english</value>
+    </labels>
+    <labels>
+        <fullName>Email</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email</shortDescription>
+        <value>*Email</value>
+    </labels>
+    <labels>
+        <fullName>EmailExist</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email Exist</shortDescription>
+        <value>This email already exists in our database</value>
+    </labels>
+    <labels>
+        <fullName>EmailNotValid</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Email if not valid</shortDescription>
+        <value>Invalid email format.</value>
+    </labels>
+    <labels>
+        <fullName>FieldRequired</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Field required member form</shortDescription>
+        <value>Field required</value>
+    </labels>
+    <labels>
+        <fullName>FirstName</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>First Name</shortDescription>
+        <value>*First Name (in english)</value>
+    </labels>
+    <labels>
+        <fullName>LastName</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Name</shortDescription>
+        <value>*Last Name (in english)</value>
+    </labels>
+    <labels>
+        <fullName>MessageAfter1</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message after registration part1</shortDescription>
+        <value>All your contacts</value>
+    </labels>
+    <labels>
+        <fullName>MessageAfter2</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message after registration part2</shortDescription>
+        <value>are saved, thank you!</value>
+    </labels>
+    <labels>
+        <fullName>MultipleContact</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >if have multiple contact with same email</shortDescription>
+        <value>Multiple contacts found</value>
+    </labels>
+    <labels>
+        <fullName>NameNotValid</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Not valide name</shortDescription>
+        <value>Invalid format. English caracters only.</value>
+    </labels>
+    <labels>
+        <fullName>NumberMembers</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Numero Members</shortDescription>
+        <value># member</value>
+    </labels>
+    <labels>
+        <fullName>PackabeBuilder_TemporaryProductCheck</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PackabeBuilder_TemporaryProductCheck</shortDescription>
+        <value>Temporary Products ?</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_DeskUnitPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_DeskUnitPrice</shortDescription>
+        <value>Desk Price</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_DesksUnits</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_DesksUnits</shortDescription>
+        <value>Desks/Units</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EndDate</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_EndDate</shortDescription>
+        <value>End Date</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EndDatetime</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_EndDatetime</shortDescription>
+        <value>End Date time</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EntryDate</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_EntryDate</shortDescription>
+        <value>Start Date</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EntryDatetime</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_EntryDatetime</shortDescription>
+        <value>Start Date time</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EntryPaymentDate</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_EntryPaymentDate</shortDescription>
+        <value>Entry Date</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_ExternalRoom</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_ExternalRoom</shortDescription>
+        <value>External</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_Name</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_Notes</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_Notes</shortDescription>
+        <value>Notes</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_Quantity</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_Quantity</shortDescription>
+        <value>Quantity</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_Value</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_Value</shortDescription>
+        <value>Value</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_Temporary</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_Temporary</shortDescription>
+        <value>Temporary</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EarlyExitRequest</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_EarlyExitRequest</shortDescription>
+        <value>Early Exit Request</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_TotalPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilderTbl_TotalPrice</shortDescription>
+        <value>Product&apos;s Price</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AccessType</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AccessType</shortDescription>
+        <value>Access Type</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AccessTypeError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AccessTypeError</shortDescription>
+        <value>Access Type not allowed for this product</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AccessTypePH</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AccessTypePH</shortDescription>
+        <value>Select Access Type</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AddProductSuccess</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AddProductSuccess</shortDescription>
+        <value>The products were updated successfully</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_BulkSaveMonthlyEndDateCleared</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Second line after bulk save when selection includes Monthly and end date was set</shortDescription>
+        <value
+    >Products with monthly access type can&apos;t have end date.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_MonthlyReplacementEndDateRequired</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Inline save when Monthly replaced-parent End Date is cleared</shortDescription>
+        <value
+    >End date cannot be cleared while a replacement line exists.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_MonthlyReplacementEndDateAfterChild</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Monthly replaced-parent end date past child end</shortDescription>
+        <value
+    >End date is too late — the replacement line would start after its end date.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AddProducts</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AddProducts</shortDescription>
+        <value>Add Products</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Availability</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Availability</shortDescription>
+        <value>AVL</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AvailableStatus</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AvailableStatus</shortDescription>
+        <value>Available</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_AverageDeskPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_AverageDeskPrice</shortDescription>
+        <value>AVG unit rate</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Cancel</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_OpportunityClosedWonReadOnly</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Shown when Opportunity is Closed Won and Package Builder is read-only</shortDescription>
+        <value
+    >This opportunity is Closed Won. Package Builder cannot be used to change products or prices.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Delete</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_DeleteProductSuccess</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_DeleteProductSuccess</shortDescription>
+        <value>The products were deleted successfully</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_DeskPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_DeskPrice</shortDescription>
+        <value>Desk/Unit Sale</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Desks</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Desks</shortDescription>
+        <value># Desks</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_EndDateError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_EndDateError</shortDescription>
+        <value>End Date can be edited only for periodic access type</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_EndDateBeforeActivatedTitle</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Toast title when draft end is before activated order line end</shortDescription>
+        <value>Cannot shorten end date</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_EndDateBeforeActivatedBody</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Toast message when draft end is before activated order line end</shortDescription>
+        <value
+    >This end date is earlier than the product on the activated order. To shorten it further, use Terminate product.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TerminatedEndDateShortenBody</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Toast when terminated draft end date is shortened inline without admin override</shortDescription>
+        <value
+    >End date may only be extended here. To set an earlier end date, use Terminate Products.</value>
+    </labels>
+    <labels>
+        <fullName
+    >PackageBuilder_TerminationReasonBlocksEndDateClearBody</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Toast when user clears end date while termination reason is set</shortDescription>
+        <value
+    >Remove the termination reason before clearing the end date.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Entry</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Entry</shortDescription>
+        <value>Entry</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Exit</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Exit</shortDescription>
+        <value>Exit</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_ListPriceAdjustment</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_ListPriceAdjustment</shortDescription>
+        <value>Discount</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_ListPriceSum</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_ListPriceSum</shortDescription>
+        <value>Total Monthly Price</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_MassDeleteBtn</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_MassDeleteBtn</shortDescription>
+        <value>Delete Selected Products</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_MassUpdateBtn</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_MassUpdateBtn</shortDescription>
+        <value>Update Selected Products</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Monthly_Price</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Monthly Price</shortDescription>
+        <value>Total List Price</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_MonthlyPayments_Empty</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Empty state when no monthly payments match selection</shortDescription>
+        <value>No monthly payments found for the selected products.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_MonthlyPayments_EmptyHint</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Hint when monthly payments may not be generated yet</shortDescription>
+        <value
+    >Payments may not have been generated yet. Save the product dates and reopen this panel.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_None</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_None</shortDescription>
+        <value>None</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_NotAvailableStatus</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_NotAvailableStatus</shortDescription>
+        <value>Not Available</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_PartlyAvailableStatus</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PackageBuilder_PartlyAvailableStatus</shortDescription>
+        <value>Partly Available</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_PrdAvailability</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_PrdAvailability</shortDescription>
+        <value>Product Available</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_QuantityError1</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_QuantityError1</shortDescription>
+        <value
+    >Quantity can&apos;t be changed for &apos;Standard Products&apos; product type</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_QuantityError2</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_QuantityError2</shortDescription>
+        <value>Quantity can&apos;t be changed for Daily access type</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Quantity_Sum</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Quantity Sum</shortDescription>
+        <value># Products</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_QuickUpdate</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_QuickUpdate</shortDescription>
+        <value>Quick Update</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_SaveError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_SaveError</shortDescription>
+        <value>Can&apos;t save this product</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_SaveTableError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_SaveTableError</shortDescription>
+        <value>Your entry cannot be saved. Fix the errors and try again.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TemporaryError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_TemporaryError</shortDescription>
+        <value
+    >Temporary can be changed only for products of type &apos;Standard Products&apos; and Periodic access type</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TemporaryOtherSiteError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Package Builder Temporary cannot be cleared for other-site products</shortDescription>
+        <value
+    >Temporary can&apos;t be cleared for products from another site.</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_TemporaryOtherSiteHelp</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Add Products Temporary help for other-site rule</shortDescription>
+        <value
+    >Products from another site are always marked Temporary and can&apos;t be unmarked.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_Title</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_Title</shortDescription>
+        <value>Package Builder</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TotalPriceOther</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_TotalPriceOther</shortDescription>
+        <value>Total Price (Extra)</value>
+    </labels>
+    <labels>
+        <fullName>Phone</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone</shortDescription>
+        <value>*Phone</value>
+    </labels>
+    <labels>
+        <fullName>PhoneNotValid</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Phone not valid</shortDescription>
+        <value>Format number not valid</value>
+    </labels>
+    <labels>
+        <fullName>ToastRequiredField</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Show toast Field Required</shortDescription>
+        <value>All mandatory fields * must be filled in.</value>
+    </labels>
+    <labels>
+        <fullName>ers_CancelButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>ers_ClearFilterAction</fullName>
+        <categories>actions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clear Filter</shortDescription>
+        <value>Clear Filter</value>
+    </labels>
+    <labels>
+        <fullName>ers_ClearFilterButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clear All Filters</shortDescription>
+        <value>Clear All Filters</value>
+    </labels>
+    <labels>
+        <fullName>ers_ClearSelectionButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Clear Selection</shortDescription>
+        <value>Clear Selection</value>
+    </labels>
+    <labels>
+        <fullName>ers_ColumnHeader</fullName>
+        <categories>headers</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Column</shortDescription>
+        <value>Column</value>
+    </labels>
+    <labels>
+        <fullName>ers_EmptyTableMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Empty</shortDescription>
+        <value>This table currently has no data to display</value>
+    </labels>
+    <labels>
+        <fullName>ers_ErrorRequiredEntry</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required</shortDescription>
+        <value
+    >This is a required entry.  At least 1 row must be selected.</value>
+    </labels>
+    <labels>
+        <fullName>ers_FilterHeader</fullName>
+        <categories>headers</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Filter</shortDescription>
+        <value>Filter</value>
+    </labels>
+    <labels>
+        <fullName>ers_FirstButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>First Page</shortDescription>
+        <value>First</value>
+    </labels>
+    <labels>
+        <fullName>ers_LabelHeader</fullName>
+        <categories>headers</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Label</shortDescription>
+        <value>Label</value>
+    </labels>
+    <labels>
+        <fullName>ers_LastButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Last Page</shortDescription>
+        <value>Last</value>
+    </labels>
+    <labels>
+        <fullName>ers_NextButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Next Page</shortDescription>
+        <value>Next</value>
+    </labels>
+    <labels>
+        <fullName>ers_PreviousButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Previous Page</shortDescription>
+        <value>Prev</value>
+    </labels>
+    <labels>
+        <fullName>ers_RecordsPerPage</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Records per Page input label</shortDescription>
+        <value>Records per Page</value>
+    </labels>
+    <labels>
+        <fullName>ers_SaveButton</fullName>
+        <categories>buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>ers_SearchPlaceholder</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search Term</shortDescription>
+        <value>Enter search term ...</value>
+    </labels>
+    <labels>
+        <fullName>ers_SetFilterAction</fullName>
+        <categories>actions</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Set Filter</shortDescription>
+        <value>Set Filter</value>
+    </labels>
+    <labels>
+        <fullName>ers_ShowingPageMiddle</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Showing Page x of y Pages input label middle</shortDescription>
+        <value>of</value>
+    </labels>
+    <labels>
+        <fullName>ers_ShowingPagePrefix</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Showing Page x of y Pages input label prefix</shortDescription>
+        <value>Showing Page</value>
+    </labels>
+    <labels>
+        <fullName>ers_ShowingPageSuffix</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Showing Page x of y Pages input label suffix</shortDescription>
+        <value>Pages</value>
+    </labels>
+    <labels>
+        <fullName>fsc_AccessLevel</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AccessLevel</shortDescription>
+        <value>Access Level</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Back</fullName>
+        <categories>Buttons,Filters,Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Back</shortDescription>
+        <value>Back</value>
+    </labels>
+    <labels>
+        <fullName>fsc_ButtonIsNotSupportedMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ButtonIsNotSupportedMessage</shortDescription>
+        <value>Following buttons are note supported:</value>
+    </labels>
+    <labels>
+        <fullName>fsc_ConditionLogicHelpText</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ConditionLogicHelpText</shortDescription>
+        <value
+    >Use parentheses, AND, OR, and NOT to customize the logic. For example, if you enter “(1 AND 2 AND 3) OR 4”, the flow evaluates whether the first three conditions are true or only the fourth condition is true.</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Delete</fullName>
+        <categories>labels, buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Delete</shortDescription>
+        <value>Delete</value>
+    </labels>
+    <labels>
+        <fullName>fsc_FieldIsNotSupportedMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>FieldIsNotSupportedMessage</shortDescription>
+        <value>Following fields are not supported:</value>
+    </labels>
+    <labels>
+        <fullName>fsc_FieldTypeNotSuportedMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>fsc_FieldTypeNotSuportedMessage</shortDescription>
+        <value
+    >You provided an unsupported value for the DataTypeFilter input on Object and Field Picker. Currently the only supported value is ’picklist’</value>
+    </labels>
+    <labels>
+        <fullName>fsc_For</fullName>
+        <categories>Buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>For</shortDescription>
+        <value>For</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Key_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Key Label</shortDescription>
+        <value>Key</value>
+    </labels>
+    <labels>
+        <fullName>fsc_LackingPermissions</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>LackingPermissions</shortDescription>
+        <value
+    >You don\&apos;t have the proper permissions for ths action</value>
+    </labels>
+    <labels>
+        <fullName>fsc_ManagerEmptyMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ManagerEmptyMessage</shortDescription>
+        <value>&quot;Manager APEX Class&quot; can not be empty</value>
+    </labels>
+    <labels>
+        <fullName>fsc_MultipleGroupsForRole</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MultipleGroupsForRole</shortDescription>
+        <value>There are multiple groups for that role</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Name</fullName>
+        <categories>quicklinks, Labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Name</shortDescription>
+        <value>Name</value>
+    </labels>
+    <labels>
+        <fullName>fsc_NonePicklistValueLabel</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NonePicklistValueLabel</shortDescription>
+        <value>-- None --</value>
+    </labels>
+    <labels>
+        <fullName>fsc_OWDReadWrite</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OWDReadWrite</shortDescription>
+        <value
+    >Sharing Settings must be private or public read/write to enable manual sharing</value>
+    </labels>
+    <labels>
+        <fullName>fsc_OwnerAdminModify</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OwnerAdminModify</shortDescription>
+        <value
+    >Only the record owner or administrators can modify permissions</value>
+    </labels>
+    <labels>
+        <fullName>fsc_PublicGroups</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PublicGroups</shortDescription>
+        <value>Public Groups</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Queues</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Queues</shortDescription>
+        <value>Queues</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Read</fullName>
+        <categories>labels, buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Read</shortDescription>
+        <value>Read</value>
+    </labels>
+    <labels>
+        <fullName>fsc_ReadWrite</fullName>
+        <categories>labels, buttons</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>ReadWrite</shortDescription>
+        <value>Read / Write</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Reason</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Reason</shortDescription>
+        <value>Reason</value>
+    </labels>
+    <labels>
+        <fullName>fsc_RelatedUsers</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>RelatedUsers</shortDescription>
+        <value>Related Users</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Roles</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Roles</shortDescription>
+        <value>Roles</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Search</fullName>
+        <categories>Actions,Buttons,quicklinks</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Search in</shortDescription>
+        <value>Search in</value>
+    </labels>
+    <labels>
+        <fullName>fsc_SearchFor</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SearchFor</shortDescription>
+        <value>For</value>
+    </labels>
+    <labels>
+        <fullName>fsc_SetAccessLevel</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SetAccessLevel</shortDescription>
+        <value>Set Access Level</value>
+    </labels>
+    <labels>
+        <fullName>fsc_SupportedAddCapabilitiesEmptyMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >SupportedAddCapabilitiesEmptyMessage</shortDescription>
+        <value>&quot;Add Capabilities&quot; can not be empty</value>
+    </labels>
+    <labels>
+        <fullName>fsc_SupportedButtonsEmptyMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SupportedButtonsEmptyMessage</shortDescription>
+        <value>&quot;Supported Buttons&quot; can not be empty</value>
+    </labels>
+    <labels>
+        <fullName>fsc_SupportedEditCapabilitiesEmptyMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >SupportedEditCapabilitiesEmptyMessage</shortDescription>
+        <value>&quot;Edit Capabilities&quot; can not be empty</value>
+    </labels>
+    <labels>
+        <fullName>fsc_TooManyResultsMessage</fullName>
+        <categories>messages</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>TooManyResultsMessage</shortDescription>
+        <value
+    >Your search found more than 200 results.  Keep typing to make it more specific</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Type</fullName>
+        <categories>Buttons,Filters,Title</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Type</shortDescription>
+        <value>Type</value>
+    </labels>
+    <labels>
+        <fullName>fsc_UserOrGroup</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UserOrGroup</shortDescription>
+        <value>User Or Group</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Users</fullName>
+        <categories>labels</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Users</shortDescription>
+        <value>Users</value>
+    </labels>
+    <labels>
+        <fullName>fsc_Value_Label</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Value Label</shortDescription>
+        <value>Value</value>
+    </labels>
+    <labels>
+        <fullName>cp_HelpText</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>rooms_OppDiscount_HelpText</shortDescription>
+        <value>Add minus(-) for discount</value>
+    </labels>
+    <labels>
+        <fullName>cp_OppTable_PriceAdj</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppTable_PriceAdj</shortDescription>
+        <value>Price Adjustment (%)</value>
+    </labels>
+    <labels>
+        <fullName>cp_allProducts</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppFilters allProducts</shortDescription>
+        <value>All Products</value>
+    </labels>
+    <labels>
+        <fullName>cp_allTime</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppFilters allTime</shortDescription>
+        <value>All Time</value>
+    </labels>
+    <labels>
+        <fullName>cp_applyFilter_btn</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast applyFilter_btn</shortDescription>
+        <value>Apply filter(s)</value>
+    </labels>
+    <labels>
+        <fullName>cp_units_btnGrp</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Units axis label</shortDescription>
+        <value>Units</value>
+    </labels>
+    <labels>
+        <fullName>cp_endMonth_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast endMonth_label</shortDescription>
+        <value>End month</value>
+    </labels>
+    <labels>
+        <fullName>cp_endYear_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast endYear_label</shortDescription>
+        <value>End year</value>
+    </labels>
+    <labels>
+        <fullName>cp_filtersCategory_Date</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast filtersCategory_Date</shortDescription>
+        <value>Date Filters</value>
+    </labels>
+    <labels>
+        <fullName>cp_filtersCategory_Product</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast filtersCategory_Product</shortDescription>
+        <value>Product Filters</value>
+    </labels>
+    <labels>
+        <fullName>cp_finalPrice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppTable finalPrice</shortDescription>
+        <value>Final Adjusted Price:</value>
+    </labels>
+    <labels>
+        <fullName>cp_forecast_segmentationDisplay</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>rooms_forecast_segmentationDisplay</shortDescription>
+        <value>Segmentations</value>
+    </labels>
+    <labels>
+        <fullName>cp_listPrice</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppTable listPrice</shortDescription>
+        <value>Monthly Price:</value>
+    </labels>
+    <labels>
+        <fullName>cp_oppDiscount_startDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppDiscount startDate</shortDescription>
+        <value>Start Date</value>
+    </labels>
+    <labels>
+        <fullName>cp_oppDiscount_endDate</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>OppDiscount endDate</shortDescription>
+        <value>End Date</value>
+    </labels>
+    <labels>
+        <fullName>cp_productFamilies_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast productFamilies_label</shortDescription>
+        <value>Product family</value>
+    </labels>
+    <labels>
+        <fullName>cp_productSubType_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast productSubType_label</shortDescription>
+        <value>Product subtype</value>
+    </labels>
+    <labels>
+        <fullName>cp_productType_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast productType_label</shortDescription>
+        <value>Product Type</value>
+    </labels>
+    <labels>
+        <fullName>cp_product_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast product_label</shortDescription>
+        <value>Product</value>
+    </labels>
+    <labels>
+        <fullName>cp_currency_btnGrp</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Currency axis label</shortDescription>
+        <value>Currency</value>
+    </labels>
+    <labels>
+        <fullName>cp_startMonth_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast startMonth_label</shortDescription>
+        <value>Start month</value>
+    </labels>
+    <labels>
+        <fullName>cp_startYear_label</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Forecast startYear_label</shortDescription>
+        <value>Start year</value>
+    </labels>
+    <labels>
+        <fullName>yetEnregistred</fullName>
+        <categories>Member form</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Message yet enregistred</shortDescription>
+        <value
+    >✅ All your contacts are already registered in the system, thank you!</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_OccupiedBy</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts Occupied By</shortDescription>
+        <value>Occupied By</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_OccupiedFrom</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts Occupied From</shortDescription>
+        <value>Occupied From</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_OccupiedTill</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts Occupied Till</shortDescription>
+        <value>Occupied Till</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_PeriodEnd</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts Period End</shortDescription>
+        <value>End Date</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_PeriodStart</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts Period Start</shortDescription>
+        <value>Start Date</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_Site</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AddProducts Site</shortDescription>
+        <value>Site</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_CpiDate</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add Products modal CPI Date default</shortDescription>
+        <value>CPI Date</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_SectionDefaults</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Add Products modal Defaults section title</shortDescription>
+        <value>Defaults</value>
+    </labels>
+    <labels>
+        <fullName>AddProducts_SectionFilters</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Add Products modal Filters section title</shortDescription>
+        <value>Filters</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_RemoveDraftConfirm</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_RemoveDraftConfirm</shortDescription>
+        <value>Are you sure you want to delete the contract draft?</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_RemoveDraftConfirmTitle</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PackageBuilder_RemoveDraftConfirmTitle</shortDescription>
+        <value>Remove draft from Package Builder</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_RemoveDraftIconHelp</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_RemoveDraftIconHelp</shortDescription>
+        <value>Remove draft from Package Builder (contract draft kept)</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_RemoveDraftSuccess</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>PackageBuilder_RemoveDraftSuccess</shortDescription>
+        <value
+    >Draft deleted. You can view it in the Version History tab.</value>
+    </labels>
+    <labels>
+        <fullName>cp_MonthlyPaymentBatch_RunDay</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Batch runs when today matches: LAST_DAY or day-of-month 1-31</shortDescription>
+        <value>LAST_DAY</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_AdjustedTotalPrice</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PackageBuilderTbl_AdjustedTotalPrice</shortDescription>
+        <value>Adjusted Total Price</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EndDateBeforeOrderStart</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Tooltip when product end date is on or before order start</shortDescription>
+        <value>Product end date is on or before the order start date.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilderTbl_EndDateOnOrBeforeToday</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Tooltip when product end date is on or before today (Active contract tab)</shortDescription>
+        <value>Product end date is on or before today.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_RowAction_DeleteProduct</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Row delete icon hover</shortDescription>
+        <value>Delete product</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_RowAction_ReplaceProduct</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Row replace icon hover</shortDescription>
+        <value>Replace product</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_CrossOrderStart</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: red X / ended before contract start</shortDescription>
+        <value>Product will expire before the contract start date</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_FuturePlusEntry</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: entry after contract start</shortDescription>
+        <value>Product will be added after the contract start date</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_FuturePlusEntryActive</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: active order line start after today</shortDescription>
+        <value>Product start date is after today</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_FutureXOtherProducts</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: end before other products max end</shortDescription>
+        <value>Product will expire before the other products</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_Modified</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: modified draft line</shortDescription>
+        <value>Modified</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_MoneyFinancial</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: monthly financial adjustment</shortDescription>
+        <value>Financial change</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_NewProduct</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: new product (green plus)</shortDescription>
+        <value>New product</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_ProductEnded</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: concluded line ended</shortDescription>
+        <value>Product has ended</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_ReplacementAdded</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: moving in / replacement line</shortDescription>
+        <value>Replacement: Product added</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StatusIcon_ReplacementRemoved</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Status column hover: moving out / replaced line</shortDescription>
+        <value>Replacement: Product removed</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TerminateSelectedHover</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Toolbar Terminate Products hover (matches bulk terminate modal)</shortDescription>
+        <value>Terminate Selected Products</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_StartDate_PastEditError</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PB: start date past edit without admin override</shortDescription>
+        <value
+    >Start Date can only be edited for today or future dates unless you have admin override permission.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TerminatedOrderItemNoEdit</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PB: save blocked when OrderItem has termination reason</shortDescription>
+        <value
+    >This product is terminated and cannot be updated here. Contact your Salesforce administrator.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TerminatedProductSelectionBlocked</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PB: terminated lines excluded from bulk selection</shortDescription>
+        <value
+    >Terminated products cannot be selected for bulk actions. Contact your Salesforce administrator.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TerminatedProductAccessTypeDisabled</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >PB: access type read-only when line is terminated</shortDescription>
+        <value
+    >Terminated products cannot be edited. Contact your Salesforce administrator.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_ContractStatus_Terminated</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Products toolbar banner when Contract.Status is Terminated</shortDescription>
+        <value>This contract is terminated.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_ContractStatus_Expired</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Products toolbar banner when Contract.Status is Expired</shortDescription>
+        <value>This contract has expired. Package Builder is read-only.</value>
+    </labels>
+    <labels>
+        <fullName>PackageBuilder_TerminatedProductsPartialBulkUpdate</fullName>
+        <categories>Package Builder</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Bulk save success when terminated rows skip non-End Date fields</shortDescription>
+        <value
+    >The products were updated successfully except the terminated products. On terminated products, only End Date can be updated; other changes were skipped.</value>
+    </labels>
+    <labels>
+        <fullName>Order_Trigger_Handler_Enabled</fullName>
+        <categories>Order</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >When false, OrderTriggerHandler is skipped; true enables triggers after deploy</shortDescription>
+        <value>true</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_AdjustmentPreview_Title</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Individual percentage adjustment preview title</shortDescription>
+        <value>Confirm percentage adjustment</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_Replace</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replace adjustment action</shortDescription>
+        <value>Replace</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_Add</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add adjustment action</shortDescription>
+        <value>Add</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_ReplaceHelp</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replace percentage explanation</shortDescription>
+        <value
+    >Replace calculates the percentage from the original Monthly Payment price.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_AddHelp</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add percentage explanation</shortDescription>
+        <value>Add compounds the percentage on the current Final price.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_RecurringReplaceWarning</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Recurring-aware Replace warning</shortDescription>
+        <value
+    >This month includes recurring pricing. Replace may remove that recurring effect from this month.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_RecurringAddWarning</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Recurring-aware Add warning</shortDescription>
+        <value
+    >This month includes recurring pricing. Add compounds on the current Final price, including that recurring effect.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_Confirm</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Confirm adjustment button</shortDescription>
+        <value>Confirm adjustment</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_Cancel</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel adjustment button</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_StaleError</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Stale preview refresh guidance</shortDescription>
+        <value
+    >The Monthly Payment changed. Refresh and preview the adjustment again.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_Action</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Adjustment action field label</shortDescription>
+        <value>Action</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_OriginalPrice</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview original price label</shortDescription>
+        <value>Original Price</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_ExistingAdjustment</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview existing adjustment label</shortDescription>
+        <value>Existing Adjustment</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_PriceBefore</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview price before label</shortDescription>
+        <value>Price Before</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_EnteredAdjustment</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview entered adjustment label</shortDescription>
+        <value>Entered Adjustment</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_SelectedAction</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview selected action label</shortDescription>
+        <value>Selected Action</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_ResultingAdjustment</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview resulting adjustment label</shortDescription>
+        <value>Resulting Adjustment</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_FinalPriceAfter</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview final price after label</shortDescription>
+        <value>Final Price After</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_CalculatingPreview</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Preview loading alternative text</shortDescription>
+        <value>Calculating preview</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_AdjustmentAmountPreview_Title</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Individual amount adjustment preview title</shortDescription>
+        <value>Confirm amount adjustment</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_AmountReplaceHelp</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Replace amount explanation</shortDescription>
+        <value
+    >Replace adds the entered amount to the original Monthly Payment price.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_AmountAddHelp</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Add amount explanation</shortDescription>
+        <value>Add adds the entered amount to the current Final price.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_AmountRecurringAddWarning</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Recurring-aware amount Add warning</shortDescription>
+        <value
+    >This month includes recurring pricing. Add applies the amount to the current Final price, including that recurring effect.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_BulkAddWarning</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bulk Add compounding warning</shortDescription>
+        <value
+    >Add combines the entered value with each month&apos;s existing adjustment, so results can differ by month.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_BulkStaleError</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bulk stale refresh guidance</shortDescription>
+        <value
+    >One or more selected Monthly Payments changed. Refresh the list and apply again.</value>
+    </labels>
+    <labels>
+        <fullName>MonthlyPayment_Adjustment_MixedEditError</fullName>
+        <categories>Monthly Payments</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Mixed multi-cell Replace/Add guidance</shortDescription>
+        <value
+    >Adjusted months need one shared percentage or amount, or save one month at a time with Replace/Add.</value>
+    </labels>
+</CustomLabels>

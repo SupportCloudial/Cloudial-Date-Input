@@ -1,0 +1,193 @@
+<template>
+  <!-- WI-000168: Package Builder container – Modify/Activate button visibility -->
+  <!-- Package Builder only on Opportunity and Contract; not supported on Order -->
+  <template lwc:if={isSupportedContext}>
+    <section class="container slds-p-around_medium" dir={textDirection}>
+      <div class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+          <c-package-builder-table
+            record-id={recordId}
+            object-api-name={objectApiName}
+            onaddproduct={handleAddProducts}
+            onopencontracttermreplace={handleOpenContractTermReplace}
+            onopenpaststartchange={handleOpenPastStartChange}
+            onopenmonthlypaymentsdrawer={handleOpenMonthlyPaymentsDrawer}
+          >
+            <div slot="header-actions">
+              <template lwc:if={showModifyButton}>
+                <span class="slds-m-horizontal_small modify-contract-wrap">
+                  <template lwc:if={creatingDraft}>
+                    <lightning-spinner
+                      alternative-text="Creating draft…"
+                      size="small"
+                      class="modify-draft-spinner-inline"
+                    ></lightning-spinner>
+                  </template>
+                  <lightning-button
+                    label={modifyButtonLabelEffective}
+                    icon-name="utility:edit"
+                    onclick={handleModify}
+                    variant="brand"
+                    disabled={modifyDisabledEffective}
+                  ></lightning-button>
+                </span>
+              </template>
+              <template lwc:if={showCancelDraftButton}>
+                <span class="slds-m-horizontal_small">
+                  <template lwc:if={cancellingDraft}>
+                    <lightning-spinner
+                      alternative-text="Cancelling…"
+                      size="small"
+                      class="slds-m-horizontal_xx-small"
+                      style="display: inline-block; vertical-align: middle"
+                    ></lightning-spinner>
+                  </template>
+                  <lightning-button-icon
+                    icon-name="utility:delete"
+                    variant="border-filled"
+                    alternative-text={labels.RemoveDraftIconHelp}
+                    title={labels.RemoveDraftIconHelp}
+                    onclick={handleCancelDraftOrder}
+                    disabled={cancelDraftButtonDisabled}
+                    class="slds-m-horizontal_xx-small"
+                  ></lightning-button-icon>
+                </span>
+              </template>
+              <template lwc:if={showActivateButton}>
+                <span class="activate-wrapper slds-m-horizontal_small">
+                  <template lwc:if={activating}>
+                    <lightning-spinner
+                      alternative-text="Activating…"
+                      size="small"
+                      class="activate-spinner"
+                    ></lightning-spinner>
+                  </template>
+                  <lightning-button
+                    label="Activate"
+                    icon-name="utility:check"
+                    onclick={handleActivateDraft}
+                    class="slds-m-horizontal_x-small"
+                    variant="success"
+                    disabled={activateButtonDisabled}
+                    title={activatingTitle}
+                  ></lightning-button>
+                </span>
+              </template>
+            </div>
+          </c-package-builder-table>
+        </div>
+      </div>
+
+      <c-package-builder-contract-term-replace-sheet
+        is-open={isContractTermReplaceSheetOpen}
+        order-id={contractTermSheetOrderId}
+        replaced-order-item-id={contractTermSheetReplacedOrderItemId}
+        replaced-pricebook-entry-id={contractTermSheetReplacedPricebookEntryId}
+        order-start-date={contractTermSheetOrderStartDate}
+        order-end-date={contractTermSheetOrderEndDate}
+        default-entry-date-ymd={contractTermSheetDefaultEntryDateYmd}
+        default-cpi-date-ymd={contractTermSheetDefaultCpiDateYmd}
+        default-quantity={contractTermSheetDefaultQuantity}
+        onclose={handleCloseContractTermReplaceSheet}
+        oncomplete={handleContractTermReplaceSheetComplete}
+      ></c-package-builder-contract-term-replace-sheet>
+
+      <c-package-builder-past-start-change-modal
+        is-open={isPastStartChangeModalOpen}
+        mode={pastStartChangeMode}
+        order-id={pastStartSheetOrderId}
+        replaced-order-item-id={pastStartSheetReplacedOrderItemId}
+        replaced-pricebook-entry-id={pastStartSheetReplacedPricebookEntryId}
+        entry-date-min-ymd={pastStartSheetEntryDateMinYmd}
+        entry-date-max-ymd={pastStartSheetEntryDateMaxYmd}
+        default-entry-date-ymd={pastStartSheetDefaultEntryDateYmd}
+        default-end-date-ymd={pastStartSheetDefaultEndDateYmd}
+        order-end-date-ymd={pastStartSheetOrderEndDateYmd}
+        default-quantity={pastStartSheetDefaultQuantity}
+        current-access-type={pastStartSheetCurrentAccessType}
+        flipped-access-type={pastStartSheetFlippedAccessType}
+        show-access-type-picker={pastStartSheetShowAccessTypePicker}
+        access-type-picker-options={pastStartSheetAccessTypePickerOptions}
+        default-picker-access-type={pastStartSheetDefaultPickerAccessType}
+        onclose={handleClosePastStartChangeModal}
+        oncomplete={handlePastStartChangeModalComplete}
+      ></c-package-builder-past-start-change-modal>
+
+      <c-package-builder-add-products-sheet
+        is-open={isAddProductsSheetOpen}
+        session-key={addProductsSessionKey}
+        record-id={addProductsRecordId}
+        object-api-name={addProductsObjectApiName}
+        replace-mode={addProductsReplaceMode}
+        replaced-order-item-id={addProductsReplacedOrderItemId}
+        replaced-pricebook-entry-id={addProductsReplacedPricebookEntryId}
+        order-end-date={addProductsOrderEndDate}
+        order-start-date={addProductsOrderStartDate}
+        replace-default-period-start-ymd={addProductsReplaceDefaultPeriodStartYmd}
+        replaced-product-end-date={addProductsReplacedProductEndDate}
+        replaced-active-end-date-ymd={addProductsReplacedActiveEndDateYmd}
+        add-products-label={labels.packagebuilder_add_products}
+        cancel-label={labels.packagebuilder_cancel}
+        onclose={handleCloseAddProductsSheet}
+        oncomplete={handleAddProductsSheetComplete}
+        onnotify={handlePackageBuilderNotify}
+      ></c-package-builder-add-products-sheet>
+
+      <!-- Monthly Payments drawer (Option A) -->
+      <div
+        class={monthlyDrawerBackdropClass}
+        onclick={handleCloseMonthlyPaymentsDrawer}
+      ></div>
+      <aside
+        class={monthlyDrawerClass}
+        role="dialog"
+        aria-label="Monthly Payments"
+        aria-hidden={monthlyDrawerAriaHidden}
+        onkeydown={handleMonthlyPaymentsDrawerKeydown}
+      >
+        <header class="monthly-drawer__header">
+          <div class="monthly-drawer__title-row">
+            <div>
+              <div class="monthly-drawer__title">Monthly Payments</div>
+              <div class="monthly-drawer__subtitle">
+                {monthlyPaymentsSelectedLineItemIds.length} products selected
+              </div>
+            </div>
+            <button
+              type="button"
+              data-drawer-close
+              class="monthly-drawer__close-btn"
+              aria-label="Close"
+              title="Close"
+              onclick={handleCloseMonthlyPaymentsDrawer}
+            >
+              <lightning-icon
+                icon-name="utility:close"
+                size="x-small"
+                alternative-text=""
+              ></lightning-icon>
+            </button>
+          </div>
+        </header>
+
+        <div class="monthly-drawer__body">
+          <!-- Mount only while open so each open gets a fresh table (reload from server, reset filters/editing state). -->
+          <template lwc:if={isMonthlyPaymentsDrawerOpen}>
+            <c-monthly-payment-table
+              record-id={monthlyPaymentsEffectiveRecordId}
+              selected-line-item-ids={monthlyPaymentsSelectedLineItemIds}
+              selected-line-item-meta={monthlyPaymentsSelectedLineItemMeta}
+              read-only={monthlyPaymentsReadOnly}
+              concluded-terms-active-tab={monthlyPaymentsConcludedTermsActiveTab}
+              show-price-optimizer-fields={monthlyPaymentsShowPriceFields}
+              price-change-mode={monthlyPaymentsPriceChangeMode}
+              contract-start-date-ymd={monthlyPaymentsContractStartDateYmd}
+              contract-end-date-ymd={monthlyPaymentsContractEndDateYmd}
+              onmonthlypaymentssaved={handleMonthlyPaymentsSaved}
+            ></c-monthly-payment-table>
+          </template>
+        </div>
+      </aside>
+    </section>
+  </template>
+</template>

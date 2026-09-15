@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description
+  >Allows marking Package Builder draft as Signed when Order Contract Start Date (Order_Start_Date__c) is before today. Assign via Post Sales Admin permission set.</description>
+    <isLicensed>false</isLicensed>
+    <label>Package Builder Signed Past Start Admin Override</label>
+</CustomPermission>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calculated_Price__c</fullName>
+    <formula>IF(
+ISPICKVAL(Access_Type__c, &quot;Periodic&quot;),
+( (UnitPrice*  Quantity  )* Period_In_Months__c ),
+
+IF(
+ISPICKVAL(Access_Type__c, &quot;Monthly&quot;),
+(UnitPrice*  Quantity * 24),
+
+UnitPrice*  Quantity 
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Calculated Price</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>
