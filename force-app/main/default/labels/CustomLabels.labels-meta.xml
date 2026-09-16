@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CloudialDateInput_Label</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default date field label</shortDescription>
+        <value>Date</value>
+    </labels>
+    <labels>
+        <fullName>CloudialDateInput_BadInput</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid date message</shortDescription>
+        <value>Enter a valid date.</value>
+    </labels>
+    <labels>
+        <fullName>CloudialDateInput_OpenCalendar</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Open calendar button</shortDescription>
+        <value>Open calendar</value>
+    </labels>
+    <labels>
+        <fullName>CloudialDateInput_Required</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required field text</shortDescription>
+        <value>required</value>
+    </labels>
+    <labels>
+        <fullName>CloudialDateInput_RangeOverflow</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Maximum date message</shortDescription>
+        <value>Date must be on or before {0}.</value>
+    </labels>
+    <labels>
+        <fullName>CloudialDateInput_RangeUnderflow</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Minimum date message</shortDescription>
+        <value>Date must be on or after {0}.</value>
+    </labels>
+    <labels>
+        <fullName>CloudialDateInput_ValueMissing</fullName>
+        <categories>Cloudial Date Input</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Required date message</shortDescription>
+        <value>Complete this field.</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,27 @@
+{
+  "name": "cloudial-date-input",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generic, locale-aware Salesforce date input for LWC, App Builder, and Flow.",
+  "scripts": {
+    "test": "sfdx-lwc-jest",
+    "test:watch": "sfdx-lwc-jest --watch",
+    "test:coverage": "sfdx-lwc-jest --coverage",
+    "lint": "eslint \"force-app/main/default/lwc/**/*.js\"",
+    "validate:identity": "node scripts/validate-identity.mjs"
+  },
+  "devDependencies": {
+    "@lwc/eslint-plugin-lwc": "^3.5.0",
+    "@salesforce/eslint-config-lwc": "^4.1.2",
+    "@salesforce/eslint-plugin-lightning": "^2.0.0",
+    "@salesforce/sfdx-lwc-jest": "^7.9.0",
+    "ajv": "^8.17.1",
+    "eslint": "^9.35.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jest": "^28.14.0",
+    "prettier": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/SupportCloudial/Cloudial-Date-Input/schemas/package-identity.schema.json",
+  "title": "Cloudial package identity",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "description",
+    "features",
+    "whenToUse",
+    "repository",
+    "packageType",
+    "status",
+    "version",
+    "installUrl"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "features": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "whenToUse": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://github\\.com/"
+    },
+    "packageType": {
+      "enum": ["source", "unlocked", "managed"]
+    },
+    "status": {
+      "enum": ["development", "released", "deprecated"]
+    },
+    "version": {
+      "type": ["string", "null"],
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:\\.[A-Za-z0-9-]+)?$"
+    },
+    "installUrl": {
+      "type": ["string", "null"],
+      "format": "uri"
+    }
+  }
+}

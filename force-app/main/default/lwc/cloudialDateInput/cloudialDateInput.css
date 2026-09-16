@@ -1,0 +1,57 @@
+:host {
+  --cloudial-date-input-width: 100%;
+  --cloudial-date-input-background: #ffffff;
+  --cloudial-date-input-border-color: #c9c9c9;
+  --cloudial-date-input-border-radius: 0.25rem;
+  --cloudial-date-input-text-color: #181818;
+  --cloudial-date-input-error-color: #ba0517;
+  --cloudial-date-input-icon-color: #706e6b;
+  --cloudial-date-input-inline-padding: 0.75rem;
+
+  display: block;
+  width: var(--cloudial-date-input-width);
+  max-width: 100%;
+}
+
+.cloudial-date-input__control {
+  position: relative;
+}
+
+.cloudial-date-input__control .slds-input {
+  padding-inline-start: var(--cloudial-date-input-inline-padding);
+  padding-inline-end: 2.25rem;
+  border-color: var(--cloudial-date-input-border-color);
+  border-radius: var(--cloudial-date-input-border-radius);
+  background: var(--cloudial-date-input-background);
+  color: var(--cloudial-date-input-text-color);
+}
+
+.cloudial-date-input__native-picker {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cloudial-date-input__picker-button {
+  position: absolute;
+  inset-block-start: 50%;
+  right: auto;
+  left: auto;
+  inset-inline-end: 0.75rem;
+  transform: translateY(-50%);
+  color: var(--cloudial-date-input-icon-color);
+}
+
+[dir="rtl"] .cloudial-date-input__control .slds-input {
+  text-align: right;
+}
+
+.slds-form-element__help {
+  color: var(--cloudial-date-input-error-color);
+}

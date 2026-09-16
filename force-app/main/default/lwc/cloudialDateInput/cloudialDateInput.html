@@ -1,0 +1,71 @@
+<template>
+  <div class={rootClass} dir={directionValue}>
+    <template lwc:if={showLabel}>
+      <label class="slds-form-element__label" for="date-input">
+        <template lwc:if={required}>
+          <abbr class="slds-required" title={requiredText}>*</abbr>
+        </template>
+        {label}
+      </label>
+      <template lwc:if={fieldLevelHelp}>
+        <lightning-helptext content={fieldLevelHelp}></lightning-helptext>
+      </template>
+    </template>
+    <div class="slds-form-element__control cloudial-date-input__control">
+      <input
+        data-id="native-picker"
+        class="cloudial-date-input__native-picker"
+        type="date"
+        value={value}
+        min={min}
+        max={max}
+        required={required}
+        disabled={pickerDisabled}
+        tabindex="-1"
+        aria-hidden="true"
+        onchange={handlePickerChange}
+      />
+      <input
+        id="date-input"
+        data-id="display-input"
+        class="slds-input"
+        type="text"
+        name={name}
+        value={displayValue}
+        placeholder={placeholder}
+        required={required}
+        disabled={disabled}
+        readonly={readOnly}
+        aria-invalid={ariaInvalid}
+        aria-describedby="date-error"
+        oninput={handleInput}
+        onblur={handleBlur}
+        onkeydown={handleKeyDown}
+      />
+      <button
+        class="cloudial-date-input__picker-button slds-button slds-button_icon"
+        type="button"
+        title={openCalendarText}
+        disabled={pickerDisabled}
+        aria-label={openCalendarText}
+        onclick={handlePickerButtonClick}
+      >
+        <lightning-icon
+          icon-name="utility:event"
+          size="x-small"
+          alternative-text=""
+        ></lightning-icon>
+      </button>
+    </div>
+    <template lwc:if={hasVisibleError}>
+      <div
+        id="date-error"
+        data-id="error-message"
+        class="slds-form-element__help"
+        role="alert"
+      >
+        {validationMessage}
+      </div>
+    </template>
+  </div>
+</template>

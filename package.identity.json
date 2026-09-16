@@ -1,0 +1,21 @@
+{
+  "$schema": "./schemas/package-identity.schema.json",
+  "schemaVersion": 1,
+  "id": "cloudial-date-input",
+  "name": "Cloudial Date Input",
+  "description": "A generic locale-aware Salesforce LWC date input with canonical ISO output, validation, native calendar selection, Flow support, and RTL layout.",
+  "features": [
+    "Canonical YYYY-MM-DD value and event contract",
+    "Locale and fixed display formats",
+    "Manual entry and native calendar picker",
+    "Required, bounds, and custom validity",
+    "App Builder, nested LWC, and Flow Screen support",
+    "Inherited LTR and RTL layout"
+  ],
+  "whenToUse": "Use when a Salesforce UI needs a reusable date-only field with stable ISO output and configurable presentation.",
+  "repository": "https://github.com/SupportCloudial/Cloudial-Date-Input",
+  "packageType": "source",
+  "status": "development",
+  "version": null,
+  "installUrl": null
+}

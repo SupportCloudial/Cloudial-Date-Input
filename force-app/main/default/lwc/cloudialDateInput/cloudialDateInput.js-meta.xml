@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Cloudial Date Input</masterLabel>
+    <description>Generic locale-aware date input with optional inclusive bounds.</description>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__RecordPage">
+            <property name="value" type="String" label="Value" description="Date in YYYY-MM-DD format." />
+            <property name="label" type="String" label="Label" />
+            <property name="name" type="String" label="Name" />
+            <property name="placeholder" type="String" label="Placeholder" />
+            <property name="fieldLevelHelp" type="String" label="Help text" />
+            <property name="displayFormat" type="String" label="Display format" default="locale" datasource="locale,DD.MM.YYYY,DD/MM/YYYY,MM/DD/YYYY,YYYY-MM-DD" />
+            <property name="locale" type="String" label="Locale override" description="Optional BCP 47 locale such as en-GB. Empty uses the Salesforce user locale." />
+            <property name="min" type="String" label="Minimum date" description="Optional inclusive minimum in YYYY-MM-DD format." />
+            <property name="max" type="String" label="Maximum date" description="Optional inclusive maximum in YYYY-MM-DD format." />
+            <property name="required" type="Boolean" label="Required" default="false" />
+            <property name="disabled" type="Boolean" label="Disabled" default="false" />
+            <property name="readOnly" type="Boolean" label="Read only" default="false" />
+            <property name="variant" type="String" label="Variant" default="standard" datasource="standard,label-hidden" />
+            <property name="direction" type="String" label="Text direction" datasource="ltr,rtl" />
+            <property name="messageWhenValueMissing" type="String" label="Required message" />
+            <property name="messageWhenBadInput" type="String" label="Invalid date message" />
+            <property name="messageWhenRangeUnderflow" type="String" label="Minimum date message" />
+            <property name="messageWhenRangeOverflow" type="String" label="Maximum date message" />
+        </targetConfig>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="value" type="String" label="Value" description="Input and output date in YYYY-MM-DD format." />
+            <property name="label" type="String" label="Label" role="inputOnly" />
+            <property name="name" type="String" label="Name" role="inputOnly" />
+            <property name="placeholder" type="String" label="Placeholder" role="inputOnly" />
+            <property name="fieldLevelHelp" type="String" label="Help text" role="inputOnly" />
+            <property name="displayFormat" type="String" label="Display format" default="locale" datasource="locale,DD.MM.YYYY,DD/MM/YYYY,MM/DD/YYYY,YYYY-MM-DD" role="inputOnly" />
+            <property name="locale" type="String" label="Locale override" description="Optional BCP 47 locale such as en-GB. Empty uses the Salesforce user locale." role="inputOnly" />
+            <property name="min" type="String" label="Minimum date" description="Optional inclusive minimum in YYYY-MM-DD format." role="inputOnly" />
+            <property name="max" type="String" label="Maximum date" description="Optional inclusive maximum in YYYY-MM-DD format." role="inputOnly" />
+            <property name="required" type="Boolean" label="Required" default="false" role="inputOnly" />
+            <property name="disabled" type="Boolean" label="Disabled" default="false" role="inputOnly" />
+            <property name="readOnly" type="Boolean" label="Read only" default="false" role="inputOnly" />
+            <property name="variant" type="String" label="Variant" default="standard" datasource="standard,label-hidden" role="inputOnly" />
+            <property name="direction" type="String" label="Text direction" datasource="ltr,rtl" role="inputOnly" />
+            <property name="messageWhenValueMissing" type="String" label="Required message" role="inputOnly" />
+            <property name="messageWhenBadInput" type="String" label="Invalid date message" role="inputOnly" />
+            <property name="messageWhenRangeUnderflow" type="String" label="Minimum date message" role="inputOnly" />
+            <property name="messageWhenRangeOverflow" type="String" label="Maximum date message" role="inputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

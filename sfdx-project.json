@@ -1,0 +1,16 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "Cloudial Date Input",
+      "versionName": "Version 1.0",
+      "versionNumber": "1.0.0.NEXT"
+    }
+  ],
+  "name": "Cloudial-Date-Input",
+  "namespace": "CloudialPackage",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "64.0",
+  "packageAliases": {}
+}
