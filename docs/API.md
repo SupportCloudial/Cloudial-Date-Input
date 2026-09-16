@@ -57,6 +57,21 @@ The component is exposed directly only as a Flow Screen component. It is not
 listed for App, Home, or Record pages. Other LWCs can use it as a nested
 component through the public contract above.
 
+After installing the managed package, a subscriber LWC references the package
+namespace exactly as registered:
+
+```html
+<cloudialPackage-cloudial-date-input
+  label="Start date"
+  value={startDate}
+  display-format="DD/MM/YYYY"
+  onchange={handleDateChange}
+></cloudialPackage-cloudial-date-input>
+```
+
+Cross-namespace LWC composition requires Lightning Web Security in the
+subscriber org.
+
 ## Styling hooks
 
 - `--cloudial-date-input-width`

@@ -1,0 +1,13 @@
+<template>
+  <cloudialPackage-cloudial-date-input
+    label="Contract date"
+    name="contractDate"
+    value={selectedDate}
+    min="2026-01-01"
+    max="2026-12-31"
+    display-format="DD/MM/YYYY"
+    required
+    onchange={handleDateChange}
+  ></cloudialPackage-cloudial-date-input>
+  <p data-id="selected-date">{selectedDate}</p>
+</template>
