@@ -12,7 +12,8 @@ empty. `min` and `max` are optional and inclusive.
 - `displayFormat` (`String`): `locale` (default), `DD.MM.YYYY`,
   `DD/MM/YYYY`, `MM/DD/YYYY`, or `YYYY-MM-DD`.
 - `locale` (`String`): optional BCP 47 locale such as `en-GB`; empty uses
-  the Salesforce user locale. It applies when `displayFormat="locale"`.
+  the Salesforce user locale. It controls locale display and permits localized
+  digits during manual entry for every display format. Dates remain Gregorian.
 - `min`, `max` (`String`): optional canonical bounds.
 - `label` (`String`): field label; defaults to `Date`.
 - `name`, `placeholder` (`String`): text-input attributes.
@@ -30,6 +31,8 @@ English defaults are Salesforce Custom Labels and can be translated.
 ## Public methods
 
 - `checkValidity()` returns whether the current text satisfies all constraints.
+- `validate()` returns Flow's `{ isValid, errorMessage? }` validation result
+  without rendering an error.
 - `reportValidity()` returns validity and displays an inline error when invalid.
 - `setCustomValidity(message)` sets or clears a custom validation error.
 - `focus()` moves focus to the manual text input.
@@ -47,6 +50,12 @@ validation.
 
 It is emitted only for a valid value different from the current value. A Flow
 `FlowAttributeChangeEvent` for `value` is emitted at the same commit point.
+
+## Exposure
+
+The component is exposed directly only as a Flow Screen component. It is not
+listed for App, Home, or Record pages. Other LWCs can use it as a nested
+component through the public contract above.
 
 ## Styling hooks
 

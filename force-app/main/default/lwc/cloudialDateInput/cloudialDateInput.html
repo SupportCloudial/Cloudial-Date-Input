@@ -1,13 +1,13 @@
 <template>
   <div class={rootClass} dir={directionValue}>
     <template lwc:if={showLabel}>
-      <label class="slds-form-element__label" for="date-input">
+      <label class={labelClass} for="date-input">
         <template lwc:if={required}>
           <abbr class="slds-required" title={requiredText}>*</abbr>
         </template>
         {label}
       </label>
-      <template lwc:if={fieldLevelHelp}>
+      <template lwc:if={showFieldLevelHelp}>
         <lightning-helptext content={fieldLevelHelp}></lightning-helptext>
       </template>
     </template>
@@ -19,7 +19,6 @@
         value={value}
         min={min}
         max={max}
-        required={required}
         disabled={pickerDisabled}
         tabindex="-1"
         aria-hidden="true"
@@ -37,7 +36,7 @@
         disabled={disabled}
         readonly={readOnly}
         aria-invalid={ariaInvalid}
-        aria-describedby="date-error"
+        aria-describedby={errorDescriptionId}
         oninput={handleInput}
         onblur={handleBlur}
         onkeydown={handleKeyDown}

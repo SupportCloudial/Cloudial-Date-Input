@@ -214,11 +214,23 @@ describe("c-cloudial-date-input", () => {
     await flushPromises();
 
     expect(element.checkValidity()).toBe(false);
+    expect(
+      element.shadowRoot
+        .querySelector('[data-id="display-input"]')
+        .hasAttribute("aria-describedby")
+    ).toBe(false);
     expect(element.reportValidity()).toBe(false);
     await flushPromises();
     expect(
       element.shadowRoot.querySelector('[data-id="error-message"]').textContent
     ).toBe("A date is required.");
+    expect(
+      element.shadowRoot
+        .querySelector('[data-id="display-input"]')
+        .getAttribute("aria-describedby")
+    ).toBe(
+      element.shadowRoot.querySelector('[data-id="error-message"]').getAttribute("id")
+    );
 
     element.setCustomValidity("Server rejected this date.");
     expect(element.reportValidity()).toBe(false);
@@ -230,6 +242,36 @@ describe("c-cloudial-date-input", () => {
     typeAndBlur(element, "09/16/2026");
     await flushPromises();
     expect(element.checkValidity()).toBe(true);
+  });
+
+  it("returns Flow-compatible validation without rendering the error", async () => {
+    const element = createDateInput({
+      required: true,
+      messageWhenValueMissing: "A date is required."
+    });
+    await flushPromises();
+
+    expect(element.validate()).toEqual({
+      isValid: false,
+      errorMessage: "A date is required."
+    });
+    expect(
+      element.shadowRoot.querySelector('[data-id="error-message"]')
+    ).toBeNull();
+
+    typeAndBlur(element, "09/16/2026");
+    await flushPromises();
+    expect(element.validate()).toEqual({ isValid: true });
+  });
+
+  it("keeps Flow external errors separate from internal validation", async () => {
+    const element = createDateInput();
+    await flushPromises();
+
+    element.setCustomValidity("Flow rejected this date.");
+    expect(element.validate()).toEqual({ isValid: true });
+    expect(element.checkValidity()).toBe(false);
+    expect(element.reportValidity()).toBe(false);
   });
 
   it("does not emit when a valid typed value is unchanged", async () => {
@@ -253,8 +295,13 @@ describe("c-cloudial-date-input", () => {
     const input = element.shadowRoot.querySelector('[data-id="display-input"]');
     input.value = "09/17/2026";
     input.dispatchEvent(new InputEvent("input"));
-    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
+    const enterEvent = new KeyboardEvent("keydown", {
+      key: "Enter",
+      cancelable: true
+    });
+    input.dispatchEvent(enterEvent);
     await flushPromises();
+    expect(enterEvent.defaultPrevented).toBe(true);
     expect(element.value).toBe("2026-09-17");
 
     typeAndBlur(element, "");
@@ -262,6 +309,19 @@ describe("c-cloudial-date-input", () => {
     expect(element.value).toBe("");
     expect(handler).toHaveBeenCalledTimes(2);
     expect(handler.mock.calls[1][0].detail).toEqual({ value: "" });
+  });
+
+  it("rejects a typed year that is not four digits", async () => {
+    const element = createDateInput({ displayFormat: "MM/DD/YYYY" });
+    await flushPromises();
+
+    const input = typeAndBlur(element, "09/16/26");
+    await flushPromises();
+    expect(element.value).toBe("");
+    expect(input.value).toBe("09/16/26");
+    expect(
+      element.shadowRoot.querySelector('[data-id="error-message"]').textContent
+    ).toBe("Enter a valid date.");
   });
 
   it("accepts native picker values and opens the native picker", async () => {
@@ -278,6 +338,7 @@ describe("c-cloudial-date-input", () => {
     picker.showPicker = jest.fn();
     expect(picker.min).toBe("2026-09-01");
     expect(picker.max).toBe("2026-09-30");
+    expect(picker.required).toBe(false);
     element.shadowRoot
       .querySelector(".cloudial-date-input__picker-button")
       .click();
@@ -291,6 +352,23 @@ describe("c-cloudial-date-input", () => {
     expect(element.value).toBe("2026-09-18");
     expect(input.value).toBe("09/18/2026");
     expect(changeHandler.mock.calls[0][0].detail.value).toBe("2026-09-18");
+  });
+
+  it("falls back to clicking the native picker when showPicker throws", async () => {
+    const element = createDateInput();
+    await flushPromises();
+    const picker = element.shadowRoot.querySelector('[data-id="native-picker"]');
+    picker.showPicker = jest.fn(() => {
+      throw new Error("showPicker unavailable");
+    });
+    picker.click = jest.fn();
+
+    expect(() =>
+      element.shadowRoot
+        .querySelector(".cloudial-date-input__picker-button")
+        .click()
+    ).not.toThrow();
+    expect(picker.click).toHaveBeenCalledTimes(1);
   });
 
   it("reflects label, help, placeholder, name, variant, and direction", async () => {
@@ -318,7 +396,10 @@ describe("c-cloudial-date-input", () => {
     element.variant = "label-hidden";
     element.direction = "";
     await flushPromises();
-    expect(element.shadowRoot.querySelector("label")).toBeNull();
+    expect(
+      element.shadowRoot.querySelector("label").classList
+    ).toContain("slds-assistive-text");
+    expect(element.shadowRoot.querySelector("lightning-helptext")).toBeNull();
     expect(
       element.shadowRoot.querySelector(".slds-form-element").hasAttribute("dir")
     ).toBe(false);

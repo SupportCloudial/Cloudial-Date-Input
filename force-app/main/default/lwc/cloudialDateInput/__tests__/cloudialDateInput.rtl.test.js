@@ -82,4 +82,34 @@ describe("c-cloudial-date-input RTL locale", () => {
 
     expect(element.value).toBe("2026-09-17");
   });
+
+  it("accepts localized digits with an explicit display format", async () => {
+    const element = createElement("c-cloudial-date-input", {
+      is: CloudialDateInput
+    });
+    element.displayFormat = "DD/MM/YYYY";
+    document.body.appendChild(element);
+    await Promise.resolve();
+
+    const input = element.shadowRoot.querySelector('[data-id="display-input"]');
+    input.value = "١٧/٩/٢٠٢٦";
+    input.dispatchEvent(new InputEvent("input"));
+    input.dispatchEvent(new FocusEvent("blur"));
+    await Promise.resolve();
+
+    expect(element.value).toBe("2026-09-17");
+  });
+
+  it("keeps the ISO Gregorian calendar for locales with another default", async () => {
+    const element = createElement("c-cloudial-date-input", {
+      is: CloudialDateInput
+    });
+    element.value = "2026-09-16";
+    element.locale = "ar-SA";
+    document.body.appendChild(element);
+    await Promise.resolve();
+
+    const input = element.shadowRoot.querySelector('[data-id="display-input"]');
+    expect(input.value).toContain("٢٠٢٦");
+  });
 });

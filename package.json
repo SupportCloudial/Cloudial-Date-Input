@@ -2,7 +2,7 @@
   "name": "cloudial-date-input",
   "version": "1.0.0",
   "private": true,
-  "description": "Generic, locale-aware Salesforce date input for LWC, App Builder, and Flow.",
+  "description": "Generic, locale-aware Salesforce date input for composed LWCs and Flow screens.",
   "scripts": {
     "test": "sfdx-lwc-jest",
     "test:watch": "sfdx-lwc-jest --watch",

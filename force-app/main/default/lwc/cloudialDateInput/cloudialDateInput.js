@@ -1,4 +1,3 @@
-/* eslint-disable @salesforce/lightning/prefer-i18n-service -- Intl is required to infer locale date order and normalize localized digits without converting the public date value. */
 import { api, LightningElement } from "lwc";
 import { FlowAttributeChangeEvent } from "lightning/flowSupport";
 import salesforceLocale from "@salesforce/i18n/locale";
@@ -9,48 +8,14 @@ import requiredLabel from "@salesforce/label/c.CloudialDateInput_Required";
 import rangeOverflowLabel from "@salesforce/label/c.CloudialDateInput_RangeOverflow";
 import rangeUnderflowLabel from "@salesforce/label/c.CloudialDateInput_RangeUnderflow";
 import valueMissingLabel from "@salesforce/label/c.CloudialDateInput_ValueMissing";
-
-const ISO_PATTERN = /^(\d{4})-(\d{2})-(\d{2})$/;
-const DISPLAY_FORMATS = new Set([
-  "locale",
-  "DD.MM.YYYY",
-  "DD/MM/YYYY",
-  "MM/DD/YYYY",
-  "YYYY-MM-DD"
-]);
-
-function validIso(value) {
-  const match = String(value || "").match(ISO_PATTERN);
-  if (!match) {
-    return false;
-  }
-  const year = Number(match[1]);
-  const month = Number(match[2]);
-  const day = Number(match[3]);
-  if (month < 1 || month > 12 || day < 1) {
-    return false;
-  }
-  const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-  const daysInMonth = [
-    31,
-    leapYear ? 29 : 28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31
-  ];
-  return day <= daysInMonth[month - 1];
-}
-
-function replaceParameter(message, value) {
-  return String(message).replace("{0}", value);
-}
+import {
+  formatIsoDate,
+  normalizeDisplayFormat,
+  normalizeIso,
+  parseDisplayDate,
+  replaceMessageParameter,
+  resolveLocale
+} from "./dateValue";
 
 export default class CloudialDateInput extends LightningElement {
   _value = "";
@@ -82,8 +47,7 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   set value(nextValue) {
-    const candidate = String(nextValue || "").trim();
-    this._value = validIso(candidate) ? candidate : "";
+    this._value = normalizeIso(nextValue);
     this._draftValue = undefined;
     this._showError = false;
   }
@@ -94,8 +58,7 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   set min(nextValue) {
-    const candidate = String(nextValue || "").trim();
-    this._min = validIso(candidate) ? candidate : "";
+    this._min = normalizeIso(nextValue);
   }
 
   @api
@@ -104,8 +67,7 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   set max(nextValue) {
-    const candidate = String(nextValue || "").trim();
-    this._max = validIso(candidate) ? candidate : "";
+    this._max = normalizeIso(nextValue);
   }
 
   @api
@@ -114,7 +76,7 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   set displayFormat(nextValue) {
-    this._displayFormat = DISPLAY_FORMATS.has(nextValue) ? nextValue : "locale";
+    this._displayFormat = normalizeDisplayFormat(nextValue);
     this._draftValue = undefined;
   }
 
@@ -133,7 +95,17 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   get showLabel() {
-    return this.variant !== "label-hidden" && Boolean(this.label);
+    return Boolean(this.label);
+  }
+
+  get labelClass() {
+    return `slds-form-element__label${
+      this.variant === "label-hidden" ? " slds-assistive-text" : ""
+    }`;
+  }
+
+  get showFieldLevelHelp() {
+    return this.variant !== "label-hidden" && Boolean(this.fieldLevelHelp);
   }
 
   get directionValue() {
@@ -143,23 +115,20 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   get effectiveLocale() {
-    const candidate = this.locale || salesforceLocale;
-    try {
-      Intl.DateTimeFormat(candidate).resolvedOptions();
-      return candidate;
-    } catch {
-      return salesforceLocale;
-    }
+    return resolveLocale(this.locale, salesforceLocale);
   }
 
   get validationMessage() {
     if (this.disabled || this.readOnly) {
       return "";
     }
-    if (this._customValidityMessage) {
-      return this._customValidityMessage;
-    }
+    return this._customValidityMessage || this.internalValidationMessage;
+  }
 
+  get internalValidationMessage() {
+    if (this.disabled || this.readOnly) {
+      return "";
+    }
     const text = String(this._draftValue ?? this.displayValue).trim();
     if (!text) {
       return this.required
@@ -172,13 +141,13 @@ export default class CloudialDateInput extends LightningElement {
       return this.messageWhenBadInput || badInputLabel;
     }
     if (this.min && parsedValue < this.min) {
-      return replaceParameter(
+      return replaceMessageParameter(
         this.messageWhenRangeUnderflow || rangeUnderflowLabel,
         this.formatIsoValue(this.min)
       );
     }
     if (this.max && parsedValue > this.max) {
-      return replaceParameter(
+      return replaceMessageParameter(
         this.messageWhenRangeOverflow || rangeOverflowLabel,
         this.formatIsoValue(this.max)
       );
@@ -192,6 +161,10 @@ export default class CloudialDateInput extends LightningElement {
 
   get ariaInvalid() {
     return this.hasVisibleError ? "true" : "false";
+  }
+
+  get errorDescriptionId() {
+    return this.hasVisibleError ? "date-error" : null;
   }
 
   get openCalendarText() {
@@ -219,6 +192,7 @@ export default class CloudialDateInput extends LightningElement {
 
   handleKeyDown(event) {
     if (!this.pickerDisabled && event.key === "Enter") {
+      event.preventDefault();
       this.validateAndCommitDraft();
     }
   }
@@ -237,7 +211,7 @@ export default class CloudialDateInput extends LightningElement {
     if (this.pickerDisabled) {
       return;
     }
-    const nextValue = validIso(event.target.value) ? event.target.value : "";
+    const nextValue = normalizeIso(event.target.value);
     this._draftValue = this.formatIsoValue(nextValue);
     this._showError = true;
     if (this.validationMessage) {
@@ -252,10 +226,14 @@ export default class CloudialDateInput extends LightningElement {
     }
     const picker = this.template.querySelector('[data-id="native-picker"]');
     if (typeof picker?.showPicker === "function") {
-      picker.showPicker();
-    } else {
-      picker?.click();
+      try {
+        picker.showPicker();
+        return;
+      } catch {
+        // Browser or security policy blocked showPicker; use click fallback.
+      }
     }
+    picker?.click();
   }
 
   commitValue(nextValue) {
@@ -282,6 +260,14 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   @api
+  validate() {
+    const errorMessage = this.internalValidationMessage;
+    return errorMessage
+      ? { isValid: false, errorMessage }
+      : { isValid: true };
+  }
+
+  @api
   reportValidity() {
     this._showError = true;
     return this.checkValidity();
@@ -298,92 +284,18 @@ export default class CloudialDateInput extends LightningElement {
   }
 
   formatIsoValue(isoValue) {
-    if (!validIso(isoValue)) {
-      return "";
-    }
-    const [year, month, day] = isoValue.split("-");
-    switch (this.displayFormat) {
-      case "DD.MM.YYYY":
-        return `${day}.${month}.${year}`;
-      case "DD/MM/YYYY":
-        return `${day}/${month}/${year}`;
-      case "MM/DD/YYYY":
-        return `${month}/${day}/${year}`;
-      case "YYYY-MM-DD":
-        return isoValue;
-      default: {
-        const date = new Date(0);
-        date.setUTCHours(0, 0, 0, 0);
-        date.setUTCFullYear(Number(year), Number(month) - 1, Number(day));
-        return new Intl.DateTimeFormat(this.effectiveLocale, {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-          timeZone: "UTC"
-        }).format(date);
-      }
-    }
+    return formatIsoDate(
+      isoValue,
+      this.displayFormat,
+      this.effectiveLocale
+    );
   }
 
   parseDisplayValue(displayValue) {
-    const text = String(displayValue || "").trim();
-    if (!text) {
-      return "";
-    }
-
-    let order;
-    let normalizedText = text;
-    switch (this.displayFormat) {
-      case "DD.MM.YYYY":
-        order = ["day", "month", "year"];
-        break;
-      case "DD/MM/YYYY":
-        order = ["day", "month", "year"];
-        break;
-      case "MM/DD/YYYY":
-        order = ["month", "day", "year"];
-        break;
-      case "YYYY-MM-DD":
-        order = ["year", "month", "day"];
-        break;
-      default:
-        order = this.localeDateOrder;
-        normalizedText = this.normalizeLocaleDigits(text);
-    }
-
-    const values = normalizedText.match(/\d+/g);
-    if (!values || values.length !== 3) {
-      return null;
-    }
-    const parts = Object.fromEntries(order.map((part, index) => [part, values[index]]));
-    const normalized = `${String(parts.year).padStart(4, "0")}-${String(parts.month).padStart(2, "0")}-${String(parts.day).padStart(2, "0")}`;
-    return validIso(normalized) ? normalized : null;
-  }
-
-  get localeDateOrder() {
-    const sample = new Date(Date.UTC(2006, 10, 22));
-    return new Intl.DateTimeFormat(this.effectiveLocale, {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-      timeZone: "UTC"
-    })
-      .formatToParts(sample)
-      .filter((part) => ["day", "month", "year"].includes(part.type))
-      .map((part) => part.type);
-  }
-
-  normalizeLocaleDigits(value) {
-    const formatter = new Intl.NumberFormat(this.effectiveLocale, {
-      useGrouping: false
-    });
-    return [...value]
-      .map((character) => {
-        const index = Array.from({ length: 10 }, (_, digit) =>
-          formatter.format(digit)
-        ).indexOf(character);
-        return index >= 0 ? String(index) : character;
-      })
-      .join("");
+    return parseDisplayDate(
+      displayValue,
+      this.displayFormat,
+      this.effectiveLocale
+    );
   }
 }

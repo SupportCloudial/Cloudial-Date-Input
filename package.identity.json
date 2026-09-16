@@ -9,7 +9,7 @@
     "Locale and fixed display formats",
     "Manual entry and native calendar picker",
     "Required, bounds, and custom validity",
-    "App Builder, nested LWC, and Flow Screen support",
+    "Nested LWC and Flow Screen support",
     "Inherited LTR and RTL layout"
   ],
   "whenToUse": "Use when a Salesforce UI needs a reusable date-only field with stable ISO output and configurable presentation.",
