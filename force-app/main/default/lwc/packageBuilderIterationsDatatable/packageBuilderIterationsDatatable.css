@@ -1,6 +1,0 @@
-/* Styles injected into shadow root from JS for datatable internals. */
-
-td.iter-pending-proposed,
-.slds-hint-parent.iter-pending-proposed {
-  background-color: #fff8e6 !important;
-}

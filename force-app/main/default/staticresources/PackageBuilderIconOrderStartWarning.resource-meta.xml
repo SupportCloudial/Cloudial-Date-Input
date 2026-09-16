@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
-    <cacheControl>Public</cacheControl>
-    <contentType>image/svg+xml</contentType>
-    <description>Client x.svg — End before order start / validation cross in status column.</description>
-</StaticResource>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<CustomPermission xmlns="http://soap.sforce.com/2006/04/metadata">
-    <description
-  >Allows running the org-wide Iteration Auto-Renew job from the Contract record page.</description>
-    <isLicensed>false</isLicensed>
-    <label>Run Iteration Auto-Renew</label>
-</CustomPermission>
