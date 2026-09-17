@@ -15,6 +15,7 @@
     "packageType",
     "status",
     "version",
+    "subscriberPackageVersionId",
     "installUrl"
   ],
   "properties": {
@@ -63,6 +64,10 @@
     "version": {
       "type": ["string", "null"],
       "pattern": "^\\d+\\.\\d+\\.\\d+(?:\\.[A-Za-z0-9-]+)?$"
+    },
+    "subscriberPackageVersionId": {
+      "type": ["string", "null"],
+      "pattern": "^04t[A-Za-z0-9]{12,15}$"
     },
     "installUrl": {
       "type": ["string", "null"],

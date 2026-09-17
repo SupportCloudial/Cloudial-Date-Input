@@ -14,3 +14,10 @@ Deploy the harness with:
 ```powershell
 sf project deploy start --source-dir test-support/main/default/lwc/cloudialDateInputConsumer --target-org TARGET_ORG
 ```
+
+For a browser smoke test, also deploy
+`test-support/main/default/aura/cloudialDateInputConsumerApp`, then open:
+
+```text
+/c/cloudialDateInputConsumerApp.app
+```

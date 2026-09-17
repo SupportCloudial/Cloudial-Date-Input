@@ -4,9 +4,9 @@ A generic Lightning Web Component date field for Salesforce. It keeps its public
 `value` in `YYYY-MM-DD` form while supporting locale-aware display, manual
 typing, a native calendar picker, inclusive bounds, Flow, and RTL layouts.
 
-The source namespace is `CloudialPackage`, now linked to the Cloudial Partner
-Business Org's Dev Hub. Creating and validating the first managed 2GP version
-is the next release step.
+Managed 2GP version `1.0.0` is released under the `CloudialPackage` namespace.
+Install it with package version `04tJ6000000LwukIAC` or use the
+[Salesforce installation URL](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ6000000LwukIAC).
 
 ## Use in another LWC
 
@@ -53,5 +53,5 @@ npm run lint
 npm run validate:identity
 ```
 
-Only `force-app` is a Salesforce package directory. This repository does not
-contain a released package version or install URL yet.
+Only `force-app` is a Salesforce package directory. `test-support` contains a
+non-packaged subscriber integration harness.

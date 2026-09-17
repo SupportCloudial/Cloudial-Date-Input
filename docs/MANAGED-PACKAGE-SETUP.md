@@ -3,6 +3,15 @@
 The source can be developed and deployed before packaging. Perform these steps
 only when a Cloudial Partner Business Org administrator is available.
 
+## Current release
+
+- Package ID: `0HoJ6000000005uKAA`
+- Version: `1.0.0`
+- Subscriber package version: `04tJ6000000LwukIAC`
+- Installation key: none
+- Install URL:
+  `https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ6000000LwukIAC`
+
 ## Permanent ownership
 
 Use the Cloudial Partner Business Org (PBO) as the permanent Dev Hub and owner

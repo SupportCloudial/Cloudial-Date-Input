@@ -14,8 +14,9 @@
   ],
   "whenToUse": "Use when a Salesforce UI needs a reusable date-only field with stable ISO output and configurable presentation.",
   "repository": "https://github.com/SupportCloudial/Cloudial-Date-Input",
-  "packageType": "source",
-  "status": "development",
-  "version": null,
-  "installUrl": null
+  "packageType": "managed",
+  "status": "released",
+  "version": "1.0.0",
+  "subscriberPackageVersionId": "04tJ6000000LwukIAC",
+  "installUrl": "https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ6000000LwukIAC"
 }
